@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fixture Prode · Mundial 2026 · Datos Oficiales</title>
+    <title>Fixture Prode · Mundial 2026 · Banderas Reales</title>
     <style>
         :root {
             --bg: #0b0b14;
@@ -103,24 +103,61 @@
             letter-spacing: 0.5px; color: var(--text-secondary); flex-wrap: wrap; gap: 4px;
         }
         .partido-card__grupo { background: var(--accent); color: #1a1a1a; font-weight: 800; padding: 3px 9px; border-radius: 12px; font-size: 0.7rem; }
-        .partido-card__equipos { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; font-weight: 700; font-size: 0.95rem; text-align: center; }
-        .partido-card__equipo { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .partido-card__bandera { font-size: 1.8rem; line-height: 1; }
-        .partido-card__nombre { font-size: 0.78rem; line-height: 1.2; word-break: break-word; }
-        .partido-card__vs { font-weight: 900; font-size: 0.85rem; color: var(--accent); flex-shrink: 0; }
+        .partido-card__equipos {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .partido-card__equipo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-align: center;
+        }
+        .partido-card__bandera {
+            font-size: 2.2rem;   /* bandera más grande y visible */
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        .partido-card__nombre {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .partido-card__vs {
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--accent);
+            background: rgba(240,185,64,0.15);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
         .partido-card__canales { font-size: 0.68rem; color: var(--text-secondary); margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
         .canal-tag { background: var(--bg-input); padding: 2px 8px; border-radius: 10px; font-weight: 500; white-space: nowrap; font-size: 0.64rem; }
         .canal-tag--destacado { background: rgba(240,185,64,0.12); color: var(--accent); font-weight: 600; }
-        .partido-card__pronostico { display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .partido-card__pronostico { display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
         .partido-card__pronostico input {
-            width: 44px; height: 40px; text-align: center; font-size: 1.1rem; font-weight: 700;
+            width: 48px; height: 42px; text-align: center; font-size: 1.2rem; font-weight: 700;
             border-radius: var(--radius-sm); border: 2px solid var(--border);
             background: var(--bg-input); color: var(--text); font-family: var(--font);
-            transition: var(--transition); -moz-appearance: textfield; appearance: textfield;
+            transition: var(--transition);
         }
         .partido-card__pronostico input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(240,185,64,0.08); }
-        .partido-card__pronostico .pronostico-sep { font-weight: 900; font-size: 1rem; color: var(--text-secondary); }
-        .partido-card__resultado-real { margin-top: 8px; font-size: 0.7rem; text-align: center; color: var(--accent2); font-weight: 700; background: rgba(0,200,151,0.08); padding: 4px 10px; border-radius: 14px; display: inline-block; width: 100%; }
+        .partido-card__pronostico .pronostico-sep { font-weight: 900; font-size: 1.2rem; color: var(--text-secondary); }
+        .partido-card__resultado-real { margin-top: 10px; font-size: 0.7rem; text-align: center; color: var(--accent2); font-weight: 700; background: rgba(0,200,151,0.08); padding: 4px 10px; border-radius: 14px; display: inline-block; width: 100%; }
         .seccion { background: var(--bg-card); border-radius: var(--radius); padding: 20px 18px; margin-top: 24px; border: 1px solid var(--border); box-shadow: var(--shadow); }
         .seccion__titulo { font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
         .btn {
@@ -167,12 +204,10 @@
         .collapsible--open .arrow { transform: rotate(180deg); }
         .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
         .collapsible--open .collapsible-body { max-height: 3000px; }
-        @media (max-width: 400px) {
-            .partido-card__equipos { font-size: 0.8rem; }
-            .partido-card__bandera { font-size: 1.4rem; }
-            .partido-card__pronostico input { width: 36px; height: 34px; font-size: 0.9rem; }
-            .filtro-btn { padding: 6px 10px; font-size: 0.7rem; }
-            .header__logo { font-size: 1rem; }
+        @media (max-width: 500px) {
+            .partido-card__bandera { font-size: 1.8rem; }
+            .partido-card__vs { width: 28px; height: 28px; font-size: 0.7rem; }
+            .partido-card__pronostico input { width: 40px; height: 36px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -234,99 +269,87 @@
         (function() {
             // --------------------------------------------------------------
             // FIXTURE OFICIAL MUNDIAL 2026 - SEGÚN PDF PROPORCIONADO
-            // Grupos A a L, 4 selecciones por grupo, sedes y horarios ET (Eastern Time)
-            // Fase de grupos: 11 junio – 25 junio 2026
+            // Cada equipo incluye su bandera emoji y nombre completo
             // --------------------------------------------------------------
             const FIXTURE_OFICIAL = [
-                // GRUPO A (México, Sudáfrica, Corea del Sur, República Checa)
+                // GRUPO A
                 { id:1, grupo:'A', fecha:'2026-06-11', hora:'12:00', sede:'Estadio Azteca, Ciudad de México', equipoA:'🇲🇽 México', equipoB:'🇿🇦 Sudáfrica', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:2, grupo:'A', fecha:'2026-06-11', hora:'22:00', sede:'SoFi Stadium, Los Ángeles', equipoA:'🇰🇷 Corea del Sur', equipoB:'🇨🇿 República Checa', canales:['DSports/DGO','TyC Sports'] },
                 { id:3, grupo:'A', fecha:'2026-06-16', hora:'15:00', sede:'BC Place, Vancouver', equipoA:'🇿🇦 Sudáfrica', equipoB:'🇰🇷 Corea del Sur', canales:['DSports/DGO'] },
                 { id:4, grupo:'A', fecha:'2026-06-16', hora:'21:00', sede:'Lumen Field, Seattle', equipoA:'🇨🇿 República Checa', equipoB:'🇲🇽 México', canales:['DSports/DGO','Telefe'] },
                 { id:5, grupo:'A', fecha:'2026-06-21', hora:'15:00', sede:'Estadio Akron, Guadalajara', equipoA:'🇲🇽 México', equipoB:'🇰🇷 Corea del Sur', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:6, grupo:'A', fecha:'2026-06-21', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', equipoA:'🇨🇿 República Checa', equipoB:'🇿🇦 Sudáfrica', canales:['DSports/DGO'] },
-
-                // GRUPO B (Canadá, Bosnia, Catar, Suiza)
+                // GRUPO B
                 { id:7, grupo:'B', fecha:'2026-06-12', hora:'15:00', sede:'BMO Field, Toronto', equipoA:'🇨🇦 Canadá', equipoB:'🇧🇦 Bosnia y Herzegovina', canales:['DSports/DGO','Telefe'] },
                 { id:8, grupo:'B', fecha:'2026-06-12', hora:'21:00', sede:'Gillette Stadium, Boston', equipoA:'🇶🇦 Catar', equipoB:'🇨🇭 Suiza', canales:['DSports/DGO'] },
                 { id:9, grupo:'B', fecha:'2026-06-17', hora:'13:00', sede:'Lincoln Financial Field, Filadelfia', equipoA:'🇧🇦 Bosnia', equipoB:'🇶🇦 Catar', canales:['DSports/DGO','TyC Sports'] },
                 { id:10, grupo:'B', fecha:'2026-06-17', hora:'19:00', sede:'MetLife Stadium, Nueva Jersey', equipoA:'🇨🇭 Suiza', equipoB:'🇨🇦 Canadá', canales:['DSports/DGO','Telefe'] },
                 { id:11, grupo:'B', fecha:'2026-06-22', hora:'15:00', sede:'Hard Rock Stadium, Miami', equipoA:'🇨🇦 Canadá', equipoB:'🇶🇦 Catar', canales:['DSports/DGO'] },
                 { id:12, grupo:'B', fecha:'2026-06-22', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', equipoA:'🇨🇭 Suiza', equipoB:'🇧🇦 Bosnia', canales:['DSports/DGO','Telefe','TV Pública'] },
-
-                // GRUPO C (Brasil, Marruecos, Haití, Escocia)
+                // GRUPO C
                 { id:13, grupo:'C', fecha:'2026-06-13', hora:'18:00', sede:'NRG Stadium, Houston', equipoA:'🇧🇷 Brasil', equipoB:'🇲🇦 Marruecos', canales:['DSports/DGO','Telefe','TyC Sports'] },
                 { id:14, grupo:'C', fecha:'2026-06-13', hora:'21:00', sede:'AT&T Stadium, Arlington', equipoA:'🇭🇹 Haití', equipoB:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia', canales:['DSports/DGO'] },
                 { id:15, grupo:'C', fecha:'2026-06-18', hora:'18:00', sede:'Arrowhead Stadium, Kansas City', equipoA:'🇲🇦 Marruecos', equipoB:'🇭🇹 Haití', canales:['DSports/DGO','Telefe'] },
                 { id:16, grupo:'C', fecha:'2026-06-18', hora:'20:30', sede:'Estadio BBVA, Monterrey', equipoA:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia', equipoB:'🇧🇷 Brasil', canales:['DSports/DGO','TyC Sports'] },
                 { id:17, grupo:'C', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', equipoA:'🇧🇷 Brasil', equipoB:'🇭🇹 Haití', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:18, grupo:'C', fecha:'2026-06-23', hora:'18:00', sede:'BC Place, Vancouver', equipoA:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia', equipoB:'🇲🇦 Marruecos', canales:['DSports/DGO'] },
-
-                // GRUPO D (Estados Unidos, Paraguay, Australia, Turquía)
+                // GRUPO D
                 { id:19, grupo:'D', fecha:'2026-06-14', hora:'15:00', sede:'SoFi Stadium, Los Ángeles', equipoA:'🇺🇸 Estados Unidos', equipoB:'🇵🇾 Paraguay', canales:['DSports/DGO','Telefe'] },
                 { id:20, grupo:'D', fecha:'2026-06-14', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', equipoA:'🇦🇺 Australia', equipoB:'🇹🇷 Turquía', canales:['DSports/DGO'] },
                 { id:21, grupo:'D', fecha:'2026-06-19', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', equipoA:'🇵🇾 Paraguay', equipoB:'🇦🇺 Australia', canales:['DSports/DGO','TyC Sports'] },
                 { id:22, grupo:'D', fecha:'2026-06-19', hora:'22:00', sede:'AT&T Stadium, Arlington', equipoA:'🇹🇷 Turquía', equipoB:'🇺🇸 Estados Unidos', canales:['DSports/DGO','Telefe'] },
                 { id:23, grupo:'D', fecha:'2026-06-24', hora:'15:00', sede:'Lincoln Financial Field, Filadelfia', equipoA:'🇺🇸 Estados Unidos', equipoB:'🇦🇺 Australia', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:24, grupo:'D', fecha:'2026-06-24', hora:'22:00', sede:'MetLife Stadium, Nueva Jersey', equipoA:'🇹🇷 Turquía', equipoB:'🇵🇾 Paraguay', canales:['DSports/DGO'] },
-
-                // GRUPO E (Alemania, Curazao, Costa de Marfil, Ecuador)
+                // GRUPO E
                 { id:25, grupo:'E', fecha:'2026-06-11', hora:'13:00', sede:'Hard Rock Stadium, Miami', equipoA:'🇩🇪 Alemania', equipoB:'🇨🇼 Curazao', canales:['DSports/DGO','Telefe'] },
                 { id:26, grupo:'E', fecha:'2026-06-11', hora:'19:00', sede:'Mercedes-Benz Stadium, Atlanta', equipoA:'🇨🇮 Costa de Marfil', equipoB:'🇪🇨 Ecuador', canales:['DSports/DGO'] },
                 { id:27, grupo:'E', fecha:'2026-06-16', hora:'13:00', sede:'Gillette Stadium, Boston', equipoA:'🇨🇼 Curazao', equipoB:'🇨🇮 Costa de Marfil', canales:['DSports/DGO','TyC Sports'] },
                 { id:28, grupo:'E', fecha:'2026-06-16', hora:'19:00', sede:'Arrowhead Stadium, Kansas City', equipoA:'🇪🇨 Ecuador', equipoB:'🇩🇪 Alemania', canales:['DSports/DGO','Telefe'] },
                 { id:29, grupo:'E', fecha:'2026-06-21', hora:'13:00', sede:'Estadio BBVA, Monterrey', equipoA:'🇩🇪 Alemania', equipoB:'🇨🇮 Costa de Marfil', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:30, grupo:'E', fecha:'2026-06-21', hora:'16:00', sede:'NRG Stadium, Houston', equipoA:'🇪🇨 Ecuador', equipoB:'🇨🇼 Curazao', canales:['DSports/DGO'] },
-
-                // GRUPO F (Países Bajos, Japón, Suecia, Túnez)
+                // GRUPO F
                 { id:31, grupo:'F', fecha:'2026-06-12', hora:'13:00', sede:'Lumen Field, Seattle', equipoA:'🇳🇱 Países Bajos', equipoB:'🇸🇪 Suecia', canales:['DSports/DGO','Telefe'] },
                 { id:32, grupo:'F', fecha:'2026-06-12', hora:'19:00', sede:'BC Place, Vancouver', equipoA:'🇯🇵 Japón', equipoB:'🇹🇳 Túnez', canales:['DSports/DGO'] },
                 { id:33, grupo:'F', fecha:'2026-06-17', hora:'15:00', sede:'Estadio Akron, Guadalajara', equipoA:'🇸🇪 Suecia', equipoB:'🇯🇵 Japón', canales:['DSports/DGO','TyC Sports'] },
                 { id:34, grupo:'F', fecha:'2026-06-17', hora:'21:00', sede:'SoFi Stadium, Los Ángeles', equipoA:'🇹🇳 Túnez', equipoB:'🇳🇱 Países Bajos', canales:['DSports/DGO','Telefe'] },
                 { id:35, grupo:'F', fecha:'2026-06-22', hora:'13:00', sede:'BMO Field, Toronto', equipoA:'🇳🇱 Países Bajos', equipoB:'🇯🇵 Japón', canales:['DSports/DGO'] },
                 { id:36, grupo:'F', fecha:'2026-06-22', hora:'19:00', sede:'Levi\'s Stadium, Santa Clara', equipoA:'🇹🇳 Túnez', equipoB:'🇸🇪 Suecia', canales:['DSports/DGO','Telefe','TV Pública'] },
-
-                // GRUPO G (Bélgica, Egipto, Irán, Nueva Zelanda)
+                // GRUPO G
                 { id:37, grupo:'G', fecha:'2026-06-13', hora:'15:00', sede:'MetLife Stadium, Nueva Jersey', equipoA:'🇧🇪 Bélgica', equipoB:'🇮🇷 Irán', canales:['DSports/DGO','Telefe'] },
                 { id:38, grupo:'G', fecha:'2026-06-13', hora:'21:00', sede:'Lincoln Financial Field, Filadelfia', equipoA:'🇪🇬 Egipto', equipoB:'🇳🇿 Nueva Zelanda', canales:['DSports/DGO'] },
                 { id:39, grupo:'G', fecha:'2026-06-18', hora:'15:00', sede:'Hard Rock Stadium, Miami', equipoA:'🇮🇷 Irán', equipoB:'🇪🇬 Egipto', canales:['DSports/DGO','TyC Sports'] },
                 { id:40, grupo:'G', fecha:'2026-06-18', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', equipoA:'🇳🇿 Nueva Zelanda', equipoB:'🇧🇪 Bélgica', canales:['DSports/DGO','Telefe'] },
                 { id:41, grupo:'G', fecha:'2026-06-23', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', equipoA:'🇧🇪 Bélgica', equipoB:'🇪🇬 Egipto', canales:['DSports/DGO'] },
                 { id:42, grupo:'G', fecha:'2026-06-23', hora:'21:00', sede:'Gillette Stadium, Boston', equipoA:'🇳🇿 Nueva Zelanda', equipoB:'🇮🇷 Irán', canales:['DSports/DGO','Telefe','TV Pública'] },
-
-                // GRUPO H (España, Cabo Verde, Arabia Saudita, Uruguay)
+                // GRUPO H
                 { id:43, grupo:'H', fecha:'2026-06-14', hora:'12:00', sede:'NRG Stadium, Houston', equipoA:'🇪🇸 España', equipoB:'🇨🇻 Cabo Verde', canales:['DSports/DGO','Telefe'] },
                 { id:44, grupo:'H', fecha:'2026-06-14', hora:'18:00', sede:'AT&T Stadium, Arlington', equipoA:'🇸🇦 Arabia Saudita', equipoB:'🇺🇾 Uruguay', canales:['DSports/DGO'] },
                 { id:45, grupo:'H', fecha:'2026-06-19', hora:'13:00', sede:'Arrowhead Stadium, Kansas City', equipoA:'🇨🇻 Cabo Verde', equipoB:'🇸🇦 Arabia Saudita', canales:['DSports/DGO','TyC Sports'] },
                 { id:46, grupo:'H', fecha:'2026-06-19', hora:'18:00', sede:'BMO Field, Toronto', equipoA:'🇺🇾 Uruguay', equipoB:'🇪🇸 España', canales:['DSports/DGO','Telefe'] },
                 { id:47, grupo:'H', fecha:'2026-06-24', hora:'12:00', sede:'Lumen Field, Seattle', equipoA:'🇪🇸 España', equipoB:'🇸🇦 Arabia Saudita', canales:['DSports/DGO'] },
                 { id:48, grupo:'H', fecha:'2026-06-24', hora:'20:00', sede:'BC Place, Vancouver', equipoA:'🇺🇾 Uruguay', equipoB:'🇨🇻 Cabo Verde', canales:['DSports/DGO','Telefe','TV Pública'] },
-
-                // GRUPO I (Francia, Senegal, Irak, Noruega)
+                // GRUPO I
                 { id:49, grupo:'I', fecha:'2026-06-15', hora:'17:00', sede:'Levi\'s Stadium, Santa Clara', equipoA:'🇫🇷 Francia', equipoB:'🇮🇶 Irak', canales:['DSports/DGO','Telefe'] },
                 { id:50, grupo:'I', fecha:'2026-06-15', hora:'20:00', sede:'SoFi Stadium, Los Ángeles', equipoA:'🇸🇳 Senegal', equipoB:'🇳🇴 Noruega', canales:['DSports/DGO'] },
                 { id:51, grupo:'I', fecha:'2026-06-20', hora:'15:00', sede:'Estadio BBVA, Monterrey', equipoA:'🇮🇶 Irak', equipoB:'🇸🇳 Senegal', canales:['DSports/DGO','TyC Sports'] },
                 { id:52, grupo:'I', fecha:'2026-06-20', hora:'21:00', sede:'Hard Rock Stadium, Miami', equipoA:'🇳🇴 Noruega', equipoB:'🇫🇷 Francia', canales:['DSports/DGO','Telefe'] },
                 { id:53, grupo:'I', fecha:'2026-06-25', hora:'15:00', sede:'Mercedes-Benz Stadium, Atlanta', equipoA:'🇫🇷 Francia', equipoB:'🇸🇳 Senegal', canales:['DSports/DGO'] },
                 { id:54, grupo:'I', fecha:'2026-06-25', hora:'21:00', sede:'MetLife Stadium, Nueva Jersey', equipoA:'🇳🇴 Noruega', equipoB:'🇮🇶 Irak', canales:['DSports/DGO','Telefe','TV Pública'] },
-
-                // GRUPO J (Argentina, Argelia, Austria, Jordania)
+                // GRUPO J (ARGENTINA)
                 { id:55, grupo:'J', fecha:'2026-06-15', hora:'13:00', sede:'Estadio Akron, Guadalajara', equipoA:'🇦🇷 Argentina', equipoB:'🇩🇿 Argelia', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
                 { id:56, grupo:'J', fecha:'2026-06-15', hora:'23:00', sede:'Lumen Field, Seattle', equipoA:'🇦🇹 Austria', equipoB:'🇯🇴 Jordania', canales:['DSports/DGO'] },
                 { id:57, grupo:'J', fecha:'2026-06-20', hora:'13:00', sede:'Gillette Stadium, Boston', equipoA:'🇩🇿 Argelia', equipoB:'🇦🇹 Austria', canales:['DSports/DGO','TyC Sports'] },
                 { id:58, grupo:'J', fecha:'2026-06-20', hora:'22:00', sede:'NRG Stadium, Houston', equipoA:'🇯🇴 Jordania', equipoB:'🇦🇷 Argentina', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:59, grupo:'J', fecha:'2026-06-25', hora:'13:00', sede:'AT&T Stadium, Arlington', equipoA:'🇦🇷 Argentina', equipoB:'🇦🇹 Austria', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
                 { id:60, grupo:'J', fecha:'2026-06-25', hora:'20:00', sede:'Lincoln Financial Field, Filadelfia', equipoA:'🇯🇴 Jordania', equipoB:'🇩🇿 Argelia', canales:['DSports/DGO'] },
-
-                // GRUPO K (Portugal, RD Congo, Uzbekistán, Colombia)
+                // GRUPO K
                 { id:61, grupo:'K', fecha:'2026-06-14', hora:'13:00', sede:'Estadio Azteca, Ciudad de México', equipoA:'🇵🇹 Portugal', equipoB:'🇨🇩 RD Congo', canales:['DSports/DGO','Telefe'] },
                 { id:62, grupo:'K', fecha:'2026-06-14', hora:'22:00', sede:'BC Place, Vancouver', equipoA:'🇺🇿 Uzbekistán', equipoB:'🇨🇴 Colombia', canales:['DSports/DGO'] },
                 { id:63, grupo:'K', fecha:'2026-06-19', hora:'16:00', sede:'Arrowhead Stadium, Kansas City', equipoA:'🇨🇩 RD Congo', equipoB:'🇺🇿 Uzbekistán', canales:['DSports/DGO','TyC Sports'] },
                 { id:64, grupo:'K', fecha:'2026-06-19', hora:'23:00', sede:'Hard Rock Stadium, Miami', equipoA:'🇨🇴 Colombia', equipoB:'🇵🇹 Portugal', canales:['DSports/DGO','Telefe'] },
                 { id:65, grupo:'K', fecha:'2026-06-24', hora:'13:00', sede:'Levi\'s Stadium, Santa Clara', equipoA:'🇵🇹 Portugal', equipoB:'🇺🇿 Uzbekistán', canales:['DSports/DGO'] },
                 { id:66, grupo:'K', fecha:'2026-06-24', hora:'19:30', sede:'MetLife Stadium, Nueva Jersey', equipoA:'🇨🇴 Colombia', equipoB:'🇨🇩 RD Congo', canales:['DSports/DGO','Telefe','TV Pública'] },
-
-                // GRUPO L (Inglaterra, Croacia, Ghana, Panamá)
+                // GRUPO L
                 { id:67, grupo:'L', fecha:'2026-06-13', hora:'16:00', sede:'Mercedes-Benz Stadium, Atlanta', equipoA:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra', equipoB:'🇭🇷 Croacia', canales:['DSports/DGO','Telefe'] },
                 { id:68, grupo:'L', fecha:'2026-06-13', hora:'19:00', sede:'SoFi Stadium, Los Ángeles', equipoA:'🇬🇭 Ghana', equipoB:'🇵🇦 Panamá', canales:['DSports/DGO'] },
                 { id:69, grupo:'L', fecha:'2026-06-18', hora:'13:00', sede:'Estadio BBVA, Monterrey', equipoA:'🇭🇷 Croacia', equipoB:'🇬🇭 Ghana', canales:['DSports/DGO','TyC Sports'] },
@@ -335,7 +358,7 @@
                 { id:72, grupo:'L', fecha:'2026-06-23', hora:'17:00', sede:'NRG Stadium, Houston', equipoA:'🇵🇦 Panamá', equipoB:'🇭🇷 Croacia', canales:['DSports/DGO','Telefe','TV Pública'] }
             ];
 
-            // Inicializar resultados reales como nulos
+            // Inicializar resultados reales
             FIXTURE_OFICIAL.forEach(p => p.resultadoReal = null);
 
             // --- Almacenamiento Local ---
@@ -352,7 +375,7 @@
                 try { localStorage.setItem(key, JSON.stringify(value)); } catch(e) { mostrarToast('⚠️ Error al guardar', true); }
             }
 
-            // --- Estado global ---
+            // --- Estado ---
             let estado = {
                 userName: lsGet(LS_KEYS.userName, ''),
                 predictions: lsGet(LS_KEYS.predictions, {}),
@@ -380,12 +403,18 @@
                 return `${parseInt(d)} ${meses[parseInt(m)-1]}`;
             }
 
-            function getEmoji(equipoStr) {
+            // Extrae solo el emoji de bandera del string (ej: "🇲🇽 México" -> "🇲🇽")
+            function getBandera(equipoStr) {
                 const match = equipoStr.match(/[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{200D}\u{1F1E6}-\u{1F1FF}]+/u);
-                return match ? match[0] : '⚽';
+                return match ? match[0] : '🏁';
             }
 
-            // --- Render de partidos (grid principal) ---
+            // Extrae el nombre del país sin el emoji
+            function getNombrePais(equipoStr) {
+                return equipoStr.replace(/[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{200D}\u{1F1E6}-\u{1F1FF}]+/u, '').trim();
+            }
+
+            // --- Render de partidos (con banderas grandes) ---
             function getPartidosFiltrados() {
                 let partidos = [...FIXTURE_OFICIAL];
                 if (estado.filtroActivo === 'argentina') {
@@ -425,9 +454,15 @@
                             <span>📅 ${formatDateDisplay(p.fecha)} · ${p.hora} ET</span>
                         </div>
                         <div class="partido-card__equipos">
-                            <div class="partido-card__equipo"><span class="partido-card__bandera">${getEmoji(p.equipoA)}</span><span class="partido-card__nombre">${p.equipoA.slice(2)}</span></div>
+                            <div class="partido-card__equipo">
+                                <span class="partido-card__bandera">${getBandera(p.equipoA)}</span>
+                                <span class="partido-card__nombre">${getNombrePais(p.equipoA)}</span>
+                            </div>
                             <span class="partido-card__vs">VS</span>
-                            <div class="partido-card__equipo"><span class="partido-card__bandera">${getEmoji(p.equipoB)}</span><span class="partido-card__nombre">${p.equipoB.slice(2)}</span></div>
+                            <div class="partido-card__equipo">
+                                <span class="partido-card__bandera">${getBandera(p.equipoB)}</span>
+                                <span class="partido-card__nombre">${getNombrePais(p.equipoB)}</span>
+                            </div>
                         </div>
                         <div class="partido-card__canales">${p.canales.map(c => `<span class="canal-tag${c !== 'DSports/DGO' ? ' canal-tag--destacado' : ''}">📺 ${c}</span>`).join(' ')}</div>
                         <div class="partido-card__pronostico">
@@ -436,7 +471,7 @@
                             <input type="number" min="0" max="20" value="${pred.golesB}" data-match="${p.id}" data-field="golesB" placeholder="-">
                         </div>
                         ${tieneReal ? `<div class="partido-card__resultado-real">✅ Real: ${real.golesA} - ${real.golesB}</div>` : ''}
-                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:6px;text-align:center;">📍 ${p.sede}</div>
+                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:8px;text-align:center;">📍 ${p.sede}</div>
                     </div>`;
                 }).join('');
                 document.querySelectorAll('.partido-card__pronostico input').forEach(input => {
@@ -448,7 +483,7 @@
                 });
             }
 
-            // --- Filtros ---
+            // --- Filtros (igual que antes) ---
             function renderFiltros() {
                 const cont = document.getElementById('filtrosContainer');
                 cont.querySelectorAll('.filtro-btn[data-grupo]').forEach(b => b.remove());
@@ -510,7 +545,7 @@
                 navigator.clipboard.writeText(txtCodigo.value).then(() => mostrarToast('📋 Código copiado')).catch(() => { txtCodigo.select(); document.execCommand('copy'); mostrarToast('📋 Copiado'); });
             });
 
-            // --- Importar amigos ---
+            // --- Importar amigos (igual) ---
             const txtAmigos = document.getElementById('txtImportarAmigos');
             const btnImport = document.getElementById('btnImportarAmigos');
             const btnLimpiar = document.getElementById('btnLimpiarAmigos');
@@ -574,7 +609,7 @@
                     return `<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;font-size:0.75rem;">
                         <span style="min-width:20px;color:var(--accent);">#${p.id}</span>
                         <span style="min-width:30px;">Gr.${p.grupo}</span>
-                        <span style="flex:1;min-width:140px;">${p.equipoA.slice(2)} vs ${p.equipoB.slice(2)}</span>
+                        <span style="flex:1;min-width:140px;">${getNombrePais(p.equipoA)} vs ${getNombrePais(p.equipoB)}</span>
                         <span style="font-size:0.65rem;">${formatDateDisplay(p.fecha)} ${p.hora}</span>
                         <input type="number" min="0" max="20" value="${real.golesA}" data-real-match="${p.id}" data-real-field="golesA" placeholder="-" style="width:44px;height:32px;text-align:center;background:var(--bg-input);border:1px solid var(--border);border-radius:6px;color:var(--text);">
                         <span>-</span>
@@ -590,7 +625,7 @@
                 });
             }
 
-            // --- Tabla de posiciones del prode ---
+            // --- Tabla de posiciones (igual) ---
             function calcularPuntos(predictions, realResults) {
                 let puntos = 0, exactos = 0, signo = 0, fallos = 0, total = 0;
                 Object.keys(realResults).forEach(mid => {
@@ -631,7 +666,7 @@
                 container.innerHTML = `<table class="tabla-posiciones"><thead><tr><th>#</th><th>Jugador</th><th>Pts</th><th>Exactos</th><th>Signo</th><th>Fallos</th><th>Pronós</th></tr></thead><tbody>${tabla.map((f,i) => `<tr class="${i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':''}"><td>${i+1}</td><td style="text-align:left;font-weight:600;">${f.name}</td><td style="font-weight:800;color:var(--accent);">${f.puntos}</td><td>${f.exactos}</td><td>${f.signo}</td><td>${f.fallos}</td><td>${f.total}</td></tr>`).join('')}</tbody></table><p style="font-size:0.65rem;margin-top:8px;text-align:center;">Resultados cargados: ${realKeys.length} de ${FIXTURE_OFICIAL.length} · 3pts exacto / 1pt signo</p>`;
             }
 
-            // --- Colapsar panel admin ---
+            // --- Panel colapsable ---
             const panelAdmin = document.getElementById('panelAdmin');
             document.getElementById('panelAdminHeader').addEventListener('click', () => {
                 panelAdmin.classList.toggle('collapsible--open');
@@ -650,7 +685,7 @@
                 renderFiltros();
                 renderPartidos();
                 actualizarInfoAmigos();
-                mostrarToast('🏆 Fixture oficial Mundial 2026 cargado');
+                mostrarToast('🏆 Fixture oficial con banderas reales cargado');
             }
             init();
         })();
