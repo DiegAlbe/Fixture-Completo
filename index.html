@@ -3,1479 +3,636 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fixture Prode · Mundial 2026 · Argentina</title>
-    <!-- style.css embebido para facilitar despliegue como archivo único si se requiere -->
+    <title>Prode Mundial 2026 🇦🇷</title>
     <style>
+        /* --- VARIABLES Y DISEÑO DARK MODE --- */
         :root {
-            --bg: #0b0b14;
-            --bg-card: #151528;
-            --bg-card-hover: #1c1c38;
-            --bg-input: #1e1e36;
-            --text: #e2e2f0;
-            --text-secondary: #a0a0c0;
-            --accent: #f0b940;
-            --accent2: #00c897;
-            --accent2-glow: rgba(0, 200, 151, 0.25);
-            --danger: #e0556a;
-            --border: #2a2a45;
-            --border-active: #4a4a70;
-            --shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
-            --radius: 12px;
-            --radius-sm: 8px;
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --transition: 0.2s ease;
+            --bg-principal: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --texto-principal: #f8fafc;
+            --texto-secundario: #94a3b8;
+            --color-acento: #0ea5e9;
+            --color-acento-hover: #0284c7;
+            --color-verde: #10b981;
+            --color-oro: #eab308;
+            --borde: #475569;
         }
 
-        *,
-        *::before,
-        *::after {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.5;
-            -webkit-tap-highlight-color: transparent;
-            background-image:
-                radial-gradient(ellipse at 20% 10%, rgba(240, 185, 64, 0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 90%, rgba(0, 200, 151, 0.03) 0%, transparent 60%);
-            background-attachment: fixed;
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            padding: 10px;
+            line-height: 1.6;
         }
 
-        /* ─── HEADER ─────────────────────────── */
-        .header {
-            background: var(--bg-card);
-            border-bottom: 2px solid var(--border);
-            padding: 14px 18px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-        }
-        .header__logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.3px;
-            color: var(--accent);
-            white-space: nowrap;
-        }
-        .header__logo .trophy {
-            font-size: 1.6rem;
-            animation: pulse 2.2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.18);
-            }
-        }
-        .header__user {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-input);
-            border-radius: 30px;
-            padding: 6px 10px 6px 16px;
-            border: 1px solid var(--border);
-            transition: var(--transition);
-        }
-        .header__user:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(240, 185, 64, 0.1);
-        }
-        .header__user input {
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 0.9rem;
-            width: 120px;
-            outline: none;
-            font-family: var(--font);
-        }
-        .header__user input::placeholder {
-            color: var(--text-secondary);
-        }
-        .header__user .icon {
-            font-size: 1.2rem;
-        }
-
-        /* ─── MAIN LAYOUT ──────────────────── */
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 16px 12px 40px;
-        }
-
-        /* ─── FILTROS ──────────────────────── */
-        .filtros {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 18px;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        .filtros__label {
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--text-secondary);
-            margin-right: 4px;
-            white-space: nowrap;
-        }
-        .filtro-btn {
-            padding: 8px 14px;
-            border-radius: 22px;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.82rem;
-            font-weight: 600;
-            transition: var(--transition);
-            white-space: nowrap;
-            font-family: var(--font);
-            user-select: none;
-        }
-        .filtro-btn:hover {
-            border-color: var(--border-active);
-            color: var(--text);
-            background: var(--bg-card-hover);
-        }
-        .filtro-btn--active {
-            background: var(--accent);
-            color: #1a1a1a;
-            border-color: var(--accent);
-            font-weight: 700;
-            box-shadow: 0 2px 14px rgba(240, 185, 64, 0.3);
-        }
-        .filtro-btn--arg {
-            border-color: #75b8ff;
-            color: #75b8ff;
-            font-weight: 700;
-        }
-        .filtro-btn--arg.filtro-btn--active {
-            background: #75b8ff;
-            color: #1a1a1a;
-            border-color: #75b8ff;
-            box-shadow: 0 2px 14px rgba(117, 184, 255, 0.35);
-        }
-
-        /* ─── PARTIDOS ─────────────────────── */
-        .partidos-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        @media (min-width: 600px) {
-            .partidos-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 900px) {
-            .partidos-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .partido-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 16px;
-            border: 1px solid var(--border);
-            transition: var(--transition);
-            position: relative;
-            box-shadow: var(--shadow);
-        }
-        .partido-card:hover {
-            border-color: var(--border-active);
-            background: var(--bg-card-hover);
-            transform: translateY(-1px);
-        }
-        .partido-card--jugado {
-            border-left: 3px solid var(--accent2);
-            background: rgba(0, 200, 151, 0.03);
-        }
-        .partido-card__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary);
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        .partido-card__grupo {
-            background: var(--accent);
-            color: #1a1a1a;
-            font-weight: 800;
-            padding: 3px 9px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-        }
-        .partido-card__fecha {
-            font-weight: 600;
-        }
-        .partido-card__equipos {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
+        header {
             text-align: center;
+            padding: 20px 10px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 3px solid var(--color-acento);
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
-        .partido-card__equipo {
-            flex: 1;
+
+        h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        h2 { font-size: 1.4rem; margin-bottom: 15px; color: var(--color-acento); }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- CONFIGURACIÓN DE USUARIO --- */
+        .seccion-usuario {
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--borde);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 4px;
+            gap: 10px;
         }
-        .partido-card__bandera {
-            font-size: 1.8rem;
-            line-height: 1;
-        }
-        .partido-card__nombre {
-            font-size: 0.78rem;
-            line-height: 1.2;
-            word-break: break-word;
-            hyphens: auto;
-        }
-        .partido-card__vs {
-            font-weight: 900;
-            font-size: 0.85rem;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-        .partido-card__canales {
-            font-size: 0.68rem;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
+
+        .flex-input {
             display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
+            gap: 10px;
         }
-        .canal-tag {
-            background: var(--bg-input);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 500;
-            white-space: nowrap;
-            font-size: 0.64rem;
-        }
-        .canal-tag--destacado {
-            background: rgba(240, 185, 64, 0.12);
-            color: var(--accent);
-            font-weight: 600;
-        }
-        .partido-card__pronostico {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .partido-card__pronostico input {
-            width: 44px;
-            height: 40px;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: var(--radius-sm);
-            border: 2px solid var(--border);
-            background: var(--bg-input);
-            color: var(--text);
-            font-family: var(--font);
-            transition: var(--transition);
-            -moz-appearance: textfield;
-            appearance: textfield;
-        }
-        .partido-card__pronostico input::-webkit-outer-spin-button,
-        .partido-card__pronostico input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .partido-card__pronostico input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(240, 185, 64, 0.08);
-        }
-        .partido-card__pronostico .pronostico-sep {
-            font-weight: 900;
+
+        /* --- COMPONENTES DE INTERFAZ (BOTONES E INPUTS) --- */
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--borde);
+            color: var(--texto-principal);
+            border-radius: 6px;
             font-size: 1rem;
-            color: var(--text-secondary);
-        }
-        .partido-card__resultado-real {
-            margin-top: 8px;
-            font-size: 0.7rem;
-            text-align: center;
-            color: var(--accent2);
-            font-weight: 700;
-            background: rgba(0, 200, 151, 0.08);
-            padding: 4px 10px;
-            border-radius: 14px;
-            display: inline-block;
-            width: 100%;
         }
 
-        /* ─── SECCIONES ────────────────────── */
-        .seccion {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 20px 18px;
-            margin-top: 24px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-        .seccion__titulo {
-            font-weight: 800;
-            font-size: 1.05rem;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-        }
-        .btn {
-            padding: 10px 20px;
-            border-radius: 26px;
+        button {
+            background-color: var(--color-acento);
+            color: white;
             border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            font-family: var(--font);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.2s ease;
         }
-        .btn--accent {
-            background: var(--accent);
-            color: #1a1a1a;
-            box-shadow: 0 4px 18px rgba(240, 185, 64, 0.3);
-        }
-        .btn--accent:hover {
-            box-shadow: 0 6px 24px rgba(240, 185, 64, 0.45);
-            transform: translateY(-1px);
-        }
-        .btn--accent2 {
-            background: var(--accent2);
-            color: #fff;
-            box-shadow: 0 4px 18px var(--accent2-glow);
-        }
-        .btn--accent2:hover {
-            box-shadow: 0 6px 28px var(--accent2-glow);
-            transform: translateY(-1px);
-        }
-        .btn--outline {
-            background: transparent;
-            border: 2px solid var(--border);
-            color: var(--text);
-        }
-        .btn--outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-        .btn--sm {
-            padding: 6px 14px;
-            font-size: 0.75rem;
-            border-radius: 20px;
-        }
-        .btn--danger {
-            background: var(--danger);
-            color: #fff;
-        }
-        .btn-group {
+
+        button:hover { background-color: var(--color-acento-hover); }
+        button.btn-verde { background-color: var(--color-verde); }
+        button.btn-verde:hover { opacity: 0.9; }
+
+        /* --- FILTROS --- */
+        .filtros-container {
+            margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        textarea {
-            width: 100%;
-            min-height: 100px;
-            background: var(--bg-input);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            color: var(--text);
-            padding: 12px;
-            font-family: 'Courier New', monospace;
+
+        .btn-filtro {
+            background-color: var(--bg-card);
+            border: 1px solid var(--borde);
+            color: var(--texto-secundario);
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+
+        .btn-filtro.activo {
+            background-color: var(--color-acento);
+            color: white;
+            border-color: var(--color-acento);
+        }
+
+        /* --- CARDS DE PARTIDOS --- */
+        .partido-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid var(--borde);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .partido-meta {
+            display: flex;
+            justify-content: space-between;
             font-size: 0.8rem;
-            resize: vertical;
-            transition: var(--transition);
-        }
-        textarea:focus {
-            border-color: var(--accent2);
-            outline: none;
-            box-shadow: 0 0 0 4px var(--accent2-glow);
-        }
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent2);
-            color: #fff;
-            padding: 12px 22px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            z-index: 999;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            animation: toastIn 0.35s ease, toastOut 0.35s ease 2.2s forwards;
-            pointer-events: none;
-        }
-        @keyframes toastIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-        @keyframes toastOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
+            color: var(--texto-secundario);
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--borde);
+            padding-bottom: 5px;
         }
 
-        /* ─── TABLA POSICIONES ────────────── */
-        .tabla-posiciones {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.82rem;
-            margin-top: 12px;
-        }
-        .tabla-posiciones th,
-        .tabla-posiciones td {
-            padding: 10px 8px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-        .tabla-posiciones th {
-            background: var(--bg-input);
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            position: sticky;
-            top: 0;
-        }
-        .tabla-posiciones tbody tr:hover {
-            background: var(--bg-card-hover);
-        }
-        .tabla-posiciones .pos-1 {
-            background: rgba(240, 185, 64, 0.08);
-            font-weight: 700;
-        }
-        .tabla-posiciones .pos-1 td:first-child::before {
-            content: '🥇 ';
-        }
-        .tabla-posiciones .pos-2 td:first-child::before {
-            content: '🥈 ';
-        }
-        .tabla-posiciones .pos-3 td:first-child::before {
-            content: '🥉 ';
-        }
-        .tabla-scroll {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
+        .partido-tv {
+            color: var(--color-oro);
+            font-weight: bold;
         }
 
-        /* ─── COLLAPSIBLE ─────────────────── */
-        .collapsible-header {
-            cursor: pointer;
+        .partido-equipos {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            user-select: none;
-        }
-        .collapsible-header .arrow {
-            transition: transform 0.3s ease;
-            font-size: 1.2rem;
-        }
-        .collapsible--open .arrow {
-            transform: rotate(180deg);
-        }
-        .collapsible-body {
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.4s ease;
-        }
-        .collapsible--open .collapsible-body {
-            max-height: 3000px;
+            gap: 10px;
         }
 
-        /* ─── RESPONSIVE ──────────────────── */
-        @media (max-width: 400px) {
-            .partido-card__equipos {
-                font-size: 0.8rem;
-            }
-            .partido-card__bandera {
-                font-size: 1.4rem;
-            }
-            .partido-card__pronostico input {
-                width: 36px;
-                height: 34px;
-                font-size: 0.9rem;
-            }
-            .filtro-btn {
-                padding: 6px 10px;
-                font-size: 0.7rem;
-            }
-            .header__logo {
-                font-size: 1rem;
-            }
+        .equipo-bloque {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .equipo-bloque.derecha { justify-content: flex-end; text-align: right; }
+        .bandera { font-size: 1.4rem; }
+        .nombre-equipo { font-weight: 600; font-size: 1rem; }
+
+        .goles-input {
+            width: 50px;
+            text-align: center;
+            padding: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: var(--bg-input);
+            border: 1px solid var(--borde);
+            color: white;
+            border-radius: 6px;
+        }
+
+        .vs {
+            color: var(--texto-secundario);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* --- SECCIONES COMPARTIR Y ADMIN --- */
+        .seccion-panel {
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid var(--borde);
+        }
+
+        .tab-contenedor {
+            display: flex;
+            border-bottom: 1px solid var(--borde);
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--texto-secundario);
+            padding: 10px 15px;
+            font-size: 1rem;
+        }
+
+        .tab-btn.activo {
+            color: var(--color-acento);
+            border-bottom: 3px solid var(--color-acento);
+        }
+
+        .panel-contenido { display: none; }
+        .panel-contenido.activo { display: block; }
+
+        /* --- TABLA DE POSICIONES --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        th { background-color: var(--bg-input); color: var(--color-oro); }
+        tr:nth-child(even) { background-color: rgba(255,255,255,0.02); }
+
+        /* --- RESPONSIVE (MOBILE FIRST CORRECTIONS) --- */
+        @media(max-width: 480px) {
+            .nombre-equipo { font-size: 0.9rem; }
+            .goles-input { width: 42px; padding: 6px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══════════ HEADER ═══════════ -->
-    <header class="header">
-        <div class="header__logo">
-            <span class="trophy">🏆</span> Fixture Prode · Mundial 2026
-        </div>
-        <div class="header__user">
-            <span class="icon">👤</span>
-            <input type="text" id="inputNombre" placeholder="Tu nombre/apodo" maxlength="25" autocomplete="off">
-        </div>
+<div class="container">
+    <header>
+        <h1>🏆 PRODE MUNDIAL 2026</h1>
+        <p>Edición Familiar / Amigos 🇦🇷 (Hora de Argentina)</p>
     </header>
 
-    <!-- ═══════════ CONTENEDOR PRINCIPAL ═══════════ -->
-    <main class="container" id="appContainer">
+    <div class="seccion-usuario">
+        <label id="label-usuario" style="font-weight: bold;">Antes de empezar, cargá tu Apodo:</label>
+        <div class="flex-input">
+            <input type="text" id="input-username" placeholder="Ej: Juan_Pizzero">
+            <button id="btn-guardar-usuario" onclick="guardarUsuario()">Listo</button>
+        </div>
+    </div>
 
-        <!-- FILTROS -->
-        <section class="filtros" id="filtrosContainer">
-            <span class="filtros__label">Filtrar:</span>
-            <button class="filtro-btn filtro-btn--active" data-filtro="todos">📋 Todos</button>
-            <button class="filtro-btn filtro-btn--arg" data-filtro="argentina">🇦🇷 Solo Argentina</button>
-            <span class="filtros__label" style="margin-left:6px;">Grupo:</span>
-            <!-- Los botones de grupos A-L se generan dinámicamente -->
-        </section>
+    <div class="filtros-container" id="contenedor-filtros">
+        <button class="btn-filtro activo" onclick="filtrarPartidos('todos', this)">Todos</button>
+        <button class="btn-filtro" onclick="filtrarPartidos('ARG', this)">🇦🇷 Solo Argentina</button>
+        <button class="btn-filtro" onclick="filtrarPartidos('A', this)">Grupo A</button>
+        <button class="btn-filtro" onclick="filtrarPartidos('B', this)">Grupo B</button>
+        <button class="btn-filtro" onclick="filtrarPartidos('C', this)">Grupo C</button>
+        </div>
 
-        <!-- GRILLA DE PARTIDOS -->
-        <section class="partidos-grid" id="partidosGrid">
-            <!-- Renderizado dinámico -->
-        </section>
+    <main id="fixture-container">
+        </main>
 
-        <!-- COMPARTIR PRONÓSTICOS -->
-        <section class="seccion">
-            <div class="seccion__titulo">📤 Compartir mis Pronósticos</div>
-            <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">
-                Generá un código para enviar al organizador del prode por WhatsApp. Incluye tu nombre y todos tus
-                pronósticos.
+    <section class="seccion-panel">
+        <div class="tab-contenedor">
+            <button class="tab-btn activo" onclick="cambiarTab('tab-compartir', this)">📤 Enviar Pronósticos</button>
+            <button class="tab-btn" onclick="cambiarTab('tab-admin', this)">⚙️ Panel Administrador</button>
+        </div>
+
+        <div id="tab-compartir" class="panel-contenido activo">
+            <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--texto-secundario);">
+                Copiá este código y mandaselo por WhatsApp al organizador del Prode.
             </p>
-            <div class="btn-group">
-                <button class="btn btn--accent2" id="btnGenerarCodigo">🔒 Generar Código</button>
-                <button class="btn btn--outline btn--sm" id="btnCopiarCodigo" disabled>📋 Copiar al Portapapeles</button>
-            </div>
-            <textarea id="txtCodigoGenerado" readonly placeholder="Tu código aparecerá aquí..." style="margin-top:10px;"></textarea>
-        </section>
+            <button class="btn-verde" onclick="exportarPronosticos()">📋 Copiar Mis Pronósticos</button>
+        </div>
 
-        <!-- PANEL ADMINISTRADOR -->
-        <section class="seccion collapsible" id="panelAdmin">
-            <div class="seccion__titulo collapsible-header" id="panelAdminHeader">
-                ⚙️ Panel Administrador (Organizador) <span class="arrow">▼</span>
-            </div>
-            <div class="collapsible-body">
-                <div style="display:flex;flex-direction:column;gap:18px;margin-top:8px;">
-
-                    <!-- Cargar códigos de amigos -->
-                    <div>
-                        <h4 style="margin-bottom:6px;color:var(--accent2);">📥 Importar Pronósticos de Amigos</h4>
-                        <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">
-                            Pegá los códigos Base64 que te manden (uno por línea o separados por comas).
-                        </p>
-                        <textarea id="txtImportarAmigos" placeholder="Pegá los códigos de tus amigos aquí..."></textarea>
-                        <div class="btn-group" style="margin-top:8px;">
-                            <button class="btn btn--accent2 btn--sm" id="btnImportarAmigos">📥 Procesar Códigos</button>
-                            <button class="btn btn--danger btn--sm" id="btnLimpiarAmigos">🗑 Limpiar Todos</button>
-                        </div>
-                        <p style="font-size:0.7rem;color:var(--text-secondary);margin-top:4px;" id="infoAmigos">Amigos
-                            importados: 0</p>
-                    </div>
-
-                    <!-- Cargar resultados reales -->
-                    <div>
-                        <h4 style="margin-bottom:6px;color:var(--accent2);">⚽ Cargar Resultados Reales</h4>
-                        <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">
-                            Completá los goles de los partidos que ya se jugaron. Se guardan automáticamente.
-                        </p>
-                        <div id="adminResultadosReales" style="max-height:400px;overflow-y:auto;padding-right:4px;">
-                            <!-- Se renderiza dinámicamente -->
-                        </div>
-                    </div>
-
-                    <!-- Tabla de Posiciones -->
-                    <div>
-                        <h4 style="margin-bottom:6px;color:var(--accent);">🏅 Tabla de Posiciones del Prode</h4>
-                        <div class="tabla-scroll" id="tablaPosicionesContainer">
-                            <p style="padding:16px;color:var(--text-secondary);font-size:0.8rem;">
-                                Cargá resultados reales e importá pronósticos de amigos para ver la tabla.
-                            </p>
-                        </div>
-                    </div>
+        <div id="tab-admin" class="panel-contenido">
+            <h3>Cargar Resultados Reales (Solo Administrador)</h3>
+            <p style="font-size: 0.85rem; color: var(--texto-secundario); margin-bottom: 10px;">
+                Cargá acá los goles oficiales de los partidos terminados para calcular los puntos. Se guarda en tu navegador.
+            </p>
+            <div id="fixture-admin-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; border: 1px solid var(--borde); padding: 5px;">
                 </div>
-            </div>
-        </section>
-    </main>
 
-    <!-- TOAST para notificaciones -->
-    <div id="toast" class="toast" style="display:none;"></div>
+            <hr style="border: 0; border-top: 1px solid var(--borde); margin: 15px 0;">
 
-    <!-- ═══════════ SCRIPT PRINCIPAL ═══════════ -->
-    <script>
-        (function() {
-            // ─────────────────────────────────────
-            // 🔧 CONFIGURACIÓN Y DATOS DEL FIXTURE
-            // ─────────────────────────────────────
+            <h3>Procesar Códigos de Amigos</h3>
+            <textarea id="txt-codigos-amigos" rows="4" placeholder="Pegá acá los códigos que te pasen tus amigos por WhatsApp. Uno por línea o de a uno."></textarea>
+            <button style="margin-top: 8px;" onclick="procesarCodigosAmigos()">Calcular Tabla de Posiciones</button>
 
-            /**
-             * Zona horaria de Argentina: GMT-3 (todo el año).
-             * Los horarios ya están expresados en hora local argentina.
-             * Sedes reales del Mundial 2026 (EE.UU., México, Canadá).
-             * Canales para Argentina:
-             *   - DSports/DGO: los 104 partidos (todo el torneo).
-             *   - Telefe: partidos de Argentina + destacados.
-             *   - TyC Sports: partidos de Argentina + algunos más.
-             *   - TV Pública: partidos de Argentina + inauguración + clásicos.
-             */
-
-            // Definición de los 12 grupos (A-L) con 4 equipos cada uno.
-            // ⚠️ Proyección hasta el sorteo oficial (finales 2025). Equipos basados en clasificados probables.
-            const GRUPOS_DEFINICION = [
-                { letra: 'A', equipos: ['🇦🇷 Argentina', '🇲🇽 México', '🇵🇱 Polonia', '🇳🇿 Nueva Zelanda'] },
-                { letra: 'B', equipos: ['🇧🇷 Brasil', '🇩🇪 Alemania', '🇸🇳 Senegal', '🇶🇦 Catar'] },
-                { letra: 'C', equipos: ['🇫🇷 Francia', '🇺🇾 Uruguay', '🇰🇷 Corea del Sur', '🇯🇲 Jamaica'] },
-                { letra: 'D', equipos: ['🇪🇸 España', '🇨🇴 Colombia', '🇲🇦 Marruecos', '🇨🇦 Canadá'] },
-                { letra: 'E', equipos: ['🏴 Inglaterra', '🇪🇨 Ecuador', '🇯🇵 Japón', '🇵🇦 Panamá'] },
-                { letra: 'F', equipos: ['🇵🇹 Portugal', '🇵🇾 Paraguay', '🇳🇬 Nigeria', '🇸🇦 Arabia Saudita'] },
-                { letra: 'G', equipos: ['🇮🇹 Italia', '🇺🇸 Estados Unidos', '🇪🇬 Egipto', '🇺🇿 Uzbekistán'] },
-                { letra: 'H', equipos: ['🇳🇱 Países Bajos', '🇭🇷 Croacia', '🇬🇭 Ghana', '🇦🇪 Emiratos Árabes'] },
-                { letra: 'I', equipos: ['🇧🇪 Bélgica', '🇩🇰 Dinamarca', '🇨🇮 Costa de Marfil', '🇨🇷 Costa Rica'] },
-                { letra: 'J', equipos: ['🇨🇭 Suiza', '🇷🇸 Serbia', '🇨🇲 Camerún', '🇦🇺 Australia'] },
-                { letra: 'K', equipos: ['🇦🇹 Austria', '🇺🇦 Ucrania', '🇩🇿 Argelia', '🇨🇱 Chile'] },
-                { letra: 'L', equipos: ['🇹🇷 Turquía', '🇸🇪 Suecia', '🇹🇳 Túnez', '🇵🇪 Perú'] },
-            ];
-
-            // Sedes y sus husos horarios aproximados respecto a GMT-3 (Argentina)
-            const SEDES = [
-                'Estadio Azteca, Cd. de México',
-                'AT&T Stadium, Arlington',
-                'MetLife Stadium, Nueva Jersey',
-                'SoFi Stadium, Los Ángeles',
-                'Hard Rock Stadium, Miami',
-                'Mercedes-Benz Stadium, Atlanta',
-                "Levi's Stadium, Santa Clara",
-                'NRG Stadium, Houston',
-                'Arrowhead Stadium, Kansas City',
-                'Lincoln Financial Field, Filadelfia',
-                'Lumen Field, Seattle',
-                'Gillette Stadium, Boston',
-                'BMO Field, Toronto',
-                'BC Place, Vancouver',
-                'Estadio BBVA, Monterrey',
-                'Estadio Akron, Guadalajara',
-            ];
-
-            // Horarios típicos argentinos para los partidos (GMT-3)
-            const HORARIOS = ['13:00', '16:00', '19:00', '22:00'];
-
-            /**
-             * Determina canales de TV para Argentina según los equipos del partido.
-             */
-            function getCanales(equipoA, equipoB) {
-                const esArgentina = equipoA.includes('Argentina') || equipoB.includes('Argentina');
-                const esBrasil = equipoA.includes('Brasil') || equipoB.includes('Brasil');
-                const esDestacado = esArgentina || esBrasil ||
-                    equipoA.includes('Francia') || equipoB.includes('Francia') ||
-                    equipoA.includes('España') || equipoB.includes('España') ||
-                    equipoA.includes('Inglaterra') || equipoB.includes('Inglaterra') ||
-                    equipoA.includes('Alemania') || equipoB.includes('Alemania') ||
-                    equipoA.includes('Italia') || equipoB.includes('Italia');
-
-                const canales = ['DSports/DGO']; // Siempre disponible
-
-                if (esArgentina) {
-                    canales.push('Telefe', 'TyC Sports', 'TV Pública');
-                } else if (esBrasil || esDestacado) {
-                    canales.push('Telefe');
-                    if (Math.random() > 0.5) canales.push('TyC Sports');
-                } else if (Math.random() > 0.7) {
-                    canales.push('TV Pública');
-                }
-                return canales;
-            }
-
-            /**
-             * Genera el fixture completo de fase de grupos (72 partidos).
-             * Jornada 1: días 1-6, Jornada 2: días 7-12, Jornada 3: días 13-18.
-             * Fecha inicio: 11 de junio de 2026.
-             */
-            function generarFixture() {
-                const partidos = [];
-                let idCounter = 1;
-                const fechaBase = new Date(2026, 5, 11); // 11 junio 2026
-                let diaOffset = 0;
-                const sedeShuffle = [...SEDES].sort(() => Math.random() - 0.5);
-
-                GRUPOS_DEFINICION.forEach((grupo, idxGrupo) => {
-                    const eq = grupo.equipos;
-                    // Jornadas: (0,1) (2,3) -> J1; (0,2) (1,3) -> J2; (0,3) (1,2) -> J3
-                    const jornadas = [
-                        { local: 0, visitante: 1, local2: 2, visitante2: 3 },
-                        { local: 0, visitante: 2, local2: 1, visitante2: 3 },
-                        { local: 0, visitante: 3, local2: 1, visitante2: 2 },
-                    ];
-
-                    jornadas.forEach((jornada, jIdx) => {
-                        // Fecha para esta jornada del grupo
-                        const fechaPartido1 = new Date(fechaBase);
-                        fechaPartido1.setDate(fechaPartido1.getDate() + diaOffset);
-                        const fechaPartido2 = new Date(fechaPartido1);
-
-                        // En jornada 3, los partidos del mismo grupo son simultáneos (misma fecha/hora)
-                        if (jIdx === 2) {
-                            // Mismo día, misma hora para ambos
-                        } else {
-                            // Pueden ser mismo día diferente hora o días consecutivos
-                            if (Math.random() > 0.5) {
-                                fechaPartido2.setDate(fechaPartido2.getDate() + 1);
-                                diaOffset++;
-                            }
-                        }
-
-                        const hora1 = HORARIOS[Math.floor(Math.random() * HORARIOS.length)];
-                        const hora2 = jIdx === 2 ? hora1 : HORARIOS[Math.floor(Math.random() * HORARIOS
-                        .length)];
-
-                        const partido1 = {
-                            id: idCounter++,
-                            grupo: grupo.letra,
-                            fecha: formatDate(fechaPartido1),
-                            hora: hora1,
-                            sede: sedeShuffle[(idCounter * 7) % sedeShuffle.length],
-                            equipoA: eq[jornada.local],
-                            equipoB: eq[jornada.visitante],
-                            canales: getCanales(eq[jornada.local], eq[jornada.visitante]),
-                            resultadoReal: null, // {golesA, golesB} cargado por admin
-                        };
-
-                        const partido2 = {
-                            id: idCounter++,
-                            grupo: grupo.letra,
-                            fecha: formatDate(fechaPartido2),
-                            hora: hora2,
-                            sede: sedeShuffle[(idCounter * 11) % sedeShuffle.length],
-                            equipoA: eq[jornada.local2],
-                            equipoB: eq[jornada.visitante2],
-                            canales: getCanales(eq[jornada.local2], eq[jornada.visitante2]),
-                            resultadoReal: null,
-                        };
-
-                        partidos.push(partido1, partido2);
-                        diaOffset++;
-                    });
-                    diaOffset++; // Espacio entre grupos
-                });
-
-                // Ordenar por fecha y hora
-                partidos.sort((a, b) => {
-                    const dateA = new Date(a.fecha + 'T' + a.hora + ':00-03:00');
-                    const dateB = new Date(b.fecha + 'T' + b.hora + ':00-03:00');
-                    return dateA - dateB;
-                });
-
-                // Reasignar IDs secuenciales
-                partidos.forEach((p, i) => p.id = i + 1);
-
-                return partidos;
-            }
-
-            function formatDate(date) {
-                const y = date.getFullYear();
-                const m = String(date.getMonth() + 1).padStart(2, '0');
-                const d = String(date.getDate()).padStart(2, '0');
-                return `${y}-${m}-${d}`;
-            }
-
-            // Fixture global (se genera una vez)
-            const FIXTURE = generarFixture();
-
-            // ─────────────────────────────────────
-            // 🗄 LOCAL STORAGE HELPERS
-            // ─────────────────────────────────────
-            const LS_KEYS = {
-                userName: 'prode_userName',
-                predictions: 'prode_predictions',
-                realResults: 'prode_realResults',
-                friendsData: 'prode_friendsData',
-            };
-
-            function lsGet(key, fallback = null) {
-                try {
-                    const raw = localStorage.getItem(key);
-                    if (raw === null) return fallback;
-                    return JSON.parse(raw);
-                } catch (e) {
-                    return fallback;
-                }
-            }
-
-            function lsSet(key, value) {
-                try {
-                    localStorage.setItem(key, JSON.stringify(value));
-                } catch (e) {
-                    mostrarToast('⚠️ Error al guardar: almacenamiento lleno', true);
-                }
-            }
-
-            // ─────────────────────────────────────
-            // 🧠 ESTADO DE LA APLICACIÓN
-            // ─────────────────────────────────────
-            let estado = {
-                userName: lsGet(LS_KEYS.userName, ''),
-                predictions: lsGet(LS_KEYS.predictions, {}), // { matchId: {golesA, golesB} }
-                realResults: lsGet(LS_KEYS.realResults, {}), // { matchId: {golesA, golesB} }
-                friendsData: lsGet(LS_KEYS.friendsData, []), // [{name, predictions:{}}]
-                filtroActivo: 'todos', // 'todos' | 'argentina' | 'A'..'L'
-            };
-
-            // Sincronizar nombre con input
-            document.getElementById('inputNombre').value = estado.userName;
-
-            // ─────────────────────────────────────
-            // 🎨 RENDERIZADO DE PARTIDOS
-            // ─────────────────────────────────────
-            const partidosGrid = document.getElementById('partidosGrid');
-            const filtrosContainer = document.getElementById('filtrosContainer');
-
-            function getPartidosFiltrados() {
-                let partidos = [...FIXTURE];
-                if (estado.filtroActivo === 'argentina') {
-                    partidos = partidos.filter(p =>
-                        p.equipoA.includes('Argentina') || p.equipoB.includes('Argentina')
-                    );
-                } else if (estado.filtroActivo !== 'todos') {
-                    partidos = partidos.filter(p => p.grupo === estado.filtroActivo);
-                }
-                return partidos;
-            }
-
-            function renderPartidos() {
-                const partidos = getPartidosFiltrados();
-                partidosGrid.innerHTML = '';
-
-                if (partidos.length === 0) {
-                    partidosGrid.innerHTML =
-                        '<p style="grid-column:1/-1;text-align:center;padding:30px;color:var(--text-secondary);">No hay partidos para este filtro.</p>';
-                    return;
-                }
-
-                partidos.forEach(partido => {
-                    const card = document.createElement('div');
-                    card.className = 'partido-card';
-                    if (partido.resultadoReal && partido.resultadoReal.golesA !== null && partido
-                        .resultadoReal.golesB !== null) {
-                        card.classList.add('partido-card--jugado');
-                    }
-
-                    const pred = estado.predictions[partido.id] || { golesA: '', golesB: '' };
-                    const real = estado.realResults[partido.id] || null;
-                    const tieneReal = real && real.golesA !== null && real.golesB !== null;
-
-                    // Extraer solo el nombre del país (sin emoji) para mostrar limpio
-                    const nombreA = partido.equipoA.replace(/[^\w\sáéíóúÁÉÍÓÚñÑüÜ\-\.]/g, '').trim() ||
-                        partido.equipoA;
-                    const nombreB = partido.equipoB.replace(/[^\w\sáéíóúÁÉÍÓÚñÑüÜ\-\.]/g, '').trim() ||
-                        partido.equipoB;
-
-                    card.innerHTML = `
-                <div class="partido-card__header">
-                  <span class="partido-card__grupo">Grupo ${partido.grupo}</span>
-                  <span class="partido-card__fecha">📅 ${formatDateDisplay(partido.fecha)} · ${partido.hora} hs</span>
-                </div>
-                <div class="partido-card__equipos">
-                  <div class="partido-card__equipo">
-                    <span class="partido-card__bandera">${getEmoji(partido.equipoA)}</span>
-                    <span class="partido-card__nombre">${nombreA}</span>
-                  </div>
-                  <span class="partido-card__vs">VS</span>
-                  <div class="partido-card__equipo">
-                    <span class="partido-card__bandera">${getEmoji(partido.equipoB)}</span>
-                    <span class="partido-card__nombre">${nombreB}</span>
-                  </div>
-                </div>
-                <div class="partido-card__canales">
-                  ${partido.canales.map(c => {
-                    const esDestacado = c !== 'DSports/DGO';
-                    return `<span class="canal-tag${esDestacado ? ' canal-tag--destacado' : ''}">📺 ${c}</span>`;
-                  }).join(' ')}
-                </div>
-                <div class="partido-card__pronostico">
-                  <input type="number" min="0" max="20" value="${pred.golesA}" 
-                    data-match="${partido.id}" data-field="golesA" 
-                    placeholder="-" aria-label="Goles ${nombreA}">
-                  <span class="pronostico-sep">-</span>
-                  <input type="number" min="0" max="20" value="${pred.golesB}" 
-                    data-match="${partido.id}" data-field="golesB" 
-                    placeholder="-" aria-label="Goles ${nombreB}">
-                </div>
-                ${tieneReal ? `<div class="partido-card__resultado-real">✅ Resultado: ${real.golesA} - ${real.golesB}</div>` : ''}
-                <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:6px;text-align:center;">📍 ${partido.sede}</div>
-              `;
-                    partidosGrid.appendChild(card);
-                });
-
-                // Asignar event listeners a los inputs de pronóstico
-                document.querySelectorAll('.partido-card__pronostico input').forEach(input => {
-                    input.addEventListener('change', handlePredictionChange);
-                    input.addEventListener('input', function() {
-                        // Limitar a 2 dígitos y números positivos
-                        if (this.value.length > 2) this.value = this.value.slice(0, 2);
-                        if (parseInt(this.value) < 0) this.value = '0';
-                    });
-                });
-            }
-
-            function getEmoji(equipoStr) {
-                // Extraer el emoji de bandera del string (primeros caracteres)
-                const match = equipoStr.match(/^[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{200D}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}\u{1F1E6}-\u{1F1FF}]+/u);
-                return match ? match[0] : '⚽';
-            }
-
-            function formatDateDisplay(fechaStr) {
-                const [y, m, d] = fechaStr.split('-');
-                const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-                return `${parseInt(d)} ${meses[parseInt(m)-1]}`;
-            }
-
-            function handlePredictionChange(e) {
-                const matchId = parseInt(e.target.dataset.match);
-                const field = e.target.dataset.field;
-                let value = parseInt(e.target.value);
-
-                if (isNaN(value) || value < 0) value = 0;
-                if (value > 20) value = 20;
-                e.target.value = value;
-
-                if (!estado.predictions[matchId]) {
-                    estado.predictions[matchId] = { golesA: null, golesB: null };
-                }
-                estado.predictions[matchId][field] = value;
-                lsSet(LS_KEYS.predictions, estado.predictions);
-            }
-
-            // ─────────────────────────────────────
-            // 🏷 RENDERIZADO DE FILTROS
-            // ─────────────────────────────────────
-            function renderFiltros() {
-                // Limpiar botones de grupo existentes (mantener los fijos: Todos, Argentina)
-                const botonesGrupo = filtrosContainer.querySelectorAll('.filtro-btn[data-grupo]');
-                botonesGrupo.forEach(b => b.remove());
-
-                // Crear botones de grupo A-L
-                const gruposUnicos = [...new Set(FIXTURE.map(p => p.grupo))].sort();
-                const labelGrupo = filtrosContainer.querySelector('.filtros__label:last-of-type');
-                const refNode = labelGrupo ? labelGrupo.nextSibling : filtrosContainer.querySelector(
-                    '.filtro-btn--arg').nextSibling;
-
-                gruposUnicos.forEach(grupo => {
-                    const btn = document.createElement('button');
-                    btn.className = 'filtro-btn';
-                    btn.dataset.grupo = grupo;
-                    btn.dataset.filtro = grupo;
-                    btn.textContent = grupo;
-                    if (estado.filtroActivo === grupo) btn.classList.add('filtro-btn--active');
-                    btn.addEventListener('click', () => setFiltro(grupo));
-                    filtrosContainer.appendChild(btn);
-                });
-
-                // Actualizar estado activo de botones fijos
-                const btnTodos = filtrosContainer.querySelector('[data-filtro="todos"]');
-                const btnArg = filtrosContainer.querySelector('[data-filtro="argentina"]');
-                if (btnTodos) btnTodos.classList.toggle('filtro-btn--active', estado.filtroActivo === 'todos');
-                if (btnArg) btnArg.classList.toggle('filtro-btn--active', estado.filtroActivo === 'argentina');
-            }
-
-            function setFiltro(filtro) {
-                estado.filtroActivo = filtro;
-                renderFiltros();
-                renderPartidos();
-            }
-
-            // Event listeners para botones fijos
-            filtrosContainer.addEventListener('click', function(e) {
-                const btn = e.target.closest('.filtro-btn');
-                if (!btn) return;
-                const filtro = btn.dataset.filtro;
-                if (filtro === 'todos' || filtro === 'argentina') {
-                    setFiltro(filtro);
-                }
-            });
-
-            // ─────────────────────────────────────
-            // 👤 NOMBRE DE USUARIO
-            // ─────────────────────────────────────
-            const inputNombre = document.getElementById('inputNombre');
-            inputNombre.addEventListener('change', function() {
-                estado.userName = this.value.trim();
-                lsSet(LS_KEYS.userName, estado.userName);
-                mostrarToast('👤 Nombre guardado: ' + (estado.userName || 'Anónimo'));
-            });
-            inputNombre.addEventListener('blur', function() {
-                estado.userName = this.value.trim();
-                lsSet(LS_KEYS.userName, estado.userName);
-            });
-
-            // ─────────────────────────────────────
-            // 📤 EXPORTAR PRONÓSTICOS (Base64)
-            // ─────────────────────────────────────
-            const btnGenerarCodigo = document.getElementById('btnGenerarCodigo');
-            const btnCopiarCodigo = document.getElementById('btnCopiarCodigo');
-            const txtCodigoGenerado = document.getElementById('txtCodigoGenerado');
-
-            btnGenerarCodigo.addEventListener('click', function() {
-                if (!estado.userName) {
-                    mostrarToast('⚠️ Primero ingresá tu nombre/apodo en el header', true);
-                    inputNombre.focus();
-                    return;
-                }
-                const prediccionesConDatos = {};
-                Object.keys(estado.predictions).forEach(matchId => {
-                    const pred = estado.predictions[matchId];
-                    if (pred.golesA !== null && pred.golesB !== null &&
-                        pred.golesA !== '' && pred.golesB !== '') {
-                        prediccionesConDatos[matchId] = {
-                            golesA: parseInt(pred.golesA) || 0,
-                            golesB: parseInt(pred.golesB) || 0
-                        };
-                    }
-                });
-
-                if (Object.keys(prediccionesConDatos).length === 0) {
-                    mostrarToast('⚠️ No tenés pronósticos cargados todavía', true);
-                    return;
-                }
-
-                const payload = {
-                    name: estado.userName,
-                    predictions: prediccionesConDatos,
-                    version: 1,
-                    timestamp: new Date().toISOString(),
-                };
-
-                try {
-                    const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-                    txtCodigoGenerado.value = base64;
-                    btnCopiarCodigo.disabled = false;
-                    mostrarToast('✅ Código generado. Copialo y envialo al organizador.');
-                } catch (e) {
-                    mostrarToast('❌ Error al generar el código', true);
-                }
-            });
-
-            btnCopiarCodigo.addEventListener('click', function() {
-                if (!txtCodigoGenerado.value) return;
-                navigator.clipboard.writeText(txtCodigoGenerado.value).then(() => {
-                    mostrarToast('📋 Código copiado al portapapeles');
-                }).catch(() => {
-                    txtCodigoGenerado.select();
-                    document.execCommand('copy');
-                    mostrarToast('📋 Código copiado (método alternativo)');
-                });
-            });
-
-            // ─────────────────────────────────────
-            // 📥 IMPORTAR PRONÓSTICOS DE AMIGOS
-            // ─────────────────────────────────────
-            const txtImportarAmigos = document.getElementById('txtImportarAmigos');
-            const btnImportarAmigos = document.getElementById('btnImportarAmigos');
-            const btnLimpiarAmigos = document.getElementById('btnLimpiarAmigos');
-            const infoAmigos = document.getElementById('infoAmigos');
-
-            function actualizarInfoAmigos() {
-                infoAmigos.textContent = 'Amigos importados: ' + estado.friendsData.length +
-                    ' | ' + estado.friendsData.map(f => f.name).join(', ');
-            }
-
-            btnImportarAmigos.addEventListener('click', function() {
-                const texto = txtImportarAmigos.value.trim();
-                if (!texto) {
-                    mostrarToast('⚠️ Pegá al menos un código Base64', true);
-                    return;
-                }
-
-                // Separar por líneas, comas o punto y coma
-                const codigos = texto.split(/[\n,;]+/).map(s => s.trim()).filter(s => s.length > 10);
-                let importados = 0;
-                let errores = 0;
-
-                codigos.forEach(codigo => {
-                    try {
-                        const decoded = JSON.parse(decodeURIComponent(escape(atob(codigo))));
-                        if (!decoded.name || !decoded.predictions || typeof decoded.predictions !==
-                            'object') {
-                            errores++;
-                            return;
-                        }
-                        // Buscar si ya existe un amigo con ese nombre (reemplazar)
-                        const idxExistente = estado.friendsData.findIndex(f => f.name === decoded
-                            .name);
-                        const friendEntry = {
-                            name: decoded.name,
-                            predictions: decoded.predictions,
-                            importedAt: new Date().toISOString(),
-                        };
-                        if (idxExistente >= 0) {
-                            estado.friendsData[idxExistente] = friendEntry;
-                        } else {
-                            estado.friendsData.push(friendEntry);
-                        }
-                        importados++;
-                    } catch (e) {
-                        errores++;
-                    }
-                });
-
-                lsSet(LS_KEYS.friendsData, estado.friendsData);
-                actualizarInfoAmigos();
-                renderTablaPosiciones();
-                txtImportarAmigos.value = '';
-                mostrarToast(`✅ ${importados} amigo(s) importado(s)${errores > 0 ? ', ' + errores + ' error(es)' : ''}`);
-            });
-
-            btnLimpiarAmigos.addEventListener('click', function() {
-                if (confirm('¿Borrar todos los pronósticos de amigos importados?')) {
-                    estado.friendsData = [];
-                    lsSet(LS_KEYS.friendsData, []);
-                    actualizarInfoAmigos();
-                    renderTablaPosiciones();
-                    mostrarToast('🗑 Amigos eliminados');
-                }
-            });
-
-            actualizarInfoAmigos();
-
-            // ─────────────────────────────────────
-            // ⚽ PANEL ADMIN: CARGAR RESULTADOS REALES
-            // ─────────────────────────────────────
-            const adminResultadosReales = document.getElementById('adminResultadosReales');
-
-            function renderAdminResultadosReales() {
-                // Mostrar solo partidos en orden cronológico
-                const partidosOrdenados = [...FIXTURE].sort((a, b) => {
-                    const dateA = new Date(a.fecha + 'T' + a.hora + ':00-03:00');
-                    const dateB = new Date(b.fecha + 'T' + b.hora + ':00-03:00');
-                    return dateA - dateB;
-                });
-
-                adminResultadosReales.innerHTML = partidosOrdenados.map(p => {
-                    const real = estado.realResults[p.id] || { golesA: '', golesB: '' };
-                    return `
-                <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;font-size:0.75rem;">
-                  <span style="min-width:20px;font-weight:700;color:var(--accent);">#${p.id}</span>
-                  <span style="min-width:30px;font-weight:700;">Gr.${p.grupo}</span>
-                  <span style="flex:1;min-width:140px;">${p.equipoA.split(' ').slice(1).join(' ')} vs ${p.equipoB.split(' ').slice(1).join(' ')}</span>
-                  <span style="font-size:0.65rem;color:var(--text-secondary);">${formatDateDisplay(p.fecha)} ${p.hora}</span>
-                  <input type="number" min="0" max="20" value="${real.golesA}" 
-                    data-real-match="${p.id}" data-real-field="golesA" 
-                    placeholder="-" style="width:38px;height:32px;text-align:center;border-radius:6px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-weight:700;font-size:0.85rem;">
-                  <span>-</span>
-                  <input type="number" min="0" max="20" value="${real.golesB}" 
-                    data-real-match="${p.id}" data-real-field="golesB" 
-                    placeholder="-" style="width:38px;height:32px;text-align:center;border-radius:6px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-weight:700;font-size:0.85rem;">
-                </div>
-              `;
-                }).join('');
-
-                // Event listeners
-                adminResultadosReales.querySelectorAll('input').forEach(input => {
-                    input.addEventListener('change', handleRealResultChange);
-                    input.addEventListener('input', function() {
-                        if (this.value.length > 2) this.value = this.value.slice(0, 2);
-                        if (parseInt(this.value) < 0) this.value = '0';
-                    });
-                });
-            }
-
-            function handleRealResultChange(e) {
-                const matchId = parseInt(e.target.dataset.realMatch);
-                const field = e.target.dataset.realField;
-                let value = parseInt(e.target.value);
-
-                if (isNaN(value) || value < 0) value = 0;
-                if (value > 20) value = 20;
-                e.target.value = value;
-
-                if (!estado.realResults[matchId]) {
-                    estado.realResults[matchId] = { golesA: null, golesB: null };
-                }
-                estado.realResults[matchId][field] = value;
-                lsSet(LS_KEYS.realResults, estado.realResults);
-
-                // Actualizar el fixture principal también
-                const partido = FIXTURE.find(p => p.id === matchId);
-                if (partido) {
-                    if (!partido.resultadoReal) partido.resultadoReal = { golesA: null, golesB: null };
-                    partido.resultadoReal[field] = value;
-                }
-
-                renderPartidos();
-                renderTablaPosiciones();
-            }
-
-            // ─────────────────────────────────────
-            // 🏅 CÁLCULO DE PUNTOS Y TABLA DE POSICIONES
-            // ─────────────────────────────────────
-            /**
-             * Regla de puntuación:
-             * - 3 puntos: acierta resultado exacto (golesA y golesB iguales al resultado real)
-             * - 1 punto: acierta el signo (ganador o empate) pero no los goles exactos
-             * - 0 puntos: no acierta nada
-             */
-            function calcularPuntos(predictions, realResults) {
-                let puntos = 0;
-                let detalles = { exactos: 0, signo: 0, fallos: 0, totalPronosticados: 0 };
-
-                Object.keys(realResults).forEach(matchId => {
-                    const real = realResults[matchId];
-                    if (real.golesA === null || real.golesB === null ||
-                        real.golesA === '' || real.golesB === '') return;
-
-                    const golesRealA = parseInt(real.golesA);
-                    const golesRealB = parseInt(real.golesB);
-                    if (isNaN(golesRealA) || isNaN(golesRealB)) return;
-
-                    const pred = predictions[matchId];
-                    if (!pred || pred.golesA === null || pred.golesB === null ||
-                        pred.golesA === '' || pred.golesB === '') return;
-
-                    const golesPredA = parseInt(pred.golesA);
-                    const golesPredB = parseInt(pred.golesB);
-                    if (isNaN(golesPredA) || isNaN(golesPredB)) return;
-
-                    detalles.totalPronosticados++;
-
-                    if (golesPredA === golesRealA && golesPredB === golesRealB) {
-                        puntos += 3;
-                        detalles.exactos++;
-                    } else {
-                        // Determinar signo real
-                        const signoReal = golesRealA > golesRealB ? 'A' : golesRealA < golesRealB ? 'B' :
-                            'E';
-                        const signoPred = golesPredA > golesPredB ? 'A' : golesPredA < golesPredB ? 'B' :
-                            'E';
-                        if (signoReal === signoPred) {
-                            puntos += 1;
-                            detalles.signo++;
-                        } else {
-                            detalles.fallos++;
-                        }
-                    }
-                });
-
-                return { puntos, detalles };
-            }
-
-            function renderTablaPosiciones() {
-                const container = document.getElementById('tablaPosicionesContainer');
-
-                // Verificar si hay resultados reales cargados
-                const realKeys = Object.keys(estado.realResults).filter(k => {
-                    const r = estado.realResults[k];
-                    return r && r.golesA !== null && r.golesB !== null && r.golesA !== '' && r.golesB !==
-                        '';
-                });
-
-                if (realKeys.length === 0) {
-                    container.innerHTML =
-                        '<p style="padding:16px;color:var(--text-secondary);font-size:0.8rem;">⚠️ Cargá al menos un resultado real para ver la tabla de posiciones.</p>';
-                    return;
-                }
-
-                if (estado.friendsData.length === 0) {
-                    container.innerHTML =
-                        '<p style="padding:16px;color:var(--text-secondary);font-size:0.8rem;">📥 Importá pronósticos de amigos para ver la tabla.</p>';
-                    return;
-                }
-
-                // Calcular puntos para cada amigo
-                const tabla = estado.friendsData.map(friend => {
-                    const resultado = calcularPuntos(friend.predictions, estado.realResults);
-                    return {
-                        name: friend.name,
-                        puntos: resultado.puntos,
-                        exactos: resultado.detalles.exactos,
-                        signo: resultado.detalles.signo,
-                        fallos: resultado.detalles.fallos,
-                        totalPronosticados: resultado.detalles.totalPronosticados,
-                    };
-                });
-
-                // Ordenar por puntos descendente
-                tabla.sort((a, b) => b.puntos - a.puntos);
-
-                // Renderizar tabla
-                container.innerHTML = `
-              <table class="tabla-posiciones">
+            <h3 style="margin-top: 20px;">📊 Tabla de Posiciones</h3>
+            <table>
                 <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Jugador</th>
-                    <th>Puntos</th>
-                    <th>Exactos (3pt)</th>
-                    <th>Signo (1pt)</th>
-                    <th>Fallos</th>
-                    <th>Pronósticos</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${tabla.map((fila, idx) => `
-                    <tr class="${idx === 0 ? 'pos-1' : idx === 1 ? 'pos-2' : idx === 2 ? 'pos-3' : ''}">
-                      <td>${idx + 1}</td>
-                      <td style="text-align:left;font-weight:600;">${escapeHtml(fila.name)}</td>
-                      <td style="font-weight:800;color:var(--accent);font-size:1rem;">${fila.puntos}</td>
-                      <td>${fila.exactos}</td>
-                      <td>${fila.signo}</td>
-                      <td>${fila.fallos}</td>
-                      <td>${fila.totalPronosticados}</td>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Participante</th>
+                        <th>Pts</th>
                     </tr>
-                  `).join('')}
+                </thead>
+                <tbody id="tabla-posiciones-body">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: var(--texto-secundario);">No hay datos procesados aún.</td>
+                    </tr>
                 </tbody>
-              </table>
-              <p style="font-size:0.65rem;color:var(--text-secondary);margin-top:8px;text-align:center;">
-                Resultados cargados: ${realKeys.length} de ${FIXTURE.length} partidos · 
-                Regla: 3pts resultado exacto | 1pt signo acertado | 0pts fallo
-              </p>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+    // --- 1. BASE DE DATOS DEL FIXTURE (JSON) ---
+    // Configurado con horarios locales de Argentina (GMT-3) y canales locales.
+    const PARTICIPANTES_INICIALES = []; 
+    const fixtureMundial = [
+        {
+            id: 1,
+            grupo: "A",
+            fecha: "11/06/2026",
+            hora: "19:00",
+            equipoA: "México",
+            flagA: "🇲🇽",
+            equipoB: "Por clasificar",
+            flagB: "🏳️",
+            tv: "DSports / Telefe",
+            tag: ""
+        },
+        {
+            id: 2,
+            grupo: "A",
+            fecha: "12/06/2026",
+            hora: "17:00",
+            equipoA: "Estados Unidos",
+            flagA: "🇺🇸",
+            equipoB: "Por clasificar",
+            flagB: "🏳️",
+            tv: "DSports / TyC Sports",
+            tag: ""
+        },
+        {
+            id: 3,
+            grupo: "C",
+            fecha: "14/06/2026",
+            hora: "16:00",
+            equipoA: "Argentina",
+            flagA: "🇦🇷",
+            equipoB: "Por clasificar",
+            flagB: "🏳️",
+            tv: "DSports / TV Pública / TyC Sports",
+            tag: "ARG"
+        },
+        {
+            id: 4,
+            grupo: "B",
+            fecha: "13/06/2026",
+            hora: "15:00",
+            equipoA: "Canadá",
+            flagA: "🇨🇦",
+            equipoB: "Por clasificar",
+            flagB: "🏳️",
+            tv: "DSports",
+            tag: ""
+        },
+        {
+            id: 5,
+            grupo: "C",
+            fecha: "19/06/2026",
+            hora: "20:00",
+            equipoA: "Argentina",
+            flagA: "🇦🇷",
+            equipoB: "Por clasificar",
+            flagB: "🏳️",
+            tv: "DSports / Telefe / TyC Sports",
+            tag: "ARG"
+        }
+        // Podés continuar agregando el resto de los 72 partidos de fase de grupos siguiendo el patrón.
+    ];
+
+    // --- 2. INICIALIZACIÓN DEL ESTADO ---
+    let pronosticosUsuario = JSON.parse(localStorage.getItem('prode_v1_pronosticos')) || {};
+    let resultadosReales = JSON.parse(localStorage.getItem('prode_v1_reales')) || {};
+    let usuarioActual = localStorage.getItem('prode_v1_usuario') || "";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if(usuarioActual) {
+            document.getElementById('input-username').value = usuarioActual;
+            document.getElementById('label-usuario').innerText = `Estás jugando como: @${usuarioActual}`;
+        }
+        renderizarFixture();
+        renderizarAdminFixture();
+        actualizarTablaUI();
+    });
+
+    // --- 3. LOGICA DE USUARIO ---
+    function guardarUsuario() {
+        const input = document.getElementById('input-username');
+        const nombre = input.value.trim().replace(/[^a-zA-Z0-9_]/g, ""); // Sanitización simple
+        if(!nombre) {
+            alert("Por favor ingresá un apodo válido (letras, números o guión bajo).");
+            return;
+        }
+        usuarioActual = nombre;
+        localStorage.setItem('prode_v1_usuario', usuarioActual);
+        document.getElementById('label-usuario').innerText = `Estás jugando como: @${usuarioActual}`;
+        alert("¡Apodo guardado con éxito!");
+    }
+
+    // --- 4. RENDERIZADO DEL FIXTURE COMPLETO ---
+    function renderizarFixture(filtro = "todos") {
+        const contenedor = document.getElementById('fixture-container');
+        contenedor.innerHTML = "";
+
+        const partidosFiltrados = fixtureMundial.filter(p => {
+            if (filtro === "todos") return true;
+            if (filtro === "ARG") return p.tag === "ARG";
+            return p.grupo === filtro;
+        });
+
+        if(partidosFiltrados.length === 0) {
+            contenedor.innerHTML = `<p style="text-align:center; padding:20px; color:var(--texto-secundario);">No hay partidos cargados para este filtro.</p>`;
+            return;
+        }
+
+        partidosFiltrados.forEach(p => {
+            const golesA = pronosticosUsuario[p.id]?.golesA !== undefined ? pronosticosUsuario[p.id].golesA : "";
+            const golesB = pronosticosUsuario[p.id]?.golesB !== undefined ? pronosticosUsuario[p.id].golesB : "";
+
+            const card = document.createElement('div');
+            card.className = "partido-card";
+            card.innerHTML = `
+                <div class="partido-meta">
+                    <span>GRUPO ${p.grupo} • ${p.fecha} - ${p.hora} hs</span>
+                    <span class="partido-tv">📺 ${p.tv}</span>
+                </div>
+                <div class="partido-equipos">
+                    <div class="equipo-bloque">
+                        <span class="bandera">${p.flagA}</span>
+                        <span class="nombre-equipo">${p.equipoA}</span>
+                    </div>
+                    <input type="number" min="0" class="goles-input" value="${golesA}" 
+                        onchange="guardarPronostico(${p.id}, 'golesA', this.value)">
+                    <span class="vs">vs</span>
+                    <input type="number" min="0" class="goles-input" value="${golesB}" 
+                        onchange="guardarPronostico(${p.id}, 'golesB', this.value)">
+                    <div class="equipo-bloque derecha">
+                        <span class="nombre-equipo">${p.equipoB}</span>
+                        <span class="bandera">${p.flagB}</span>
+                    </div>
+                </div>
             `;
+            contenedor.appendChild(card);
+        });
+    }
+
+    // Guardado persistente automático por evento Change
+    function guardarPronostico(partidoId, campo, valor) {
+        if(!pronosticosUsuario[partidoId]) {
+            pronosticosUsuario[partidoId] = { golesA: undefined, golesB: undefined };
+        }
+        pronosticosUsuario[partidoId][campo] = valor !== "" ? parseInt(valor, 10) : undefined;
+        localStorage.setItem('prode_v1_pronosticos', JSON.stringify(pronosticosUsuario));
+    }
+
+    // Filtros UI
+    function filtrarPartidos(grupo, btn) {
+        document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+        renderizarFixture(grupo);
+    }
+
+    // --- 5. PANEL ADMINISTRADOR: CONTROL DE RESULTADOS REALES ---
+    function renderizarAdminFixture() {
+        const contenedor = document.getElementById('fixture-admin-container');
+        contenedor.innerHTML = "";
+
+        fixtureMundial.forEach(p => {
+            const golesA = resultadosReales[p.id]?.golesA !== undefined ? resultadosReales[p.id].golesA : "";
+            const golesB = resultadosReales[p.id]?.golesB !== undefined ? resultadosReales[p.id].golesB : "";
+
+            const fila = document.createElement('div');
+            fila.style.cssText = "display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding: 4px; border-bottom:1px solid #334155; font-size:0.9rem;";
+            fila.innerHTML = `
+                <span style="width:35%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.flagA} ${p.equipoA}</span>
+                <div style="display:flex; gap:5px; align-items:center;">
+                    <input type="number" min="0" style="width:35px; text-align:center; background:#0f172a; color:white; border:1px solid var(--borde);" 
+                        value="${golesA}" onchange="guardarResultadoReal(${p.id}, 'golesA', this.value)">
+                    <span>-</span>
+                    <input type="number" min="0" style="width:35px; text-align:center; background:#0f172a; color:white; border:1px solid var(--borde);" 
+                        value="${golesB}" onchange="guardarResultadoReal(${p.id}, 'golesB', this.value)">
+                </div>
+                <span style="width:35%; text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.equipoB} ${p.flagB}</span>
+            `;
+            contenedor.appendChild(fila);
+        });
+    }
+
+    function guardarResultadoReal(partidoId, campo, valor) {
+        if(!resultadosReales[partidoId]) {
+            resultadosReales[partidoId] = { golesA: undefined, golesB: undefined };
+        }
+        resultadosReales[partidoId][campo] = valor !== "" ? parseInt(valor, 10) : undefined;
+        localStorage.setItem('prode_v1_reales', JSON.stringify(resultadosReales));
+    }
+
+    // --- 6. EXPORTACIÓN / IMPORTACIÓN (EL BACKEND MANUAL VIA WHATSAPP) ---
+    function exportarPronosticos() {
+        if(!usuarioActual) {
+            alert("Por favor, ponete un Apodo arriba antes de exportar tus datos.");
+            return;
+        }
+
+        // Filtramos pronósticos vacíos para compactar la cadena
+        const dataAExportar = {
+            usuario: usuarioActual,
+            predicciones: pronosticosUsuario
+        };
+
+        // Pasamos a String JSON y luego a Base64 para que el usuario no manipule texto plano fácilmente
+        const jsonString = JSON.stringify(dataAExportar);
+        const base64String = btoa(unescape(encodeURIComponent(jsonString)));
+
+        // Copiar al portapapeles usando la API moderna
+        navigator.clipboard.writeText(`PRODE2026:${base64String}`).then(() => {
+            alert("¡Código de pronósticos copiado al portapapeles! Ya podés pegarlo en el chat de WhatsApp de tu grupo.");
+        }).catch(err => {
+            alert("Error al copiar. Copialo manualmente desde la consola.");
+            console.log(`PRODE2026:${base64String}`);
+        });
+    }
+
+    // --- 7. MOTOR DE CÁLCULO DE PUNTOS ---
+    function calcularPuntos(predicciones, reales) {
+        let puntosTotales = 0;
+
+        for (const partidoId in reales) {
+            const realA = reales[partidoId].golesA;
+            const realB = reales[partidoId].golesB;
+
+            // Si el partido real no tiene cargado el resultado completo, no se evalúa
+            if (realA === undefined || realB === undefined) continue;
+
+            const pred = predicciones[partidoId];
+            if (!pred || pred.golesA === undefined || pred.golesB === undefined) continue;
+
+            const predA = pred.golesA;
+            const predB = pred.golesB;
+
+            // Determinar signos (Ganador/Empate)
+            const signoReal = realA > realB ? "A" : (realA < realB ? "B" : "E");
+            const signoPred = predA > predB ? "A" : (predA < predB ? "B" : "E");
+
+            if (realA === predA && realB === predB) {
+                puntosTotales += 3; // Resultado exacto absoluto
+            } else if (signoReal === signoPred) {
+                puntosTotales += 1; // Acertó la tendencia (ganador o empate) pero erró goles exactos
             }
+            // Si no cumple ninguna, suma 0 puntos.
+        }
+        return puntosTotales;
+    }
 
-            function escapeHtml(str) {
-                const div = document.createElement('div');
-                div.textContent = str;
-                return div.innerHTML;
-            }
+    // Procesado masivo por parte del Administrador
+    function procesarCodigosAmigos() {
+        const textarea = document.getElementById('txt-codigos-amigos');
+        const lineas = textarea.value.split('\n');
+        
+        let listaPosiciones = [];
 
-            // ─────────────────────────────────────
-            // 🎯 PANEL ADMIN COLLAPSIBLE
-            // ─────────────────────────────────────
-            const panelAdmin = document.getElementById('panelAdmin');
-            const panelAdminHeader = document.getElementById('panelAdminHeader');
+        // Primero nos sumamos a nosotros mismos si tenemos predicciones hechas
+        if (usuarioActual && Object.keys(pronosticosUsuario).length > 0) {
+            const misPuntos = calcularPuntos(pronosticosUsuario, resultadosReales);
+            listaPosiciones.push({ usuario: usuarioActual + " (Vos)", puntos: misPuntos });
+        }
 
-            panelAdminHeader.addEventListener('click', function() {
-                panelAdmin.classList.toggle('collapsible--open');
-                if (panelAdmin.classList.contains('collapsible--open')) {
-                    renderAdminResultadosReales();
-                    renderTablaPosiciones();
-                }
-            });
+        lineas.forEach(linea => {
+            let limpia = linea.trim();
+            if(!limpia.startsWith("PRODE2026:")) return;
 
-            // ─────────────────────────────────────
-            // 🔔 TOAST NOTIFICATIONS
-            // ─────────────────────────────────────
-            function mostrarToast(mensaje, isError = false) {
-                const toast = document.getElementById('toast');
-                toast.textContent = mensaje;
-                toast.style.display = 'block';
-                toast.style.background = isError ? 'var(--danger)' : 'var(--accent2)';
-                toast.style.animation = 'none';
-                toast.offsetHeight; // reflow
-                toast.style.animation = 'toastIn 0.35s ease, toastOut 0.35s ease 2.2s forwards';
-                setTimeout(() => {
-                    toast.style.display = 'none';
-                }, 2600);
-            }
+            try {
+                const b64 = limpia.split("PRODE2026:")[1];
+                const jsonString = decodeURIComponent(escape(atob(b64)));
+                const dataAmigo = JSON.parse(jsonString);
 
-            // ─────────────────────────────────────
-            // 🚀 INICIALIZACIÓN
-            // ─────────────────────────────────────
-            function init() {
-                // Sincronizar resultados reales del LS al fixture
-                Object.keys(estado.realResults).forEach(matchId => {
-                    const partido = FIXTURE.find(p => p.id === parseInt(matchId));
-                    if (partido) {
-                        partido.resultadoReal = estado.realResults[matchId];
+                if(dataAmigo.usuario && dataAmigo.predicciones) {
+                    const puntos = calcularPuntos(dataAmigo.predicciones, resultadosReales);
+                    
+                    // Si ya existe el usuario, lo sobreescribimos con la última versión del código enviado
+                    const indexExistente = listaPosiciones.findIndex(item => item.usuario === dataAmigo.usuario);
+                    if(indexExistente !== -1) {
+                        listaPosiciones[indexExistente].puntos = puntos;
+                    } else {
+                        listaPosiciones.push({ usuario: dataAmigo.usuario, puntos: puntos });
                     }
-                });
-
-                renderFiltros();
-                renderPartidos();
-                renderTablaPosiciones();
-                actualizarInfoAmigos();
-
-                // Si el panel admin estaba abierto (por LS o preferencia), no lo abrimos por defecto
-                console.log('⚽ Fixture Prode Mundial 2026 inicializado.');
-                console.log('📋 Partidos en fixture:', FIXTURE.length);
-                console.log('👤 Usuario:', estado.userName || 'No definido');
-                console.log('🔮 Pronósticos cargados:', Object.keys(estado.predictions).length);
-                console.log('✅ Resultados reales cargados:', Object.keys(estado.realResults).length);
-                console.log('👥 Amigos importados:', estado.friendsData.length);
-                console.log('💾 Datos guardados en LocalStorage.');
-                console.log('📺 Canales Argentina: DSports/DGO (104 partidos), Telefe, TyC Sports, TV Pública.');
+                }
+            } catch (e) {
+                console.error("Error al decodificar una de las líneas del prode.", e);
             }
+        });
 
-            init();
+        // Guardar en LocalStorage del Admin la tabla calculada para que no se pierda al refrescar
+        localStorage.setItem('prode_v1_tabla_calculada', JSON.stringify(listaPosiciones));
+        actualizarTablaUI();
+    }
 
-            // Exponer funciones útiles al scope global para depuración
-            window.prodeApp = {
-                fixture: FIXTURE,
-                estado: estado,
-                renderPartidos: renderPartidos,
-                renderTablaPosiciones: renderTablaPosiciones,
-                renderAdminResultadosReales: renderAdminResultadosReales,
-                mostrarToast: mostrarToast,
-                recalcularTodo: function() {
-                    renderFiltros();
-                    renderPartidos();
-                    renderAdminResultadosReales();
-                    renderTablaPosiciones();
-                    actualizarInfoAmigos();
-                },
-            };
+    function actualizarTablaUI() {
+        const tablaBody = document.getElementById('tabla-posiciones-body');
+        const datosTabla = JSON.parse(localStorage.getItem('prode_v1_tabla_calculada')) || [];
 
-            console.log('💡 Acceso global: window.prodeApp para depuración.');
-        })();
-    </script>
+        if(datosTabla.length === 0) return;
+
+        // Ordenar de mayor a menor puntaje
+        datosTabla.sort((a, b) => b.puntos - a.puntos);
+
+        tablaBody.innerHTML = "";
+        datosTabla.forEach((jugador, index) => {
+            const tr = document.createElement('tr');
+            // Resaltar los primeros tres lugares con estilo podio simple
+            let medalla = index + 1;
+            if(index === 0) medalla = "🥇";
+            if(index === 1) medalla = "🥈";
+            if(index === 2) medalla = "🥉";
+
+            tr.innerHTML = `
+                <td style="font-weight: bold;">${medalla}</td>
+                <td>${jugador.usuario}</td>
+                <td style="font-weight: bold; color: var(--color-verde);">${jugador.puntos} pts</td>
+            `;
+            tablaBody.appendChild(tr);
+        });
+    }
+
+    // --- UI INTERNA DE TABS ---
+    function cambiarTab(tabId, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activo'));
+        document.querySelectorAll('.panel-contenido').forEach(c => c.classList.remove('activo'));
+        
+        btn.classList.add('activo');
+        document.getElementById(tabId).classList.add('activo');
+    }
+</script>
 </body>
 </html>
