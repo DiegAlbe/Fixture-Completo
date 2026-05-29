@@ -119,7 +119,7 @@
             text-align: center;
         }
         .partido-card__bandera {
-            font-size: 2.2rem;   /* bandera más grande y visible */
+            font-size: 2.2rem;
             line-height: 1;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
@@ -268,7 +268,7 @@
     <script>
         (function() {
             // --------------------------------------------------------------
-            // FIXTURE OFICIAL MUNDIAL 2026 - SEGÚN PDF PROPORCIONADO
+            // FIXTURE OFICIAL MUNDIAL 2026 - SEGÚN PDF
             // Cada equipo incluye su bandera emoji y nombre completo
             // --------------------------------------------------------------
             const FIXTURE_OFICIAL = [
@@ -385,16 +385,19 @@
             };
             document.getElementById('inputNombre').value = estado.userName;
 
-            // --- Utilidades ---
-            function mostrarToast(mensaje, isError = false) {
-                const toast = document.getElementById('toast');
-                toast.textContent = mensaje;
-                toast.style.display = 'block';
-                toast.style.background = isError ? 'var(--danger)' : 'var(--accent2)';
-                toast.style.animation = 'none';
-                toast.offsetHeight;
-                toast.style.animation = 'toastIn 0.35s ease, toastOut 0.35s ease 2.2s forwards';
-                setTimeout(() => { toast.style.display = 'none'; }, 2600);
+            // --- Utilidades mejoradas para banderas ---
+            function getBandera(equipoStr) {
+                // Método robusto: extrae el primer emoji (que será la bandera)
+                const match = equipoStr.match(/\p{Emoji}/u);
+                if (match && match[0]) return match[0];
+                // Fallback: intentar con dos letras regionales
+                const regional = equipoStr.match(/[\u{1F1E6}-\u{1F1FF}]{2}/u);
+                return regional ? regional[0] : '🏁';
+            }
+
+            function getNombrePais(equipoStr) {
+                // Elimina la bandera (uno o dos caracteres emoji) y espacios sobrantes
+                return equipoStr.replace(/^\p{Emoji}+/u, '').trim();
             }
 
             function formatDateDisplay(fechaStr) {
@@ -403,18 +406,7 @@
                 return `${parseInt(d)} ${meses[parseInt(m)-1]}`;
             }
 
-            // Extrae solo el emoji de bandera del string (ej: "🇲🇽 México" -> "🇲🇽")
-            function getBandera(equipoStr) {
-                const match = equipoStr.match(/[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{200D}\u{1F1E6}-\u{1F1FF}]+/u);
-                return match ? match[0] : '🏁';
-            }
-
-            // Extrae el nombre del país sin el emoji
-            function getNombrePais(equipoStr) {
-                return equipoStr.replace(/[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{200D}\u{1F1E6}-\u{1F1FF}]+/u, '').trim();
-            }
-
-            // --- Render de partidos (con banderas grandes) ---
+            // --- Render de partidos (con banderas) ---
             function getPartidosFiltrados() {
                 let partidos = [...FIXTURE_OFICIAL];
                 if (estado.filtroActivo === 'argentina') {
@@ -448,6 +440,10 @@
                     const pred = estado.predictions[p.id] || { golesA: '', golesB: '' };
                     const real = estado.realResults[p.id] || null;
                     const tieneReal = real && real.golesA !== null && real.golesB !== null;
+                    const banderaA = getBandera(p.equipoA);
+                    const nombreA = getNombrePais(p.equipoA);
+                    const banderaB = getBandera(p.equipoB);
+                    const nombreB = getNombrePais(p.equipoB);
                     return `<div class="partido-card${tieneReal ? ' partido-card--jugado' : ''}">
                         <div class="partido-card__header">
                             <span class="partido-card__grupo">Grupo ${p.grupo}</span>
@@ -455,13 +451,13 @@
                         </div>
                         <div class="partido-card__equipos">
                             <div class="partido-card__equipo">
-                                <span class="partido-card__bandera">${getBandera(p.equipoA)}</span>
-                                <span class="partido-card__nombre">${getNombrePais(p.equipoA)}</span>
+                                <span class="partido-card__bandera">${banderaA}</span>
+                                <span class="partido-card__nombre">${nombreA}</span>
                             </div>
                             <span class="partido-card__vs">VS</span>
                             <div class="partido-card__equipo">
-                                <span class="partido-card__bandera">${getBandera(p.equipoB)}</span>
-                                <span class="partido-card__nombre">${getNombrePais(p.equipoB)}</span>
+                                <span class="partido-card__bandera">${banderaB}</span>
+                                <span class="partido-card__nombre">${nombreB}</span>
                             </div>
                         </div>
                         <div class="partido-card__canales">${p.canales.map(c => `<span class="canal-tag${c !== 'DSports/DGO' ? ' canal-tag--destacado' : ''}">📺 ${c}</span>`).join(' ')}</div>
@@ -483,7 +479,7 @@
                 });
             }
 
-            // --- Filtros (igual que antes) ---
+            // --- Filtros ---
             function renderFiltros() {
                 const cont = document.getElementById('filtrosContainer');
                 cont.querySelectorAll('.filtro-btn[data-grupo]').forEach(b => b.remove());
@@ -545,7 +541,7 @@
                 navigator.clipboard.writeText(txtCodigo.value).then(() => mostrarToast('📋 Código copiado')).catch(() => { txtCodigo.select(); document.execCommand('copy'); mostrarToast('📋 Copiado'); });
             });
 
-            // --- Importar amigos (igual) ---
+            // --- Importar amigos ---
             const txtAmigos = document.getElementById('txtImportarAmigos');
             const btnImport = document.getElementById('btnImportarAmigos');
             const btnLimpiar = document.getElementById('btnLimpiarAmigos');
@@ -625,7 +621,7 @@
                 });
             }
 
-            // --- Tabla de posiciones (igual) ---
+            // --- Tabla de posiciones ---
             function calcularPuntos(predictions, realResults) {
                 let puntos = 0, exactos = 0, signo = 0, fallos = 0, total = 0;
                 Object.keys(realResults).forEach(mid => {
@@ -676,7 +672,18 @@
                 }
             });
 
-            // --- Inicialización ---
+            // --- Toast y inicialización ---
+            function mostrarToast(mensaje, isError = false) {
+                const toast = document.getElementById('toast');
+                toast.textContent = mensaje;
+                toast.style.display = 'block';
+                toast.style.background = isError ? 'var(--danger)' : 'var(--accent2)';
+                toast.style.animation = 'none';
+                toast.offsetHeight;
+                toast.style.animation = 'toastIn 0.35s ease, toastOut 0.35s ease 2.2s forwards';
+                setTimeout(() => { toast.style.display = 'none'; }, 2600);
+            }
+
             function init() {
                 Object.keys(estado.realResults).forEach(mid => {
                     const partido = FIXTURE_OFICIAL.find(p => p.id === parseInt(mid));
