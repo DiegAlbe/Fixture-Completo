@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fixture Prode · Mundial 2026 · Banderas Visibles</title>
+    <title>Fixture Prode · Mundial 2026 · Banderas y Publicidad</title>
+    <!-- Flag Icons CDN (banderas profesionales) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
     <style>
         :root {
             --bg: #0b0b14;
@@ -68,7 +70,81 @@
             font-size: 0.9rem; width: 120px; outline: none; font-family: var(--font);
         }
         .header__user input::placeholder { color: var(--text-secondary); }
-        .container { max-width: 960px; margin: 0 auto; padding: 16px 12px 40px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 16px 12px 40px; }
+        
+        /* Banners */
+        .banners-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .banner {
+            background: linear-gradient(135deg, #1e1e36, #0f0f20);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            flex: 1;
+            min-width: 180px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-align: center;
+            padding: 16px 8px;
+        }
+        .banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+        .banner img {
+            max-width: 100%;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        .banner p {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        .banner .brand {
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        /* Instrucciones */
+        .instrucciones {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 24px;
+            border-left: 5px solid var(--accent2);
+        }
+        .instrucciones h3 {
+            color: var(--accent2);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .instrucciones ul {
+            margin-left: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .instrucciones li {
+            margin: 8px 0;
+        }
+        .puntos-destacado {
+            background: var(--bg-input);
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
         .filtros {
             display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
             align-items: center; justify-content: flex-start;
@@ -87,9 +163,11 @@
         .filtro-btn--active { background: var(--accent); color: #1a1a1a; border-color: var(--accent); font-weight: 700; box-shadow: 0 2px 14px rgba(240,185,64,0.3); }
         .filtro-btn--arg { border-color: #75b8ff; color: #75b8ff; }
         .filtro-btn--arg.filtro-btn--active { background: #75b8ff; color: #1a1a1a; border-color: #75b8ff; box-shadow: 0 2px 14px rgba(117,184,255,0.35); }
+        
         .partidos-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
         @media (min-width: 600px) { .partidos-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 900px) { .partidos-grid { grid-template-columns: repeat(3, 1fr); } }
+        
         .partido-card {
             background: var(--bg-card); border-radius: var(--radius); padding: 16px;
             border: 1px solid var(--border); transition: var(--transition);
@@ -119,9 +197,18 @@
             text-align: center;
         }
         .partido-card__bandera {
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Estilo para flag-icons */
+        .fi {
             font-size: 2.2rem;
-            line-height: 1;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         .partido-card__nombre {
             font-size: 0.7rem;
@@ -158,6 +245,7 @@
         .partido-card__pronostico input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(240,185,64,0.08); }
         .partido-card__pronostico .pronostico-sep { font-weight: 900; font-size: 1.2rem; color: var(--text-secondary); }
         .partido-card__resultado-real { margin-top: 10px; font-size: 0.7rem; text-align: center; color: var(--accent2); font-weight: 700; background: rgba(0,200,151,0.08); padding: 4px 10px; border-radius: 14px; display: inline-block; width: 100%; }
+        
         .seccion { background: var(--bg-card); border-radius: var(--radius); padding: 20px 18px; margin-top: 24px; border: 1px solid var(--border); box-shadow: var(--shadow); }
         .seccion__titulo { font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
         .btn {
@@ -205,7 +293,7 @@
         .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
         .collapsible--open .collapsible-body { max-height: 3000px; }
         @media (max-width: 500px) {
-            .partido-card__bandera { font-size: 1.8rem; }
+            .partido-card__bandera .fi { font-size: 1.8rem; }
             .partido-card__vs { width: 28px; height: 28px; font-size: 0.7rem; }
             .partido-card__pronostico input { width: 40px; height: 36px; font-size: 1rem; }
         }
@@ -220,6 +308,44 @@
         </div>
     </header>
     <main class="container" id="appContainer">
+        <!-- Banners superiores -->
+        <div class="banners-row" id="bannerTop">
+            <div class="banner" onclick="window.open('https://www.betano.com','_blank')">
+                <div class="brand">⚽ Betano</div>
+                <p>Apuestas deportivas · Bonos exclusivos</p>
+            </div>
+            <div class="banner" onclick="window.open('https://www.coca-cola.com','_blank')">
+                <div class="brand">🥤 Coca-Cola</div>
+                <p>Comparte la emoción del Mundial</p>
+            </div>
+            <div class="banner" onclick="window.open('https://www.adidas.com','_blank')">
+                <div class="brand">👟 Adidas</div>
+                <p>La pelota oficial del torneo</p>
+            </div>
+            <div class="banner" onclick="window.open('https://www.mercadolibre.com','_blank')">
+                <div class="brand">📱 Mercado Libre</div>
+                <p>Envíos gratis en tu compra</p>
+            </div>
+        </div>
+
+        <!-- Bloque de instrucciones -->
+        <div class="instrucciones">
+            <h3>📋 ¿Cómo participar?</h3>
+            <ul>
+                <li>1. Ingresá tu <strong>nombre/apodo</strong> en el campo superior derecho.</li>
+                <li>2. Para cada partido, completá tu pronóstico de <strong>goles</strong> (local y visitante) en los cuadros blancos.</li>
+                <li>3. Al finalizar, hacé clic en <strong>"Generar Código"</strong> y enviáselo al organizador del prode por WhatsApp.</li>
+                <li>4. El organizador cargará los resultados reales y podrás ver la tabla de posiciones.</li>
+            </ul>
+            <h3>🏅 Sistema de Puntuación</h3>
+            <ul>
+                <li><span class="puntos-destacado">🎯 3 puntos</span> si aciertas el resultado <strong>exacto</strong> (goles de ambos equipos).</li>
+                <li><span class="puntos-destacado">✅ 1 punto</span> si aciertas el <strong>signo</strong> (ganador o empate) sin acertar el marcador exacto.</li>
+                <li><span class="puntos-destacado">❌ 0 puntos</span> si fallas completamente.</li>
+                <li>Se contabilizan <strong>todos los partidos de la fase de grupos</strong> (72 encuentros).</li>
+            </ul>
+        </div>
+
         <section class="filtros" id="filtrosContainer">
             <span class="filtros__label">Filtrar:</span>
             <button class="filtro-btn filtro-btn--active" data-filtro="todos">📋 Todos</button>
@@ -227,6 +353,15 @@
             <span class="filtros__label" style="margin-left:6px;">Grupo:</span>
         </section>
         <section class="partidos-grid" id="partidosGrid"></section>
+        
+        <!-- Banner intermedio -->
+        <div class="banners-row" style="margin: 20px 0;">
+            <div class="banner" onclick="window.open('https://www.pepsi.com','_blank')">
+                <div class="brand">🥤 Pepsi</div>
+                <p>Vive el sabor del fútbol</p>
+            </div>
+        </div>
+
         <section class="seccion">
             <div class="seccion__titulo">📤 Compartir mis Pronósticos</div>
             <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">Generá un código para enviar al organizador del prode por WhatsApp. Incluye tu nombre y todos tus pronósticos.</p>
@@ -268,93 +403,93 @@
     <script>
         (function() {
             // --------------------------------------------------------------
-            // FIXTURE OFICIAL MUNDIAL 2026 - CON BANDERA Y NOMBRE SEPARADOS
+            // FIXTURE OFICIAL MUNDIAL 2026 - Con códigos de país para flag-icons
             // --------------------------------------------------------------
             const FIXTURE_OFICIAL = [
                 // GRUPO A
-                { id:1, grupo:'A', fecha:'2026-06-11', hora:'12:00', sede:'Estadio Azteca, Ciudad de México', banderaA:'🇲🇽', nombreA:'México', banderaB:'🇿🇦', nombreB:'Sudáfrica', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:2, grupo:'A', fecha:'2026-06-11', hora:'22:00', sede:'SoFi Stadium, Los Ángeles', banderaA:'🇰🇷', nombreA:'Corea del Sur', banderaB:'🇨🇿', nombreB:'República Checa', canales:['DSports/DGO','TyC Sports'] },
-                { id:3, grupo:'A', fecha:'2026-06-16', hora:'15:00', sede:'BC Place, Vancouver', banderaA:'🇿🇦', nombreA:'Sudáfrica', banderaB:'🇰🇷', nombreB:'Corea del Sur', canales:['DSports/DGO'] },
-                { id:4, grupo:'A', fecha:'2026-06-16', hora:'21:00', sede:'Lumen Field, Seattle', banderaA:'🇨🇿', nombreA:'República Checa', banderaB:'🇲🇽', nombreB:'México', canales:['DSports/DGO','Telefe'] },
-                { id:5, grupo:'A', fecha:'2026-06-21', hora:'15:00', sede:'Estadio Akron, Guadalajara', banderaA:'🇲🇽', nombreA:'México', banderaB:'🇰🇷', nombreB:'Corea del Sur', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:6, grupo:'A', fecha:'2026-06-21', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', banderaA:'🇨🇿', nombreA:'República Checa', banderaB:'🇿🇦', nombreB:'Sudáfrica', canales:['DSports/DGO'] },
+                { id:1, grupo:'A', fecha:'2026-06-11', hora:'12:00', sede:'Estadio Azteca, Ciudad de México', codA:'mx', nombreA:'México', codB:'za', nombreB:'Sudáfrica', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:2, grupo:'A', fecha:'2026-06-11', hora:'22:00', sede:'SoFi Stadium, Los Ángeles', codA:'kr', nombreA:'Corea del Sur', codB:'cz', nombreB:'República Checa', canales:['DSports/DGO','TyC Sports'] },
+                { id:3, grupo:'A', fecha:'2026-06-16', hora:'15:00', sede:'BC Place, Vancouver', codA:'za', nombreA:'Sudáfrica', codB:'kr', nombreB:'Corea del Sur', canales:['DSports/DGO'] },
+                { id:4, grupo:'A', fecha:'2026-06-16', hora:'21:00', sede:'Lumen Field, Seattle', codA:'cz', nombreA:'República Checa', codB:'mx', nombreB:'México', canales:['DSports/DGO','Telefe'] },
+                { id:5, grupo:'A', fecha:'2026-06-21', hora:'15:00', sede:'Estadio Akron, Guadalajara', codA:'mx', nombreA:'México', codB:'kr', nombreB:'Corea del Sur', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:6, grupo:'A', fecha:'2026-06-21', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', codA:'cz', nombreA:'República Checa', codB:'za', nombreB:'Sudáfrica', canales:['DSports/DGO'] },
                 // GRUPO B
-                { id:7, grupo:'B', fecha:'2026-06-12', hora:'15:00', sede:'BMO Field, Toronto', banderaA:'🇨🇦', nombreA:'Canadá', banderaB:'🇧🇦', nombreB:'Bosnia y Herzegovina', canales:['DSports/DGO','Telefe'] },
-                { id:8, grupo:'B', fecha:'2026-06-12', hora:'21:00', sede:'Gillette Stadium, Boston', banderaA:'🇶🇦', nombreA:'Catar', banderaB:'🇨🇭', nombreB:'Suiza', canales:['DSports/DGO'] },
-                { id:9, grupo:'B', fecha:'2026-06-17', hora:'13:00', sede:'Lincoln Financial Field, Filadelfia', banderaA:'🇧🇦', nombreA:'Bosnia', banderaB:'🇶🇦', nombreB:'Catar', canales:['DSports/DGO','TyC Sports'] },
-                { id:10, grupo:'B', fecha:'2026-06-17', hora:'19:00', sede:'MetLife Stadium, Nueva Jersey', banderaA:'🇨🇭', nombreA:'Suiza', banderaB:'🇨🇦', nombreB:'Canadá', canales:['DSports/DGO','Telefe'] },
-                { id:11, grupo:'B', fecha:'2026-06-22', hora:'15:00', sede:'Hard Rock Stadium, Miami', banderaA:'🇨🇦', nombreA:'Canadá', banderaB:'🇶🇦', nombreB:'Catar', canales:['DSports/DGO'] },
-                { id:12, grupo:'B', fecha:'2026-06-22', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', banderaA:'🇨🇭', nombreA:'Suiza', banderaB:'🇧🇦', nombreB:'Bosnia', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:7, grupo:'B', fecha:'2026-06-12', hora:'15:00', sede:'BMO Field, Toronto', codA:'ca', nombreA:'Canadá', codB:'ba', nombreB:'Bosnia y Herzegovina', canales:['DSports/DGO','Telefe'] },
+                { id:8, grupo:'B', fecha:'2026-06-12', hora:'21:00', sede:'Gillette Stadium, Boston', codA:'qa', nombreA:'Catar', codB:'ch', nombreB:'Suiza', canales:['DSports/DGO'] },
+                { id:9, grupo:'B', fecha:'2026-06-17', hora:'13:00', sede:'Lincoln Financial Field, Filadelfia', codA:'ba', nombreA:'Bosnia', codB:'qa', nombreB:'Catar', canales:['DSports/DGO','TyC Sports'] },
+                { id:10, grupo:'B', fecha:'2026-06-17', hora:'19:00', sede:'MetLife Stadium, Nueva Jersey', codA:'ch', nombreA:'Suiza', codB:'ca', nombreB:'Canadá', canales:['DSports/DGO','Telefe'] },
+                { id:11, grupo:'B', fecha:'2026-06-22', hora:'15:00', sede:'Hard Rock Stadium, Miami', codA:'ca', nombreA:'Canadá', codB:'qa', nombreB:'Catar', canales:['DSports/DGO'] },
+                { id:12, grupo:'B', fecha:'2026-06-22', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'ch', nombreA:'Suiza', codB:'ba', nombreB:'Bosnia', canales:['DSports/DGO','Telefe','TV Pública'] },
                 // GRUPO C
-                { id:13, grupo:'C', fecha:'2026-06-13', hora:'18:00', sede:'NRG Stadium, Houston', banderaA:'🇧🇷', nombreA:'Brasil', banderaB:'🇲🇦', nombreB:'Marruecos', canales:['DSports/DGO','Telefe','TyC Sports'] },
-                { id:14, grupo:'C', fecha:'2026-06-13', hora:'21:00', sede:'AT&T Stadium, Arlington', banderaA:'🇭🇹', nombreA:'Haití', banderaB:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', nombreB:'Escocia', canales:['DSports/DGO'] },
-                { id:15, grupo:'C', fecha:'2026-06-18', hora:'18:00', sede:'Arrowhead Stadium, Kansas City', banderaA:'🇲🇦', nombreA:'Marruecos', banderaB:'🇭🇹', nombreB:'Haití', canales:['DSports/DGO','Telefe'] },
-                { id:16, grupo:'C', fecha:'2026-06-18', hora:'20:30', sede:'Estadio BBVA, Monterrey', banderaA:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', nombreA:'Escocia', banderaB:'🇧🇷', nombreB:'Brasil', canales:['DSports/DGO','TyC Sports'] },
-                { id:17, grupo:'C', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', banderaA:'🇧🇷', nombreA:'Brasil', banderaB:'🇭🇹', nombreB:'Haití', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:18, grupo:'C', fecha:'2026-06-23', hora:'18:00', sede:'BC Place, Vancouver', banderaA:'🏴󠁧󠁢󠁳󠁣󠁴󠁿', nombreA:'Escocia', banderaB:'🇲🇦', nombreB:'Marruecos', canales:['DSports/DGO'] },
+                { id:13, grupo:'C', fecha:'2026-06-13', hora:'18:00', sede:'NRG Stadium, Houston', codA:'br', nombreA:'Brasil', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO','Telefe','TyC Sports'] },
+                { id:14, grupo:'C', fecha:'2026-06-13', hora:'21:00', sede:'AT&T Stadium, Arlington', codA:'ht', nombreA:'Haití', codB:'sct', nombreB:'Escocia', canales:['DSports/DGO'] },
+                { id:15, grupo:'C', fecha:'2026-06-18', hora:'18:00', sede:'Arrowhead Stadium, Kansas City', codA:'ma', nombreA:'Marruecos', codB:'ht', nombreB:'Haití', canales:['DSports/DGO','Telefe'] },
+                { id:16, grupo:'C', fecha:'2026-06-18', hora:'20:30', sede:'Estadio BBVA, Monterrey', codA:'sct', nombreA:'Escocia', codB:'br', nombreB:'Brasil', canales:['DSports/DGO','TyC Sports'] },
+                { id:17, grupo:'C', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', codA:'br', nombreA:'Brasil', codB:'ht', nombreB:'Haití', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:18, grupo:'C', fecha:'2026-06-23', hora:'18:00', sede:'BC Place, Vancouver', codA:'sct', nombreA:'Escocia', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO'] },
                 // GRUPO D
-                { id:19, grupo:'D', fecha:'2026-06-14', hora:'15:00', sede:'SoFi Stadium, Los Ángeles', banderaA:'🇺🇸', nombreA:'Estados Unidos', banderaB:'🇵🇾', nombreB:'Paraguay', canales:['DSports/DGO','Telefe'] },
-                { id:20, grupo:'D', fecha:'2026-06-14', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', banderaA:'🇦🇺', nombreA:'Australia', banderaB:'🇹🇷', nombreB:'Turquía', canales:['DSports/DGO'] },
-                { id:21, grupo:'D', fecha:'2026-06-19', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', banderaA:'🇵🇾', nombreA:'Paraguay', banderaB:'🇦🇺', nombreB:'Australia', canales:['DSports/DGO','TyC Sports'] },
-                { id:22, grupo:'D', fecha:'2026-06-19', hora:'22:00', sede:'AT&T Stadium, Arlington', banderaA:'🇹🇷', nombreA:'Turquía', banderaB:'🇺🇸', nombreB:'Estados Unidos', canales:['DSports/DGO','Telefe'] },
-                { id:23, grupo:'D', fecha:'2026-06-24', hora:'15:00', sede:'Lincoln Financial Field, Filadelfia', banderaA:'🇺🇸', nombreA:'Estados Unidos', banderaB:'🇦🇺', nombreB:'Australia', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:24, grupo:'D', fecha:'2026-06-24', hora:'22:00', sede:'MetLife Stadium, Nueva Jersey', banderaA:'🇹🇷', nombreA:'Turquía', banderaB:'🇵🇾', nombreB:'Paraguay', canales:['DSports/DGO'] },
+                { id:19, grupo:'D', fecha:'2026-06-14', hora:'15:00', sede:'SoFi Stadium, Los Ángeles', codA:'us', nombreA:'Estados Unidos', codB:'py', nombreB:'Paraguay', canales:['DSports/DGO','Telefe'] },
+                { id:20, grupo:'D', fecha:'2026-06-14', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', codA:'au', nombreA:'Australia', codB:'tr', nombreB:'Turquía', canales:['DSports/DGO'] },
+                { id:21, grupo:'D', fecha:'2026-06-19', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', codA:'py', nombreA:'Paraguay', codB:'au', nombreB:'Australia', canales:['DSports/DGO','TyC Sports'] },
+                { id:22, grupo:'D', fecha:'2026-06-19', hora:'22:00', sede:'AT&T Stadium, Arlington', codA:'tr', nombreA:'Turquía', codB:'us', nombreB:'Estados Unidos', canales:['DSports/DGO','Telefe'] },
+                { id:23, grupo:'D', fecha:'2026-06-24', hora:'15:00', sede:'Lincoln Financial Field, Filadelfia', codA:'us', nombreA:'Estados Unidos', codB:'au', nombreB:'Australia', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:24, grupo:'D', fecha:'2026-06-24', hora:'22:00', sede:'MetLife Stadium, Nueva Jersey', codA:'tr', nombreA:'Turquía', codB:'py', nombreB:'Paraguay', canales:['DSports/DGO'] },
                 // GRUPO E
-                { id:25, grupo:'E', fecha:'2026-06-11', hora:'13:00', sede:'Hard Rock Stadium, Miami', banderaA:'🇩🇪', nombreA:'Alemania', banderaB:'🇨🇼', nombreB:'Curazao', canales:['DSports/DGO','Telefe'] },
-                { id:26, grupo:'E', fecha:'2026-06-11', hora:'19:00', sede:'Mercedes-Benz Stadium, Atlanta', banderaA:'🇨🇮', nombreA:'Costa de Marfil', banderaB:'🇪🇨', nombreB:'Ecuador', canales:['DSports/DGO'] },
-                { id:27, grupo:'E', fecha:'2026-06-16', hora:'13:00', sede:'Gillette Stadium, Boston', banderaA:'🇨🇼', nombreA:'Curazao', banderaB:'🇨🇮', nombreB:'Costa de Marfil', canales:['DSports/DGO','TyC Sports'] },
-                { id:28, grupo:'E', fecha:'2026-06-16', hora:'19:00', sede:'Arrowhead Stadium, Kansas City', banderaA:'🇪🇨', nombreA:'Ecuador', banderaB:'🇩🇪', nombreB:'Alemania', canales:['DSports/DGO','Telefe'] },
-                { id:29, grupo:'E', fecha:'2026-06-21', hora:'13:00', sede:'Estadio BBVA, Monterrey', banderaA:'🇩🇪', nombreA:'Alemania', banderaB:'🇨🇮', nombreB:'Costa de Marfil', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:30, grupo:'E', fecha:'2026-06-21', hora:'16:00', sede:'NRG Stadium, Houston', banderaA:'🇪🇨', nombreA:'Ecuador', banderaB:'🇨🇼', nombreB:'Curazao', canales:['DSports/DGO'] },
+                { id:25, grupo:'E', fecha:'2026-06-11', hora:'13:00', sede:'Hard Rock Stadium, Miami', codA:'de', nombreA:'Alemania', codB:'cw', nombreB:'Curazao', canales:['DSports/DGO','Telefe'] },
+                { id:26, grupo:'E', fecha:'2026-06-11', hora:'19:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'ci', nombreA:'Costa de Marfil', codB:'ec', nombreB:'Ecuador', canales:['DSports/DGO'] },
+                { id:27, grupo:'E', fecha:'2026-06-16', hora:'13:00', sede:'Gillette Stadium, Boston', codA:'cw', nombreA:'Curazao', codB:'ci', nombreB:'Costa de Marfil', canales:['DSports/DGO','TyC Sports'] },
+                { id:28, grupo:'E', fecha:'2026-06-16', hora:'19:00', sede:'Arrowhead Stadium, Kansas City', codA:'ec', nombreA:'Ecuador', codB:'de', nombreB:'Alemania', canales:['DSports/DGO','Telefe'] },
+                { id:29, grupo:'E', fecha:'2026-06-21', hora:'13:00', sede:'Estadio BBVA, Monterrey', codA:'de', nombreA:'Alemania', codB:'ci', nombreB:'Costa de Marfil', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:30, grupo:'E', fecha:'2026-06-21', hora:'16:00', sede:'NRG Stadium, Houston', codA:'ec', nombreA:'Ecuador', codB:'cw', nombreB:'Curazao', canales:['DSports/DGO'] },
                 // GRUPO F
-                { id:31, grupo:'F', fecha:'2026-06-12', hora:'13:00', sede:'Lumen Field, Seattle', banderaA:'🇳🇱', nombreA:'Países Bajos', banderaB:'🇸🇪', nombreB:'Suecia', canales:['DSports/DGO','Telefe'] },
-                { id:32, grupo:'F', fecha:'2026-06-12', hora:'19:00', sede:'BC Place, Vancouver', banderaA:'🇯🇵', nombreA:'Japón', banderaB:'🇹🇳', nombreB:'Túnez', canales:['DSports/DGO'] },
-                { id:33, grupo:'F', fecha:'2026-06-17', hora:'15:00', sede:'Estadio Akron, Guadalajara', banderaA:'🇸🇪', nombreA:'Suecia', banderaB:'🇯🇵', nombreB:'Japón', canales:['DSports/DGO','TyC Sports'] },
-                { id:34, grupo:'F', fecha:'2026-06-17', hora:'21:00', sede:'SoFi Stadium, Los Ángeles', banderaA:'🇹🇳', nombreA:'Túnez', banderaB:'🇳🇱', nombreB:'Países Bajos', canales:['DSports/DGO','Telefe'] },
-                { id:35, grupo:'F', fecha:'2026-06-22', hora:'13:00', sede:'BMO Field, Toronto', banderaA:'🇳🇱', nombreA:'Países Bajos', banderaB:'🇯🇵', nombreB:'Japón', canales:['DSports/DGO'] },
-                { id:36, grupo:'F', fecha:'2026-06-22', hora:'19:00', sede:'Levi\'s Stadium, Santa Clara', banderaA:'🇹🇳', nombreA:'Túnez', banderaB:'🇸🇪', nombreB:'Suecia', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:31, grupo:'F', fecha:'2026-06-12', hora:'13:00', sede:'Lumen Field, Seattle', codA:'nl', nombreA:'Países Bajos', codB:'se', nombreB:'Suecia', canales:['DSports/DGO','Telefe'] },
+                { id:32, grupo:'F', fecha:'2026-06-12', hora:'19:00', sede:'BC Place, Vancouver', codA:'jp', nombreA:'Japón', codB:'tn', nombreB:'Túnez', canales:['DSports/DGO'] },
+                { id:33, grupo:'F', fecha:'2026-06-17', hora:'15:00', sede:'Estadio Akron, Guadalajara', codA:'se', nombreA:'Suecia', codB:'jp', nombreB:'Japón', canales:['DSports/DGO','TyC Sports'] },
+                { id:34, grupo:'F', fecha:'2026-06-17', hora:'21:00', sede:'SoFi Stadium, Los Ángeles', codA:'tn', nombreA:'Túnez', codB:'nl', nombreB:'Países Bajos', canales:['DSports/DGO','Telefe'] },
+                { id:35, grupo:'F', fecha:'2026-06-22', hora:'13:00', sede:'BMO Field, Toronto', codA:'nl', nombreA:'Países Bajos', codB:'jp', nombreB:'Japón', canales:['DSports/DGO'] },
+                { id:36, grupo:'F', fecha:'2026-06-22', hora:'19:00', sede:'Levi\'s Stadium, Santa Clara', codA:'tn', nombreA:'Túnez', codB:'se', nombreB:'Suecia', canales:['DSports/DGO','Telefe','TV Pública'] },
                 // GRUPO G
-                { id:37, grupo:'G', fecha:'2026-06-13', hora:'15:00', sede:'MetLife Stadium, Nueva Jersey', banderaA:'🇧🇪', nombreA:'Bélgica', banderaB:'🇮🇷', nombreB:'Irán', canales:['DSports/DGO','Telefe'] },
-                { id:38, grupo:'G', fecha:'2026-06-13', hora:'21:00', sede:'Lincoln Financial Field, Filadelfia', banderaA:'🇪🇬', nombreA:'Egipto', banderaB:'🇳🇿', nombreB:'Nueva Zelanda', canales:['DSports/DGO'] },
-                { id:39, grupo:'G', fecha:'2026-06-18', hora:'15:00', sede:'Hard Rock Stadium, Miami', banderaA:'🇮🇷', nombreA:'Irán', banderaB:'🇪🇬', nombreB:'Egipto', canales:['DSports/DGO','TyC Sports'] },
-                { id:40, grupo:'G', fecha:'2026-06-18', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', banderaA:'🇳🇿', nombreA:'Nueva Zelanda', banderaB:'🇧🇪', nombreB:'Bélgica', canales:['DSports/DGO','Telefe'] },
-                { id:41, grupo:'G', fecha:'2026-06-23', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', banderaA:'🇧🇪', nombreA:'Bélgica', banderaB:'🇪🇬', nombreB:'Egipto', canales:['DSports/DGO'] },
-                { id:42, grupo:'G', fecha:'2026-06-23', hora:'21:00', sede:'Gillette Stadium, Boston', banderaA:'🇳🇿', nombreA:'Nueva Zelanda', banderaB:'🇮🇷', nombreB:'Irán', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:37, grupo:'G', fecha:'2026-06-13', hora:'15:00', sede:'MetLife Stadium, Nueva Jersey', codA:'be', nombreA:'Bélgica', codB:'ir', nombreB:'Irán', canales:['DSports/DGO','Telefe'] },
+                { id:38, grupo:'G', fecha:'2026-06-13', hora:'21:00', sede:'Lincoln Financial Field, Filadelfia', codA:'eg', nombreA:'Egipto', codB:'nz', nombreB:'Nueva Zelanda', canales:['DSports/DGO'] },
+                { id:39, grupo:'G', fecha:'2026-06-18', hora:'15:00', sede:'Hard Rock Stadium, Miami', codA:'ir', nombreA:'Irán', codB:'eg', nombreB:'Egipto', canales:['DSports/DGO','TyC Sports'] },
+                { id:40, grupo:'G', fecha:'2026-06-18', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'nz', nombreA:'Nueva Zelanda', codB:'be', nombreB:'Bélgica', canales:['DSports/DGO','Telefe'] },
+                { id:41, grupo:'G', fecha:'2026-06-23', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', codA:'be', nombreA:'Bélgica', codB:'eg', nombreB:'Egipto', canales:['DSports/DGO'] },
+                { id:42, grupo:'G', fecha:'2026-06-23', hora:'21:00', sede:'Gillette Stadium, Boston', codA:'nz', nombreA:'Nueva Zelanda', codB:'ir', nombreB:'Irán', canales:['DSports/DGO','Telefe','TV Pública'] },
                 // GRUPO H
-                { id:43, grupo:'H', fecha:'2026-06-14', hora:'12:00', sede:'NRG Stadium, Houston', banderaA:'🇪🇸', nombreA:'España', banderaB:'🇨🇻', nombreB:'Cabo Verde', canales:['DSports/DGO','Telefe'] },
-                { id:44, grupo:'H', fecha:'2026-06-14', hora:'18:00', sede:'AT&T Stadium, Arlington', banderaA:'🇸🇦', nombreA:'Arabia Saudita', banderaB:'🇺🇾', nombreB:'Uruguay', canales:['DSports/DGO'] },
-                { id:45, grupo:'H', fecha:'2026-06-19', hora:'13:00', sede:'Arrowhead Stadium, Kansas City', banderaA:'🇨🇻', nombreA:'Cabo Verde', banderaB:'🇸🇦', nombreB:'Arabia Saudita', canales:['DSports/DGO','TyC Sports'] },
-                { id:46, grupo:'H', fecha:'2026-06-19', hora:'18:00', sede:'BMO Field, Toronto', banderaA:'🇺🇾', nombreA:'Uruguay', banderaB:'🇪🇸', nombreB:'España', canales:['DSports/DGO','Telefe'] },
-                { id:47, grupo:'H', fecha:'2026-06-24', hora:'12:00', sede:'Lumen Field, Seattle', banderaA:'🇪🇸', nombreA:'España', banderaB:'🇸🇦', nombreB:'Arabia Saudita', canales:['DSports/DGO'] },
-                { id:48, grupo:'H', fecha:'2026-06-24', hora:'20:00', sede:'BC Place, Vancouver', banderaA:'🇺🇾', nombreA:'Uruguay', banderaB:'🇨🇻', nombreB:'Cabo Verde', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:43, grupo:'H', fecha:'2026-06-14', hora:'12:00', sede:'NRG Stadium, Houston', codA:'es', nombreA:'España', codB:'cv', nombreB:'Cabo Verde', canales:['DSports/DGO','Telefe'] },
+                { id:44, grupo:'H', fecha:'2026-06-14', hora:'18:00', sede:'AT&T Stadium, Arlington', codA:'sa', nombreA:'Arabia Saudita', codB:'uy', nombreB:'Uruguay', canales:['DSports/DGO'] },
+                { id:45, grupo:'H', fecha:'2026-06-19', hora:'13:00', sede:'Arrowhead Stadium, Kansas City', codA:'cv', nombreA:'Cabo Verde', codB:'sa', nombreB:'Arabia Saudita', canales:['DSports/DGO','TyC Sports'] },
+                { id:46, grupo:'H', fecha:'2026-06-19', hora:'18:00', sede:'BMO Field, Toronto', codA:'uy', nombreA:'Uruguay', codB:'es', nombreB:'España', canales:['DSports/DGO','Telefe'] },
+                { id:47, grupo:'H', fecha:'2026-06-24', hora:'12:00', sede:'Lumen Field, Seattle', codA:'es', nombreA:'España', codB:'sa', nombreB:'Arabia Saudita', canales:['DSports/DGO'] },
+                { id:48, grupo:'H', fecha:'2026-06-24', hora:'20:00', sede:'BC Place, Vancouver', codA:'uy', nombreA:'Uruguay', codB:'cv', nombreB:'Cabo Verde', canales:['DSports/DGO','Telefe','TV Pública'] },
                 // GRUPO I
-                { id:49, grupo:'I', fecha:'2026-06-15', hora:'17:00', sede:'Levi\'s Stadium, Santa Clara', banderaA:'🇫🇷', nombreA:'Francia', banderaB:'🇮🇶', nombreB:'Irak', canales:['DSports/DGO','Telefe'] },
-                { id:50, grupo:'I', fecha:'2026-06-15', hora:'20:00', sede:'SoFi Stadium, Los Ángeles', banderaA:'🇸🇳', nombreA:'Senegal', banderaB:'🇳🇴', nombreB:'Noruega', canales:['DSports/DGO'] },
-                { id:51, grupo:'I', fecha:'2026-06-20', hora:'15:00', sede:'Estadio BBVA, Monterrey', banderaA:'🇮🇶', nombreA:'Irak', banderaB:'🇸🇳', nombreB:'Senegal', canales:['DSports/DGO','TyC Sports'] },
-                { id:52, grupo:'I', fecha:'2026-06-20', hora:'21:00', sede:'Hard Rock Stadium, Miami', banderaA:'🇳🇴', nombreA:'Noruega', banderaB:'🇫🇷', nombreB:'Francia', canales:['DSports/DGO','Telefe'] },
-                { id:53, grupo:'I', fecha:'2026-06-25', hora:'15:00', sede:'Mercedes-Benz Stadium, Atlanta', banderaA:'🇫🇷', nombreA:'Francia', banderaB:'🇸🇳', nombreB:'Senegal', canales:['DSports/DGO'] },
-                { id:54, grupo:'I', fecha:'2026-06-25', hora:'21:00', sede:'MetLife Stadium, Nueva Jersey', banderaA:'🇳🇴', nombreA:'Noruega', banderaB:'🇮🇶', nombreB:'Irak', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:49, grupo:'I', fecha:'2026-06-15', hora:'17:00', sede:'Levi\'s Stadium, Santa Clara', codA:'fr', nombreA:'Francia', codB:'iq', nombreB:'Irak', canales:['DSports/DGO','Telefe'] },
+                { id:50, grupo:'I', fecha:'2026-06-15', hora:'20:00', sede:'SoFi Stadium, Los Ángeles', codA:'sn', nombreA:'Senegal', codB:'no', nombreB:'Noruega', canales:['DSports/DGO'] },
+                { id:51, grupo:'I', fecha:'2026-06-20', hora:'15:00', sede:'Estadio BBVA, Monterrey', codA:'iq', nombreA:'Irak', codB:'sn', nombreB:'Senegal', canales:['DSports/DGO','TyC Sports'] },
+                { id:52, grupo:'I', fecha:'2026-06-20', hora:'21:00', sede:'Hard Rock Stadium, Miami', codA:'no', nombreA:'Noruega', codB:'fr', nombreB:'Francia', canales:['DSports/DGO','Telefe'] },
+                { id:53, grupo:'I', fecha:'2026-06-25', hora:'15:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'fr', nombreA:'Francia', codB:'sn', nombreB:'Senegal', canales:['DSports/DGO'] },
+                { id:54, grupo:'I', fecha:'2026-06-25', hora:'21:00', sede:'MetLife Stadium, Nueva Jersey', codA:'no', nombreA:'Noruega', codB:'iq', nombreB:'Irak', canales:['DSports/DGO','Telefe','TV Pública'] },
                 // GRUPO J (ARGENTINA)
-                { id:55, grupo:'J', fecha:'2026-06-15', hora:'13:00', sede:'Estadio Akron, Guadalajara', banderaA:'🇦🇷', nombreA:'Argentina', banderaB:'🇩🇿', nombreB:'Argelia', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
-                { id:56, grupo:'J', fecha:'2026-06-15', hora:'23:00', sede:'Lumen Field, Seattle', banderaA:'🇦🇹', nombreA:'Austria', banderaB:'🇯🇴', nombreB:'Jordania', canales:['DSports/DGO'] },
-                { id:57, grupo:'J', fecha:'2026-06-20', hora:'13:00', sede:'Gillette Stadium, Boston', banderaA:'🇩🇿', nombreA:'Argelia', banderaB:'🇦🇹', nombreB:'Austria', canales:['DSports/DGO','TyC Sports'] },
-                { id:58, grupo:'J', fecha:'2026-06-20', hora:'22:00', sede:'NRG Stadium, Houston', banderaA:'🇯🇴', nombreA:'Jordania', banderaB:'🇦🇷', nombreB:'Argentina', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:59, grupo:'J', fecha:'2026-06-25', hora:'13:00', sede:'AT&T Stadium, Arlington', banderaA:'🇦🇷', nombreA:'Argentina', banderaB:'🇦🇹', nombreB:'Austria', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
-                { id:60, grupo:'J', fecha:'2026-06-25', hora:'20:00', sede:'Lincoln Financial Field, Filadelfia', banderaA:'🇯🇴', nombreA:'Jordania', banderaB:'🇩🇿', nombreB:'Argelia', canales:['DSports/DGO'] },
+                { id:55, grupo:'J', fecha:'2026-06-15', hora:'13:00', sede:'Estadio Akron, Guadalajara', codA:'ar', nombreA:'Argentina', codB:'dz', nombreB:'Argelia', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
+                { id:56, grupo:'J', fecha:'2026-06-15', hora:'23:00', sede:'Lumen Field, Seattle', codA:'at', nombreA:'Austria', codB:'jo', nombreB:'Jordania', canales:['DSports/DGO'] },
+                { id:57, grupo:'J', fecha:'2026-06-20', hora:'13:00', sede:'Gillette Stadium, Boston', codA:'dz', nombreA:'Argelia', codB:'at', nombreB:'Austria', canales:['DSports/DGO','TyC Sports'] },
+                { id:58, grupo:'J', fecha:'2026-06-20', hora:'22:00', sede:'NRG Stadium, Houston', codA:'jo', nombreA:'Jordania', codB:'ar', nombreB:'Argentina', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:59, grupo:'J', fecha:'2026-06-25', hora:'13:00', sede:'AT&T Stadium, Arlington', codA:'ar', nombreA:'Argentina', codB:'at', nombreB:'Austria', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
+                { id:60, grupo:'J', fecha:'2026-06-25', hora:'20:00', sede:'Lincoln Financial Field, Filadelfia', codA:'jo', nombreA:'Jordania', codB:'dz', nombreB:'Argelia', canales:['DSports/DGO'] },
                 // GRUPO K
-                { id:61, grupo:'K', fecha:'2026-06-14', hora:'13:00', sede:'Estadio Azteca, Ciudad de México', banderaA:'🇵🇹', nombreA:'Portugal', banderaB:'🇨🇩', nombreB:'RD Congo', canales:['DSports/DGO','Telefe'] },
-                { id:62, grupo:'K', fecha:'2026-06-14', hora:'22:00', sede:'BC Place, Vancouver', banderaA:'🇺🇿', nombreA:'Uzbekistán', banderaB:'🇨🇴', nombreB:'Colombia', canales:['DSports/DGO'] },
-                { id:63, grupo:'K', fecha:'2026-06-19', hora:'16:00', sede:'Arrowhead Stadium, Kansas City', banderaA:'🇨🇩', nombreA:'RD Congo', banderaB:'🇺🇿', nombreB:'Uzbekistán', canales:['DSports/DGO','TyC Sports'] },
-                { id:64, grupo:'K', fecha:'2026-06-19', hora:'23:00', sede:'Hard Rock Stadium, Miami', banderaA:'🇨🇴', nombreA:'Colombia', banderaB:'🇵🇹', nombreB:'Portugal', canales:['DSports/DGO','Telefe'] },
-                { id:65, grupo:'K', fecha:'2026-06-24', hora:'13:00', sede:'Levi\'s Stadium, Santa Clara', banderaA:'🇵🇹', nombreA:'Portugal', banderaB:'🇺🇿', nombreB:'Uzbekistán', canales:['DSports/DGO'] },
-                { id:66, grupo:'K', fecha:'2026-06-24', hora:'19:30', sede:'MetLife Stadium, Nueva Jersey', banderaA:'🇨🇴', nombreA:'Colombia', banderaB:'🇨🇩', nombreB:'RD Congo', canales:['DSports/DGO','Telefe','TV Pública'] },
+                { id:61, grupo:'K', fecha:'2026-06-14', hora:'13:00', sede:'Estadio Azteca, Ciudad de México', codA:'pt', nombreA:'Portugal', codB:'cd', nombreB:'RD Congo', canales:['DSports/DGO','Telefe'] },
+                { id:62, grupo:'K', fecha:'2026-06-14', hora:'22:00', sede:'BC Place, Vancouver', codA:'uz', nombreA:'Uzbekistán', codB:'co', nombreB:'Colombia', canales:['DSports/DGO'] },
+                { id:63, grupo:'K', fecha:'2026-06-19', hora:'16:00', sede:'Arrowhead Stadium, Kansas City', codA:'cd', nombreA:'RD Congo', codB:'uz', nombreB:'Uzbekistán', canales:['DSports/DGO','TyC Sports'] },
+                { id:64, grupo:'K', fecha:'2026-06-19', hora:'23:00', sede:'Hard Rock Stadium, Miami', codA:'co', nombreA:'Colombia', codB:'pt', nombreB:'Portugal', canales:['DSports/DGO','Telefe'] },
+                { id:65, grupo:'K', fecha:'2026-06-24', hora:'13:00', sede:'Levi\'s Stadium, Santa Clara', codA:'pt', nombreA:'Portugal', codB:'uz', nombreB:'Uzbekistán', canales:['DSports/DGO'] },
+                { id:66, grupo:'K', fecha:'2026-06-24', hora:'19:30', sede:'MetLife Stadium, Nueva Jersey', codA:'co', nombreA:'Colombia', codB:'cd', nombreB:'RD Congo', canales:['DSports/DGO','Telefe','TV Pública'] },
                 // GRUPO L
-                { id:67, grupo:'L', fecha:'2026-06-13', hora:'16:00', sede:'Mercedes-Benz Stadium, Atlanta', banderaA:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', nombreA:'Inglaterra', banderaB:'🇭🇷', nombreB:'Croacia', canales:['DSports/DGO','Telefe'] },
-                { id:68, grupo:'L', fecha:'2026-06-13', hora:'19:00', sede:'SoFi Stadium, Los Ángeles', banderaA:'🇬🇭', nombreA:'Ghana', banderaB:'🇵🇦', nombreB:'Panamá', canales:['DSports/DGO'] },
-                { id:69, grupo:'L', fecha:'2026-06-18', hora:'13:00', sede:'Estadio BBVA, Monterrey', banderaA:'🇭🇷', nombreA:'Croacia', banderaB:'🇬🇭', nombreB:'Ghana', canales:['DSports/DGO','TyC Sports'] },
-                { id:70, grupo:'L', fecha:'2026-06-18', hora:'22:00', sede:'AT&T Stadium, Arlington', banderaA:'🇵🇦', nombreA:'Panamá', banderaB:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', nombreB:'Inglaterra', canales:['DSports/DGO','Telefe'] },
-                { id:71, grupo:'L', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', banderaA:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', nombreA:'Inglaterra', banderaB:'🇬🇭', nombreB:'Ghana', canales:['DSports/DGO'] },
-                { id:72, grupo:'L', fecha:'2026-06-23', hora:'17:00', sede:'NRG Stadium, Houston', banderaA:'🇵🇦', nombreA:'Panamá', banderaB:'🇭🇷', nombreB:'Croacia', canales:['DSports/DGO','Telefe','TV Pública'] }
+                { id:67, grupo:'L', fecha:'2026-06-13', hora:'16:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'gb-eng', nombreA:'Inglaterra', codB:'hr', nombreB:'Croacia', canales:['DSports/DGO','Telefe'] },
+                { id:68, grupo:'L', fecha:'2026-06-13', hora:'19:00', sede:'SoFi Stadium, Los Ángeles', codA:'gh', nombreA:'Ghana', codB:'pa', nombreB:'Panamá', canales:['DSports/DGO'] },
+                { id:69, grupo:'L', fecha:'2026-06-18', hora:'13:00', sede:'Estadio BBVA, Monterrey', codA:'hr', nombreA:'Croacia', codB:'gh', nombreB:'Ghana', canales:['DSports/DGO','TyC Sports'] },
+                { id:70, grupo:'L', fecha:'2026-06-18', hora:'22:00', sede:'AT&T Stadium, Arlington', codA:'pa', nombreA:'Panamá', codB:'gb-eng', nombreB:'Inglaterra', canales:['DSports/DGO','Telefe'] },
+                { id:71, grupo:'L', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', codA:'gb-eng', nombreA:'Inglaterra', codB:'gh', nombreB:'Ghana', canales:['DSports/DGO'] },
+                { id:72, grupo:'L', fecha:'2026-06-23', hora:'17:00', sede:'NRG Stadium, Houston', codA:'pa', nombreA:'Panamá', codB:'hr', nombreB:'Croacia', canales:['DSports/DGO','Telefe','TV Pública'] }
             ];
 
             // Inicializar resultados reales
@@ -391,7 +526,7 @@
                 return `${parseInt(d)} ${meses[parseInt(m)-1]}`;
             }
 
-            // --- Render de partidos (con banderas directas) ---
+            // --- Render de partidos (con flag-icons) ---
             function getPartidosFiltrados() {
                 let partidos = [...FIXTURE_OFICIAL];
                 if (estado.filtroActivo === 'argentina') {
@@ -432,12 +567,12 @@
                         </div>
                         <div class="partido-card__equipos">
                             <div class="partido-card__equipo">
-                                <span class="partido-card__bandera">${p.banderaA}</span>
+                                <span class="partido-card__bandera"><span class="fi fi-${p.codA}"></span></span>
                                 <span class="partido-card__nombre">${p.nombreA}</span>
                             </div>
                             <span class="partido-card__vs">VS</span>
                             <div class="partido-card__equipo">
-                                <span class="partido-card__bandera">${p.banderaB}</span>
+                                <span class="partido-card__bandera"><span class="fi fi-${p.codB}"></span></span>
                                 <span class="partido-card__nombre">${p.nombreB}</span>
                             </div>
                         </div>
@@ -673,7 +808,7 @@
                 renderFiltros();
                 renderPartidos();
                 actualizarInfoAmigos();
-                mostrarToast('🏆 Fixture oficial con banderas reales cargado');
+                mostrarToast('🏆 Fixture oficial con banderas profesionales cargado');
             }
             init();
         })();
