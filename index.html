@@ -7,6 +7,7 @@
     <!-- Flag Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
     <style>
+        /* ========== MISMO ESTILO QUE ANTES (sin cambios importantes) ========== */
         :root {
             --bg: #0b0b14;
             --bg-card: #151528;
@@ -274,8 +275,74 @@
         .partido-card__pronostico .pronostico-sep { font-weight: 900; font-size: 1.2rem; color: var(--text-secondary); }
         .partido-card__resultado-real { margin-top: 10px; font-size: 0.7rem; text-align: center; color: var(--accent2); font-weight: 700; background: rgba(0,200,151,0.08); padding: 4px 10px; border-radius: 14px; display: inline-block; width: 100%; }
         
-        .seccion { background: var(--bg-card); border-radius: var(--radius); padding: 20px 18px; margin-top: 24px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-        .seccion__titulo { font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--accent); }
+        /* SECCIONES GENERALES */
+        .seccion {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            margin-top: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .seccion__titulo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+        /* Tabla de posiciones (visible para todos) */
+        .tabla-posiciones {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .tabla-posiciones th, .tabla-posiciones td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .tabla-posiciones th {
+            background: var(--bg-input);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        .tabla-posiciones tbody tr:hover {
+            background: var(--bg-card-hover);
+        }
+        .tabla-posiciones .pos-1 {
+            background: rgba(240,185,64,0.1);
+            font-weight: 700;
+        }
+        .tabla-posiciones .pos-1 td:first-child::before {
+            content: '🥇 ';
+        }
+        .tabla-posiciones .pos-2 td:first-child::before {
+            content: '🥈 ';
+        }
+        .tabla-posiciones .pos-3 td:first-child::before {
+            content: '🥉 ';
+        }
+        .tabla-scroll {
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* Botones y otros */
         .btn {
             padding: 10px 20px; border-radius: 26px; border: none; cursor: pointer;
             font-weight: 700; font-size: 0.85rem; transition: var(--transition);
@@ -306,20 +373,13 @@
         }
         @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(30px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
         @keyframes toastOut { from { opacity: 1; } to { opacity: 0; transform: translateX(-50%) translateY(20px); } }
-        .tabla-posiciones { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
-        .tabla-posiciones th, .tabla-posiciones td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
-        .tabla-posiciones th { background: var(--bg-input); color: var(--accent); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
-        .tabla-posiciones tbody tr:hover { background: var(--bg-card-hover); }
-        .tabla-posiciones .pos-1 { background: rgba(240,185,64,0.08); font-weight: 700; }
-        .tabla-posiciones .pos-1 td:first-child::before { content: '🥇 '; }
-        .tabla-posiciones .pos-2 td:first-child::before { content: '🥈 '; }
-        .tabla-posiciones .pos-3 td:first-child::before { content: '🥉 '; }
-        .tabla-scroll { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+        
         .collapsible-header { cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
         .collapsible-header .arrow { transition: transform 0.3s ease; font-size: 1.2rem; }
         .collapsible--open .arrow { transform: rotate(180deg); }
         .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
         .collapsible--open .collapsible-body { max-height: 3000px; }
+        
         @media (max-width: 500px) {
             .fi { font-size: 1.6rem; }
             .partido-card__vs { width: 28px; height: 28px; font-size: 0.7rem; }
@@ -346,8 +406,8 @@
         </div>
     </header>
     <main class="container" id="appContainer">
-        <!-- Banners superiores -->
-        <div class="banners-row" id="bannerTop">
+        <!-- BANNERS SUPERIORES -->
+        <div class="banners-row">
             <div class="banner" onclick="window.open('https://www.betano.com','_blank')">
                 <div class="brand">⚽ Betano</div>
                 <p>Apuestas deportivas · Bonos exclusivos</p>
@@ -366,7 +426,7 @@
             </div>
         </div>
 
-        <!-- Bloque de instrucciones -->
+        <!-- INSTRUCCIONES -->
         <div class="instrucciones">
             <h3>📋 ¿Cómo participar?</h3>
             <ul>
@@ -384,15 +444,18 @@
             </ul>
         </div>
 
+        <!-- FILTROS DE PARTIDOS -->
         <section class="filtros" id="filtrosContainer">
             <span class="filtros__label">Filtrar:</span>
             <button class="filtro-btn filtro-btn--active" data-filtro="todos">📋 Todos</button>
             <button class="filtro-btn filtro-btn--arg" data-filtro="argentina">🇦🇷 Solo Argentina</button>
             <span class="filtros__label" style="margin-left:6px;">Grupo:</span>
         </section>
+
+        <!-- GRID DE PARTIDOS -->
         <section class="partidos-grid" id="partidosGrid"></section>
-        
-        <!-- Banner intermedio -->
+
+        <!-- BANNER INTERMEDIO (opcional) -->
         <div class="banners-row" style="margin: 20px 0;">
             <div class="banner" onclick="window.open('https://www.pepsi.com','_blank')">
                 <div class="brand">🥤 Pepsi</div>
@@ -400,6 +463,22 @@
             </div>
         </div>
 
+        <!-- ========== NUEVA SECCIÓN: TABLA DE POSICIONES VISIBLE PARA TODOS ========== -->
+        <section class="seccion" id="tablaGlobalSection">
+            <div class="seccion__titulo">
+                🏆 Tabla de Posiciones · Competencia entre amigos
+            </div>
+            <div class="tabla-scroll" id="tablaPosicionesContainerGlobal">
+                <!-- Aquí se renderizará la tabla automáticamente -->
+                <div class="empty-message">Cargando datos... (esperando resultados)</div>
+            </div>
+            <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:12px; text-align:center;">
+                📢 Solo se muestran los amigos cuyos códigos fueron importados por el organizador.
+                Los puntos se actualizan en tiempo real cuando el organizador carga resultados.
+            </p>
+        </section>
+
+        <!-- SECCIÓN PARA COMPARTIR CÓDIGO (visible para todos) -->
         <section class="seccion">
             <div class="seccion__titulo">📤 Compartir mis Pronósticos</div>
             <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">Generá un código para enviar al organizador del prode por WhatsApp. Incluye tu nombre y todos tus pronósticos.</p>
@@ -409,6 +488,8 @@
             </div>
             <textarea id="txtCodigoGenerado" readonly placeholder="Tu código aparecerá aquí..." style="margin-top:10px;"></textarea>
         </section>
+
+        <!-- PANEL ADMINISTRADOR (colapsable, solo organizador) -->
         <section class="seccion collapsible" id="panelAdmin">
             <div class="seccion__titulo collapsible-header" id="panelAdminHeader">⚙️ Panel Administrador (Organizador) <span class="arrow">▼</span></div>
             <div class="collapsible-body">
@@ -428,10 +509,6 @@
                         <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">Completá los goles de los partidos que ya se jugaron. Se guardan automáticamente.</p>
                         <div id="adminResultadosReales" style="max-height:400px;overflow-y:auto;padding-right:4px;"></div>
                     </div>
-                    <div>
-                        <h4 style="margin-bottom:6px;color:var(--accent);">🏅 Tabla de Posiciones del Prode</h4>
-                        <div class="tabla-scroll" id="tablaPosicionesContainer"></div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -441,87 +518,75 @@
     <script>
         (function() {
             // --------------------------------------------------------------
-            // FIXTURE OFICIAL MUNDIAL 2026 - Con códigos de país para flag-icons
+            // FIXTURE OFICIAL MUNDIAL 2026 (mismo que antes, con códigos de país)
             // --------------------------------------------------------------
             const FIXTURE_OFICIAL = [
-                // GRUPO A
                 { id:1, grupo:'A', fecha:'2026-06-11', hora:'12:00', sede:'Estadio Azteca, Ciudad de México', codA:'mx', nombreA:'México', codB:'za', nombreB:'Sudáfrica', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:2, grupo:'A', fecha:'2026-06-11', hora:'22:00', sede:'SoFi Stadium, Los Ángeles', codA:'kr', nombreA:'Corea del Sur', codB:'cz', nombreB:'República Checa', canales:['DSports/DGO','TyC Sports'] },
                 { id:3, grupo:'A', fecha:'2026-06-16', hora:'15:00', sede:'BC Place, Vancouver', codA:'za', nombreA:'Sudáfrica', codB:'kr', nombreB:'Corea del Sur', canales:['DSports/DGO'] },
                 { id:4, grupo:'A', fecha:'2026-06-16', hora:'21:00', sede:'Lumen Field, Seattle', codA:'cz', nombreA:'República Checa', codB:'mx', nombreB:'México', canales:['DSports/DGO','Telefe'] },
                 { id:5, grupo:'A', fecha:'2026-06-21', hora:'15:00', sede:'Estadio Akron, Guadalajara', codA:'mx', nombreA:'México', codB:'kr', nombreB:'Corea del Sur', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:6, grupo:'A', fecha:'2026-06-21', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', codA:'cz', nombreA:'República Checa', codB:'za', nombreB:'Sudáfrica', canales:['DSports/DGO'] },
-                // GRUPO B
                 { id:7, grupo:'B', fecha:'2026-06-12', hora:'15:00', sede:'BMO Field, Toronto', codA:'ca', nombreA:'Canadá', codB:'ba', nombreB:'Bosnia y Herzegovina', canales:['DSports/DGO','Telefe'] },
                 { id:8, grupo:'B', fecha:'2026-06-12', hora:'21:00', sede:'Gillette Stadium, Boston', codA:'qa', nombreA:'Catar', codB:'ch', nombreB:'Suiza', canales:['DSports/DGO'] },
                 { id:9, grupo:'B', fecha:'2026-06-17', hora:'13:00', sede:'Lincoln Financial Field, Filadelfia', codA:'ba', nombreA:'Bosnia', codB:'qa', nombreB:'Catar', canales:['DSports/DGO','TyC Sports'] },
                 { id:10, grupo:'B', fecha:'2026-06-17', hora:'19:00', sede:'MetLife Stadium, Nueva Jersey', codA:'ch', nombreA:'Suiza', codB:'ca', nombreB:'Canadá', canales:['DSports/DGO','Telefe'] },
                 { id:11, grupo:'B', fecha:'2026-06-22', hora:'15:00', sede:'Hard Rock Stadium, Miami', codA:'ca', nombreA:'Canadá', codB:'qa', nombreB:'Catar', canales:['DSports/DGO'] },
                 { id:12, grupo:'B', fecha:'2026-06-22', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'ch', nombreA:'Suiza', codB:'ba', nombreB:'Bosnia', canales:['DSports/DGO','Telefe','TV Pública'] },
-                // GRUPO C
                 { id:13, grupo:'C', fecha:'2026-06-13', hora:'18:00', sede:'NRG Stadium, Houston', codA:'br', nombreA:'Brasil', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO','Telefe','TyC Sports'] },
                 { id:14, grupo:'C', fecha:'2026-06-13', hora:'21:00', sede:'AT&T Stadium, Arlington', codA:'ht', nombreA:'Haití', codB:'sct', nombreB:'Escocia', canales:['DSports/DGO'] },
                 { id:15, grupo:'C', fecha:'2026-06-18', hora:'18:00', sede:'Arrowhead Stadium, Kansas City', codA:'ma', nombreA:'Marruecos', codB:'ht', nombreB:'Haití', canales:['DSports/DGO','Telefe'] },
                 { id:16, grupo:'C', fecha:'2026-06-18', hora:'20:30', sede:'Estadio BBVA, Monterrey', codA:'sct', nombreA:'Escocia', codB:'br', nombreB:'Brasil', canales:['DSports/DGO','TyC Sports'] },
                 { id:17, grupo:'C', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', codA:'br', nombreA:'Brasil', codB:'ht', nombreB:'Haití', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:18, grupo:'C', fecha:'2026-06-23', hora:'18:00', sede:'BC Place, Vancouver', codA:'sct', nombreA:'Escocia', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO'] },
-                // GRUPO D
                 { id:19, grupo:'D', fecha:'2026-06-14', hora:'15:00', sede:'SoFi Stadium, Los Ángeles', codA:'us', nombreA:'Estados Unidos', codB:'py', nombreB:'Paraguay', canales:['DSports/DGO','Telefe'] },
                 { id:20, grupo:'D', fecha:'2026-06-14', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', codA:'au', nombreA:'Australia', codB:'tr', nombreB:'Turquía', canales:['DSports/DGO'] },
                 { id:21, grupo:'D', fecha:'2026-06-19', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', codA:'py', nombreA:'Paraguay', codB:'au', nombreB:'Australia', canales:['DSports/DGO','TyC Sports'] },
                 { id:22, grupo:'D', fecha:'2026-06-19', hora:'22:00', sede:'AT&T Stadium, Arlington', codA:'tr', nombreA:'Turquía', codB:'us', nombreB:'Estados Unidos', canales:['DSports/DGO','Telefe'] },
                 { id:23, grupo:'D', fecha:'2026-06-24', hora:'15:00', sede:'Lincoln Financial Field, Filadelfia', codA:'us', nombreA:'Estados Unidos', codB:'au', nombreB:'Australia', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:24, grupo:'D', fecha:'2026-06-24', hora:'22:00', sede:'MetLife Stadium, Nueva Jersey', codA:'tr', nombreA:'Turquía', codB:'py', nombreB:'Paraguay', canales:['DSports/DGO'] },
-                // GRUPO E
                 { id:25, grupo:'E', fecha:'2026-06-11', hora:'13:00', sede:'Hard Rock Stadium, Miami', codA:'de', nombreA:'Alemania', codB:'cw', nombreB:'Curazao', canales:['DSports/DGO','Telefe'] },
                 { id:26, grupo:'E', fecha:'2026-06-11', hora:'19:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'ci', nombreA:'Costa de Marfil', codB:'ec', nombreB:'Ecuador', canales:['DSports/DGO'] },
                 { id:27, grupo:'E', fecha:'2026-06-16', hora:'13:00', sede:'Gillette Stadium, Boston', codA:'cw', nombreA:'Curazao', codB:'ci', nombreB:'Costa de Marfil', canales:['DSports/DGO','TyC Sports'] },
                 { id:28, grupo:'E', fecha:'2026-06-16', hora:'19:00', sede:'Arrowhead Stadium, Kansas City', codA:'ec', nombreA:'Ecuador', codB:'de', nombreB:'Alemania', canales:['DSports/DGO','Telefe'] },
                 { id:29, grupo:'E', fecha:'2026-06-21', hora:'13:00', sede:'Estadio BBVA, Monterrey', codA:'de', nombreA:'Alemania', codB:'ci', nombreB:'Costa de Marfil', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:30, grupo:'E', fecha:'2026-06-21', hora:'16:00', sede:'NRG Stadium, Houston', codA:'ec', nombreA:'Ecuador', codB:'cw', nombreB:'Curazao', canales:['DSports/DGO'] },
-                // GRUPO F
                 { id:31, grupo:'F', fecha:'2026-06-12', hora:'13:00', sede:'Lumen Field, Seattle', codA:'nl', nombreA:'Países Bajos', codB:'se', nombreB:'Suecia', canales:['DSports/DGO','Telefe'] },
                 { id:32, grupo:'F', fecha:'2026-06-12', hora:'19:00', sede:'BC Place, Vancouver', codA:'jp', nombreA:'Japón', codB:'tn', nombreB:'Túnez', canales:['DSports/DGO'] },
                 { id:33, grupo:'F', fecha:'2026-06-17', hora:'15:00', sede:'Estadio Akron, Guadalajara', codA:'se', nombreA:'Suecia', codB:'jp', nombreB:'Japón', canales:['DSports/DGO','TyC Sports'] },
                 { id:34, grupo:'F', fecha:'2026-06-17', hora:'21:00', sede:'SoFi Stadium, Los Ángeles', codA:'tn', nombreA:'Túnez', codB:'nl', nombreB:'Países Bajos', canales:['DSports/DGO','Telefe'] },
                 { id:35, grupo:'F', fecha:'2026-06-22', hora:'13:00', sede:'BMO Field, Toronto', codA:'nl', nombreA:'Países Bajos', codB:'jp', nombreB:'Japón', canales:['DSports/DGO'] },
                 { id:36, grupo:'F', fecha:'2026-06-22', hora:'19:00', sede:'Levi\'s Stadium, Santa Clara', codA:'tn', nombreA:'Túnez', codB:'se', nombreB:'Suecia', canales:['DSports/DGO','Telefe','TV Pública'] },
-                // GRUPO G
                 { id:37, grupo:'G', fecha:'2026-06-13', hora:'15:00', sede:'MetLife Stadium, Nueva Jersey', codA:'be', nombreA:'Bélgica', codB:'ir', nombreB:'Irán', canales:['DSports/DGO','Telefe'] },
                 { id:38, grupo:'G', fecha:'2026-06-13', hora:'21:00', sede:'Lincoln Financial Field, Filadelfia', codA:'eg', nombreA:'Egipto', codB:'nz', nombreB:'Nueva Zelanda', canales:['DSports/DGO'] },
                 { id:39, grupo:'G', fecha:'2026-06-18', hora:'15:00', sede:'Hard Rock Stadium, Miami', codA:'ir', nombreA:'Irán', codB:'eg', nombreB:'Egipto', canales:['DSports/DGO','TyC Sports'] },
                 { id:40, grupo:'G', fecha:'2026-06-18', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'nz', nombreA:'Nueva Zelanda', codB:'be', nombreB:'Bélgica', canales:['DSports/DGO','Telefe'] },
                 { id:41, grupo:'G', fecha:'2026-06-23', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', codA:'be', nombreA:'Bélgica', codB:'eg', nombreB:'Egipto', canales:['DSports/DGO'] },
                 { id:42, grupo:'G', fecha:'2026-06-23', hora:'21:00', sede:'Gillette Stadium, Boston', codA:'nz', nombreA:'Nueva Zelanda', codB:'ir', nombreB:'Irán', canales:['DSports/DGO','Telefe','TV Pública'] },
-                // GRUPO H
                 { id:43, grupo:'H', fecha:'2026-06-14', hora:'12:00', sede:'NRG Stadium, Houston', codA:'es', nombreA:'España', codB:'cv', nombreB:'Cabo Verde', canales:['DSports/DGO','Telefe'] },
                 { id:44, grupo:'H', fecha:'2026-06-14', hora:'18:00', sede:'AT&T Stadium, Arlington', codA:'sa', nombreA:'Arabia Saudita', codB:'uy', nombreB:'Uruguay', canales:['DSports/DGO'] },
                 { id:45, grupo:'H', fecha:'2026-06-19', hora:'13:00', sede:'Arrowhead Stadium, Kansas City', codA:'cv', nombreA:'Cabo Verde', codB:'sa', nombreB:'Arabia Saudita', canales:['DSports/DGO','TyC Sports'] },
                 { id:46, grupo:'H', fecha:'2026-06-19', hora:'18:00', sede:'BMO Field, Toronto', codA:'uy', nombreA:'Uruguay', codB:'es', nombreB:'España', canales:['DSports/DGO','Telefe'] },
                 { id:47, grupo:'H', fecha:'2026-06-24', hora:'12:00', sede:'Lumen Field, Seattle', codA:'es', nombreA:'España', codB:'sa', nombreB:'Arabia Saudita', canales:['DSports/DGO'] },
                 { id:48, grupo:'H', fecha:'2026-06-24', hora:'20:00', sede:'BC Place, Vancouver', codA:'uy', nombreA:'Uruguay', codB:'cv', nombreB:'Cabo Verde', canales:['DSports/DGO','Telefe','TV Pública'] },
-                // GRUPO I
                 { id:49, grupo:'I', fecha:'2026-06-15', hora:'17:00', sede:'Levi\'s Stadium, Santa Clara', codA:'fr', nombreA:'Francia', codB:'iq', nombreB:'Irak', canales:['DSports/DGO','Telefe'] },
                 { id:50, grupo:'I', fecha:'2026-06-15', hora:'20:00', sede:'SoFi Stadium, Los Ángeles', codA:'sn', nombreA:'Senegal', codB:'no', nombreB:'Noruega', canales:['DSports/DGO'] },
                 { id:51, grupo:'I', fecha:'2026-06-20', hora:'15:00', sede:'Estadio BBVA, Monterrey', codA:'iq', nombreA:'Irak', codB:'sn', nombreB:'Senegal', canales:['DSports/DGO','TyC Sports'] },
                 { id:52, grupo:'I', fecha:'2026-06-20', hora:'21:00', sede:'Hard Rock Stadium, Miami', codA:'no', nombreA:'Noruega', codB:'fr', nombreB:'Francia', canales:['DSports/DGO','Telefe'] },
                 { id:53, grupo:'I', fecha:'2026-06-25', hora:'15:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'fr', nombreA:'Francia', codB:'sn', nombreB:'Senegal', canales:['DSports/DGO'] },
                 { id:54, grupo:'I', fecha:'2026-06-25', hora:'21:00', sede:'MetLife Stadium, Nueva Jersey', codA:'no', nombreA:'Noruega', codB:'iq', nombreB:'Irak', canales:['DSports/DGO','Telefe','TV Pública'] },
-                // GRUPO J (ARGENTINA)
                 { id:55, grupo:'J', fecha:'2026-06-15', hora:'13:00', sede:'Estadio Akron, Guadalajara', codA:'ar', nombreA:'Argentina', codB:'dz', nombreB:'Argelia', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
                 { id:56, grupo:'J', fecha:'2026-06-15', hora:'23:00', sede:'Lumen Field, Seattle', codA:'at', nombreA:'Austria', codB:'jo', nombreB:'Jordania', canales:['DSports/DGO'] },
                 { id:57, grupo:'J', fecha:'2026-06-20', hora:'13:00', sede:'Gillette Stadium, Boston', codA:'dz', nombreA:'Argelia', codB:'at', nombreB:'Austria', canales:['DSports/DGO','TyC Sports'] },
                 { id:58, grupo:'J', fecha:'2026-06-20', hora:'22:00', sede:'NRG Stadium, Houston', codA:'jo', nombreA:'Jordania', codB:'ar', nombreB:'Argentina', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:59, grupo:'J', fecha:'2026-06-25', hora:'13:00', sede:'AT&T Stadium, Arlington', codA:'ar', nombreA:'Argentina', codB:'at', nombreB:'Austria', canales:['DSports/DGO','Telefe','TyC Sports','TV Pública'] },
                 { id:60, grupo:'J', fecha:'2026-06-25', hora:'20:00', sede:'Lincoln Financial Field, Filadelfia', codA:'jo', nombreA:'Jordania', codB:'dz', nombreB:'Argelia', canales:['DSports/DGO'] },
-                // GRUPO K
                 { id:61, grupo:'K', fecha:'2026-06-14', hora:'13:00', sede:'Estadio Azteca, Ciudad de México', codA:'pt', nombreA:'Portugal', codB:'cd', nombreB:'RD Congo', canales:['DSports/DGO','Telefe'] },
                 { id:62, grupo:'K', fecha:'2026-06-14', hora:'22:00', sede:'BC Place, Vancouver', codA:'uz', nombreA:'Uzbekistán', codB:'co', nombreB:'Colombia', canales:['DSports/DGO'] },
                 { id:63, grupo:'K', fecha:'2026-06-19', hora:'16:00', sede:'Arrowhead Stadium, Kansas City', codA:'cd', nombreA:'RD Congo', codB:'uz', nombreB:'Uzbekistán', canales:['DSports/DGO','TyC Sports'] },
                 { id:64, grupo:'K', fecha:'2026-06-19', hora:'23:00', sede:'Hard Rock Stadium, Miami', codA:'co', nombreA:'Colombia', codB:'pt', nombreB:'Portugal', canales:['DSports/DGO','Telefe'] },
                 { id:65, grupo:'K', fecha:'2026-06-24', hora:'13:00', sede:'Levi\'s Stadium, Santa Clara', codA:'pt', nombreA:'Portugal', codB:'uz', nombreB:'Uzbekistán', canales:['DSports/DGO'] },
                 { id:66, grupo:'K', fecha:'2026-06-24', hora:'19:30', sede:'MetLife Stadium, Nueva Jersey', codA:'co', nombreA:'Colombia', codB:'cd', nombreB:'RD Congo', canales:['DSports/DGO','Telefe','TV Pública'] },
-                // GRUPO L
                 { id:67, grupo:'L', fecha:'2026-06-13', hora:'16:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'gb-eng', nombreA:'Inglaterra', codB:'hr', nombreB:'Croacia', canales:['DSports/DGO','Telefe'] },
                 { id:68, grupo:'L', fecha:'2026-06-13', hora:'19:00', sede:'SoFi Stadium, Los Ángeles', codA:'gh', nombreA:'Ghana', codB:'pa', nombreB:'Panamá', canales:['DSports/DGO'] },
                 { id:69, grupo:'L', fecha:'2026-06-18', hora:'13:00', sede:'Estadio BBVA, Monterrey', codA:'hr', nombreA:'Croacia', codB:'gh', nombreB:'Ghana', canales:['DSports/DGO','TyC Sports'] },
@@ -529,11 +594,9 @@
                 { id:71, grupo:'L', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', codA:'gb-eng', nombreA:'Inglaterra', codB:'gh', nombreB:'Ghana', canales:['DSports/DGO'] },
                 { id:72, grupo:'L', fecha:'2026-06-23', hora:'17:00', sede:'NRG Stadium, Houston', codA:'pa', nombreA:'Panamá', codB:'hr', nombreB:'Croacia', canales:['DSports/DGO','Telefe','TV Pública'] }
             ];
-
-            // Inicializar resultados reales
             FIXTURE_OFICIAL.forEach(p => p.resultadoReal = null);
 
-            // --- Almacenamiento Local ---
+            // --- LocalStorage Keys ---
             const LS_KEYS = {
                 userName: 'prode_userName',
                 predictions: 'prode_predictions',
@@ -557,14 +620,24 @@
             };
             document.getElementById('inputNombre').value = estado.userName;
 
-            // --- Utilidades ---
+            // --- Funciones auxiliares ---
             function formatDateDisplay(fechaStr) {
                 const [y,m,d] = fechaStr.split('-');
                 const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
                 return `${parseInt(d)} ${meses[parseInt(m)-1]}`;
             }
+            function mostrarToast(mensaje, isError = false) {
+                const toast = document.getElementById('toast');
+                toast.textContent = mensaje;
+                toast.style.display = 'block';
+                toast.style.background = isError ? 'var(--danger)' : 'var(--accent2)';
+                toast.style.animation = 'none';
+                toast.offsetHeight;
+                toast.style.animation = 'toastIn 0.35s ease, toastOut 0.35s ease 2.2s forwards';
+                setTimeout(() => { toast.style.display = 'none'; }, 2600);
+            }
 
-            // --- Render de partidos (con flag-icons) ---
+            // --- Render de partidos (igual que antes) ---
             function getPartidosFiltrados() {
                 let partidos = [...FIXTURE_OFICIAL];
                 if (estado.filtroActivo === 'argentina') {
@@ -574,7 +647,6 @@
                 }
                 return partidos;
             }
-
             function handlePredictionChange(e) {
                 const matchId = parseInt(e.target.dataset.match);
                 const field = e.target.dataset.field;
@@ -586,7 +658,6 @@
                 estado.predictions[matchId][field] = value;
                 lsSet(LS_KEYS.predictions, estado.predictions);
             }
-
             function renderPartidos() {
                 const partidos = getPartidosFiltrados();
                 const grid = document.getElementById('partidosGrid');
@@ -661,7 +732,7 @@
                 if (filtro === 'todos' || filtro === 'argentina') setFiltro(filtro);
             });
 
-            // --- Nombre usuario ---
+            // --- Nombre de usuario ---
             const inputNombre = document.getElementById('inputNombre');
             inputNombre.addEventListener('change', () => {
                 estado.userName = inputNombre.value.trim();
@@ -695,14 +766,14 @@
                 navigator.clipboard.writeText(txtCodigo.value).then(() => mostrarToast('📋 Código copiado')).catch(() => { txtCodigo.select(); document.execCommand('copy'); mostrarToast('📋 Copiado'); });
             });
 
-            // --- Importar amigos ---
+            // --- Importar amigos (administrador) ---
             const txtAmigos = document.getElementById('txtImportarAmigos');
             const btnImport = document.getElementById('btnImportarAmigos');
             const btnLimpiar = document.getElementById('btnLimpiarAmigos');
             const infoAmigos = document.getElementById('infoAmigos');
             function actualizarInfoAmigos() {
                 infoAmigos.textContent = `Amigos importados: ${estado.friendsData.length} | ${estado.friendsData.map(f=>f.name).join(', ')}`;
-                renderTablaPosiciones();
+                renderTablaPosicionesGlobal();  // Actualizar tabla visible
             }
             btnImport.addEventListener('click', () => {
                 const texto = txtAmigos.value.trim();
@@ -735,7 +806,7 @@
             });
             actualizarInfoAmigos();
 
-            // --- Resultados reales (admin) ---
+            // --- Resultados reales (administrador) ---
             const adminResultadosDiv = document.getElementById('adminResultadosReales');
             function handleRealResultChange(e) {
                 const matchId = parseInt(e.target.dataset.realMatch);
@@ -750,7 +821,7 @@
                 const partido = FIXTURE_OFICIAL.find(p => p.id === matchId);
                 if (partido) partido.resultadoReal = estado.realResults[matchId];
                 renderPartidos();
-                renderTablaPosiciones();
+                renderTablaPosicionesGlobal();  // Actualizar tabla visible
             }
             function renderAdminResultadosReales() {
                 const ordenados = [...FIXTURE_OFICIAL].sort((a,b)=>new Date(a.fecha+'T'+a.hora+':00-04:00') - new Date(b.fecha+'T'+b.hora+':00-04:00'));
@@ -775,7 +846,7 @@
                 });
             }
 
-            // --- Tabla de posiciones ---
+            // --- Cálculo de puntos y tabla de posiciones (ahora global) ---
             function calcularPuntos(predictions, realResults) {
                 let puntos = 0, exactos = 0, signo = 0, fallos = 0, total = 0;
                 Object.keys(realResults).forEach(mid => {
@@ -797,47 +868,36 @@
                 });
                 return { puntos, exactos, signo, fallos, total };
             }
-            function renderTablaPosiciones() {
-                const container = document.getElementById('tablaPosicionesContainer');
+
+            function renderTablaPosicionesGlobal() {
+                const container = document.getElementById('tablaPosicionesContainerGlobal');
                 const realKeys = Object.keys(estado.realResults).filter(k => {
                     const r = estado.realResults[k];
                     return r && r.golesA !== null && r.golesB !== null;
                 });
                 if (realKeys.length === 0) {
-                    container.innerHTML = '<p style="padding:16px;">⚠️ Cargá resultados reales para ver la tabla.</p>';
+                    container.innerHTML = '<div class="empty-message">⚠️ El organizador aún no cargó resultados reales. ¡Pronto aparecerán aquí!</div>';
                     return;
                 }
                 if (estado.friendsData.length === 0) {
-                    container.innerHTML = '<p style="padding:16px;">📥 Importá pronósticos de amigos para competir.</p>';
+                    container.innerHTML = '<div class="empty-message">📥 Aún no se han importado pronósticos de amigos. El organizador debe importarlos.</div>';
                     return;
                 }
                 const tabla = estado.friendsData.map(f => ({ name: f.name, ...calcularPuntos(f.predictions, estado.realResults) }))
                     .sort((a,b) => b.puntos - a.puntos);
-                container.innerHTML = `<table class="tabla-posiciones"><thead><tr><th>#</th><th>Jugador</th><th>Pts</th><th>Exactos</th><th>Signo</th><th>Fallos</th><th>Pronós</th></tr></thead><tbody>${tabla.map((f,i) => `<tr class="${i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':''}"><td>${i+1}<tr><td style="text-align:left;font-weight:600;">${f.name}</td><td style="font-weight:800;color:var(--accent);">${f.puntos}</td><td>${f.exactos}</td><td>${f.signo}</td><td>${f.fallos}</td><td>${f.total}</td></tr>`).join('')}</tbody></table><p style="font-size:0.65rem;margin-top:8px;text-align:center;">Resultados cargados: ${realKeys.length} de ${FIXTURE_OFICIAL.length} · 3pts exacto / 1pt signo</p>`;
+                container.innerHTML = `<table class="tabla-posiciones"><thead><tr><th>#</th><th>Jugador</th><th>Pts</th><th>Exactos</th><th>Signo</th><th>Fallos</th><th>Pronós</th></tr></thead><tbody>${tabla.map((f,i) => `<tr class="${i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':''}"><td>${i+1}</td><td style="text-align:left;font-weight:600;">${f.name}</td><td style="font-weight:800;color:var(--accent);">${f.puntos}</td><td>${f.exactos}</td><td>${f.signo}</td><td>${f.fallos}</td><td>${f.total}</td></tr>`).join('')}</tbody></table><p style="font-size:0.65rem;margin-top:12px;text-align:center;">Resultados cargados: ${realKeys.length} de ${FIXTURE_OFICIAL.length} · 3pts exacto / 1pt signo</p>`;
             }
 
-            // --- Panel colapsable ---
+            // --- Panel administrador colapsable ---
             const panelAdmin = document.getElementById('panelAdmin');
             document.getElementById('panelAdminHeader').addEventListener('click', () => {
                 panelAdmin.classList.toggle('collapsible--open');
                 if (panelAdmin.classList.contains('collapsible--open')) {
                     renderAdminResultadosReales();
-                    renderTablaPosiciones();
                 }
             });
 
-            // --- Toast y inicialización ---
-            function mostrarToast(mensaje, isError = false) {
-                const toast = document.getElementById('toast');
-                toast.textContent = mensaje;
-                toast.style.display = 'block';
-                toast.style.background = isError ? 'var(--danger)' : 'var(--accent2)';
-                toast.style.animation = 'none';
-                toast.offsetHeight;
-                toast.style.animation = 'toastIn 0.35s ease, toastOut 0.35s ease 2.2s forwards';
-                setTimeout(() => { toast.style.display = 'none'; }, 2600);
-            }
-
+            // --- Inicialización ---
             function init() {
                 Object.keys(estado.realResults).forEach(mid => {
                     const partido = FIXTURE_OFICIAL.find(p => p.id === parseInt(mid));
@@ -846,7 +906,8 @@
                 renderFiltros();
                 renderPartidos();
                 actualizarInfoAmigos();
-                mostrarToast('🏆 Fixture oficial con banderas profesionales cargado');
+                renderTablaPosicionesGlobal();  // Mostrar tabla desde el inicio
+                mostrarToast('🏆 Tabla de posiciones visible para todos · ¡Suerte!');
             }
             init();
         })();
