@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prode Mundial 2026 · El mejor fixture para amigos</title>
+    <title>Prode Mundial 2026 · ¿Quién sabe más de fútbol?</title>
     <!-- Flag Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
     <style>
-        /* ========== MISMO ESTILO QUE ANTES (sin cambios importantes) ========== */
         :root {
             --bg: #0b0b14;
             --bg-card: #151528;
@@ -39,53 +38,71 @@
                               radial-gradient(ellipse at 80% 90%, rgba(0, 200, 151, 0.03) 0%, transparent 60%);
             background-attachment: fixed;
         }
-        /* HEADER MEJORADO */
+        /* ========== HEADER MEJORADO CON PREGUNTA ========== */
         .header {
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a30 100%);
-            border-bottom: 3px solid var(--accent);
-            padding: 12px 18px;
-            position: sticky; top: 0; z-index: 100;
+            background: linear-gradient(135deg, #0a0a18 0%, #1a1a30 100%);
+            border-bottom: 4px solid var(--accent);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+        .header__top {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
         .header__brand {
             display: flex;
-            flex-direction: column;
-            gap: 5px;
+            align-items: center;
+            gap: 12px;
         }
         .header__logo {
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: -0.3px;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
             color: var(--accent);
         }
         .header__logo .trophy {
-            font-size: 1.8rem;
-            animation: pulse 2.2s ease-in-out infinite;
+            font-size: 2rem;
+            animation: pulse 2s ease-in-out infinite;
         }
         @keyframes pulse {
             0%,100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+            50% { transform: scale(1.1); }
         }
-        .header__slogan {
-            font-size: 0.85rem;
-            color: var(--accent2);
-            background: rgba(0,200,151,0.15);
-            padding: 4px 12px;
-            border-radius: 30px;
+        .header__question {
+            background: linear-gradient(135deg, rgba(240,185,64,0.2), rgba(0,200,151,0.1));
+            border-left: 5px solid var(--accent2);
+            padding: 8px 20px;
+            border-radius: 40px;
             display: inline-block;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            backdrop-filter: blur(4px);
-            white-space: nowrap;
+            width: fit-content;
+        }
+        .header__question h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, #f0b940, #00c897);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .header__question p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
         }
         .header__user {
             display: flex;
@@ -93,20 +110,20 @@
             gap: 8px;
             background: var(--bg-input);
             border-radius: 30px;
-            padding: 6px 10px 6px 16px;
+            padding: 6px 12px 6px 18px;
             border: 1px solid var(--border);
             transition: var(--transition);
         }
         .header__user:focus-within {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(240,185,64,0.1);
+            box-shadow: 0 0 0 3px rgba(240,185,64,0.2);
         }
         .header__user input {
             background: transparent;
             border: none;
             color: var(--text);
-            font-size: 0.9rem;
-            width: 130px;
+            font-size: 0.95rem;
+            width: 150px;
             outline: none;
             font-family: var(--font);
         }
@@ -183,6 +200,73 @@
             color: var(--accent);
         }
         
+        /* Tabla de posiciones (visible para todos) */
+        .seccion {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            margin-top: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .seccion__titulo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+        .tabla-posiciones {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .tabla-posiciones th, .tabla-posiciones td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .tabla-posiciones th {
+            background: var(--bg-input);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        .tabla-posiciones tbody tr:hover {
+            background: var(--bg-card-hover);
+        }
+        .tabla-posiciones .pos-1 {
+            background: rgba(240,185,64,0.1);
+            font-weight: 700;
+        }
+        .tabla-posiciones .pos-1 td:first-child::before {
+            content: '🥇 ';
+        }
+        .tabla-posiciones .pos-2 td:first-child::before {
+            content: '🥈 ';
+        }
+        .tabla-posiciones .pos-3 td:first-child::before {
+            content: '🥉 ';
+        }
+        .tabla-scroll {
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* Filtros y partidos (igual que antes) */
         .filtros {
             display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
             align-items: center; justify-content: flex-start;
@@ -195,7 +279,7 @@
             padding: 8px 14px; border-radius: 22px; border: 1px solid var(--border);
             background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
             font-size: 0.82rem; font-weight: 600; transition: var(--transition);
-            white-space: nowrap; font-family: var(--font);
+            white-space: nowrap;
         }
         .filtro-btn:hover { border-color: var(--border-active); color: var(--text); background: var(--bg-card-hover); }
         .filtro-btn--active { background: var(--accent); color: #1a1a1a; border-color: var(--accent); font-weight: 700; box-shadow: 0 2px 14px rgba(240,185,64,0.3); }
@@ -268,85 +352,18 @@
         .partido-card__pronostico input {
             width: 48px; height: 42px; text-align: center; font-size: 1.2rem; font-weight: 700;
             border-radius: var(--radius-sm); border: 2px solid var(--border);
-            background: var(--bg-input); color: var(--text); font-family: var(--font);
+            background: var(--bg-input); color: var(--text);
             transition: var(--transition);
         }
         .partido-card__pronostico input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(240,185,64,0.08); }
         .partido-card__pronostico .pronostico-sep { font-weight: 900; font-size: 1.2rem; color: var(--text-secondary); }
         .partido-card__resultado-real { margin-top: 10px; font-size: 0.7rem; text-align: center; color: var(--accent2); font-weight: 700; background: rgba(0,200,151,0.08); padding: 4px 10px; border-radius: 14px; display: inline-block; width: 100%; }
         
-        /* SECCIONES GENERALES */
-        .seccion {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 20px 18px;
-            margin-top: 24px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-        .seccion__titulo {
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 8px;
-        }
-        /* Tabla de posiciones (visible para todos) */
-        .tabla-posiciones {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            margin-top: 8px;
-        }
-        .tabla-posiciones th, .tabla-posiciones td {
-            padding: 10px 8px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-        .tabla-posiciones th {
-            background: var(--bg-input);
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-        .tabla-posiciones tbody tr:hover {
-            background: var(--bg-card-hover);
-        }
-        .tabla-posiciones .pos-1 {
-            background: rgba(240,185,64,0.1);
-            font-weight: 700;
-        }
-        .tabla-posiciones .pos-1 td:first-child::before {
-            content: '🥇 ';
-        }
-        .tabla-posiciones .pos-2 td:first-child::before {
-            content: '🥈 ';
-        }
-        .tabla-posiciones .pos-3 td:first-child::before {
-            content: '🥉 ';
-        }
-        .tabla-scroll {
-            overflow-x: auto;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-        }
-        .empty-message {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-        
-        /* Botones y otros */
+        /* Botones */
         .btn {
             padding: 10px 20px; border-radius: 26px; border: none; cursor: pointer;
             font-weight: 700; font-size: 0.85rem; transition: var(--transition);
-            font-family: var(--font); display: inline-flex; align-items: center; gap: 6px;
+            display: inline-flex; align-items: center; gap: 6px;
         }
         .btn--accent { background: var(--accent); color: #1a1a1a; box-shadow: 0 4px 18px rgba(240,185,64,0.3); }
         .btn--accent:hover { box-shadow: 0 6px 24px rgba(240,185,64,0.45); transform: translateY(-1px); }
@@ -380,33 +397,36 @@
         .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
         .collapsible--open .collapsible-body { max-height: 3000px; }
         
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .fi { font-size: 1.6rem; }
             .partido-card__vs { width: 28px; height: 28px; font-size: 0.7rem; }
             .partido-card__pronostico input { width: 40px; height: 36px; font-size: 1rem; }
-            .header__slogan { font-size: 0.7rem; white-space: normal; }
-            .header__logo { font-size: 1.1rem; }
+            .header__question h2 { font-size: 1.2rem; }
+            .header__logo { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="header__brand">
-            <div class="header__logo">
-                <span class="trophy">🏆</span> 
-                <span>Prode Mundial 2026</span>
+        <div class="header__top">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <span class="trophy">🏆</span> 
+                    <span>Prode Mundial 2026</span>
+                </div>
             </div>
-            <div class="header__slogan">
-                ⚽ ¿Te animás a participar del mejor fixture para amigos? 🎯
+            <div class="header__user">
+                <span>👤</span>
+                <input type="text" id="inputNombre" placeholder="Tu nombre/apodo" maxlength="25" autocomplete="off">
             </div>
         </div>
-        <div class="header__user">
-            <span>👤</span>
-            <input type="text" id="inputNombre" placeholder="Tu nombre/apodo" maxlength="25" autocomplete="off">
+        <div class="header__question">
+            <h2>⚽ ¿Quién sabe más de fútbol? 🧠</h2>
+            <p>Demostrá que sos el mejor pronosticador · Competí con tus amigos</p>
         </div>
     </header>
-    <main class="container" id="appContainer">
-        <!-- BANNERS SUPERIORES -->
+    <main class="container">
+        <!-- Banners superiores -->
         <div class="banners-row">
             <div class="banner" onclick="window.open('https://www.betano.com','_blank')">
                 <div class="brand">⚽ Betano</div>
@@ -426,36 +446,47 @@
             </div>
         </div>
 
-        <!-- INSTRUCCIONES -->
+        <!-- Instrucciones -->
         <div class="instrucciones">
             <h3>📋 ¿Cómo participar?</h3>
             <ul>
                 <li>1. Ingresá tu <strong>nombre/apodo</strong> en el campo superior derecho.</li>
-                <li>2. Para cada partido, completá tu pronóstico de <strong>goles</strong> (local y visitante) en los cuadros blancos.</li>
-                <li>3. Al finalizar, hacé clic en <strong>"Generar Código"</strong> y enviáselo al organizador del prode por WhatsApp.</li>
-                <li>4. El organizador cargará los resultados reales y podrás ver la tabla de posiciones.</li>
+                <li>2. Para cada partido, completá tu pronóstico de <strong>goles</strong> (local y visitante).</li>
+                <li>3. Al finalizar, hacé clic en <strong>"Generar Código"</strong> y enviáselo al organizador por WhatsApp.</li>
+                <li>4. El organizador cargará los resultados reales y todos verán la tabla de posiciones actualizada.</li>
             </ul>
             <h3>🏅 Sistema de Puntuación</h3>
             <ul>
-                <li><span class="puntos-destacado">🎯 3 puntos</span> si aciertas el resultado <strong>exacto</strong> (goles de ambos equipos).</li>
-                <li><span class="puntos-destacado">✅ 1 punto</span> si aciertas el <strong>signo</strong> (ganador o empate) sin acertar el marcador exacto.</li>
-                <li><span class="puntos-destacado">❌ 0 puntos</span> si fallas completamente.</li>
-                <li>Se contabilizan <strong>todos los partidos de la fase de grupos</strong> (72 encuentros).</li>
+                <li><span class="puntos-destacado">🎯 3 puntos</span> si acertás el resultado <strong>exacto</strong>.</li>
+                <li><span class="puntos-destacado">✅ 1 punto</span> si acertás el <strong>signo</strong> (ganador o empate).</li>
+                <li><span class="puntos-destacado">❌ 0 puntos</span> si fallás completamente.</li>
+                <li>Se contabilizan <strong>los 72 partidos de la fase de grupos</strong>.</li>
             </ul>
         </div>
 
-        <!-- FILTROS DE PARTIDOS -->
+        <!-- ===== TABLA DE POSICIONES VISIBLE PARA TODOS ===== -->
+        <section class="seccion">
+            <div class="seccion__titulo">
+                🏆 Tabla de Posiciones · Competencia entre amigos
+            </div>
+            <div class="tabla-scroll" id="tablaPosicionesContainerGlobal">
+                <div class="empty-message">Cargando datos... (esperando resultados)</div>
+            </div>
+            <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:12px; text-align:center;">
+                📢 Los puntos se actualizan automáticamente cuando el organizador carga resultados reales.
+            </p>
+        </section>
+
+        <!-- Filtros y partidos -->
         <section class="filtros" id="filtrosContainer">
             <span class="filtros__label">Filtrar:</span>
             <button class="filtro-btn filtro-btn--active" data-filtro="todos">📋 Todos</button>
             <button class="filtro-btn filtro-btn--arg" data-filtro="argentina">🇦🇷 Solo Argentina</button>
             <span class="filtros__label" style="margin-left:6px;">Grupo:</span>
         </section>
-
-        <!-- GRID DE PARTIDOS -->
         <section class="partidos-grid" id="partidosGrid"></section>
 
-        <!-- BANNER INTERMEDIO (opcional) -->
+        <!-- Banner intermedio -->
         <div class="banners-row" style="margin: 20px 0;">
             <div class="banner" onclick="window.open('https://www.pepsi.com','_blank')">
                 <div class="brand">🥤 Pepsi</div>
@@ -463,25 +494,10 @@
             </div>
         </div>
 
-        <!-- ========== NUEVA SECCIÓN: TABLA DE POSICIONES VISIBLE PARA TODOS ========== -->
-        <section class="seccion" id="tablaGlobalSection">
-            <div class="seccion__titulo">
-                🏆 Tabla de Posiciones · Competencia entre amigos
-            </div>
-            <div class="tabla-scroll" id="tablaPosicionesContainerGlobal">
-                <!-- Aquí se renderizará la tabla automáticamente -->
-                <div class="empty-message">Cargando datos... (esperando resultados)</div>
-            </div>
-            <p style="font-size:0.7rem; color:var(--text-secondary); margin-top:12px; text-align:center;">
-                📢 Solo se muestran los amigos cuyos códigos fueron importados por el organizador.
-                Los puntos se actualizan en tiempo real cuando el organizador carga resultados.
-            </p>
-        </section>
-
-        <!-- SECCIÓN PARA COMPARTIR CÓDIGO (visible para todos) -->
+        <!-- Compartir pronósticos -->
         <section class="seccion">
             <div class="seccion__titulo">📤 Compartir mis Pronósticos</div>
-            <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">Generá un código para enviar al organizador del prode por WhatsApp. Incluye tu nombre y todos tus pronósticos.</p>
+            <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">Generá un código para enviar al organizador del prode por WhatsApp.</p>
             <div class="btn-group">
                 <button class="btn btn--accent2" id="btnGenerarCodigo">🔒 Generar Código</button>
                 <button class="btn btn--outline btn--sm" id="btnCopiarCodigo" disabled>📋 Copiar al Portapapeles</button>
@@ -489,7 +505,7 @@
             <textarea id="txtCodigoGenerado" readonly placeholder="Tu código aparecerá aquí..." style="margin-top:10px;"></textarea>
         </section>
 
-        <!-- PANEL ADMINISTRADOR (colapsable, solo organizador) -->
+        <!-- Panel Administrador (colapsable, solo organizador) -->
         <section class="seccion collapsible" id="panelAdmin">
             <div class="seccion__titulo collapsible-header" id="panelAdminHeader">⚙️ Panel Administrador (Organizador) <span class="arrow">▼</span></div>
             <div class="collapsible-body">
@@ -506,7 +522,7 @@
                     </div>
                     <div>
                         <h4 style="margin-bottom:6px;color:var(--accent2);">⚽ Cargar Resultados Reales</h4>
-                        <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">Completá los goles de los partidos que ya se jugaron. Se guardan automáticamente.</p>
+                        <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:8px;">Completá los goles de los partidos que ya se jugaron.</p>
                         <div id="adminResultadosReales" style="max-height:400px;overflow-y:auto;padding-right:4px;"></div>
                     </div>
                 </div>
@@ -518,7 +534,8 @@
     <script>
         (function() {
             // --------------------------------------------------------------
-            // FIXTURE OFICIAL MUNDIAL 2026 (mismo que antes, con códigos de país)
+            // FIXTURE OFICIAL MUNDIAL 2026 (con códigos de país correctos)
+            // CORREGIDO: Escocia ahora usa 'gb-sct' (funciona en flag-icons)
             // --------------------------------------------------------------
             const FIXTURE_OFICIAL = [
                 { id:1, grupo:'A', fecha:'2026-06-11', hora:'12:00', sede:'Estadio Azteca, Ciudad de México', codA:'mx', nombreA:'México', codB:'za', nombreB:'Sudáfrica', canales:['DSports/DGO','Telefe','TV Pública'] },
@@ -534,11 +551,12 @@
                 { id:11, grupo:'B', fecha:'2026-06-22', hora:'15:00', sede:'Hard Rock Stadium, Miami', codA:'ca', nombreA:'Canadá', codB:'qa', nombreB:'Catar', canales:['DSports/DGO'] },
                 { id:12, grupo:'B', fecha:'2026-06-22', hora:'21:00', sede:'Mercedes-Benz Stadium, Atlanta', codA:'ch', nombreA:'Suiza', codB:'ba', nombreB:'Bosnia', canales:['DSports/DGO','Telefe','TV Pública'] },
                 { id:13, grupo:'C', fecha:'2026-06-13', hora:'18:00', sede:'NRG Stadium, Houston', codA:'br', nombreA:'Brasil', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO','Telefe','TyC Sports'] },
-                { id:14, grupo:'C', fecha:'2026-06-13', hora:'21:00', sede:'AT&T Stadium, Arlington', codA:'ht', nombreA:'Haití', codB:'sct', nombreB:'Escocia', canales:['DSports/DGO'] },
+                { id:14, grupo:'C', fecha:'2026-06-13', hora:'21:00', sede:'AT&T Stadium, Arlington', codA:'ht', nombreA:'Haití', codB:'gb-sct', nombreB:'Escocia', canales:['DSports/DGO'] },  // Escocia corregida
                 { id:15, grupo:'C', fecha:'2026-06-18', hora:'18:00', sede:'Arrowhead Stadium, Kansas City', codA:'ma', nombreA:'Marruecos', codB:'ht', nombreB:'Haití', canales:['DSports/DGO','Telefe'] },
-                { id:16, grupo:'C', fecha:'2026-06-18', hora:'20:30', sede:'Estadio BBVA, Monterrey', codA:'sct', nombreA:'Escocia', codB:'br', nombreB:'Brasil', canales:['DSports/DGO','TyC Sports'] },
+                { id:16, grupo:'C', fecha:'2026-06-18', hora:'20:30', sede:'Estadio BBVA, Monterrey', codA:'gb-sct', nombreA:'Escocia', codB:'br', nombreB:'Brasil', canales:['DSports/DGO','TyC Sports'] },
                 { id:17, grupo:'C', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', codA:'br', nombreA:'Brasil', codB:'ht', nombreB:'Haití', canales:['DSports/DGO','Telefe','TV Pública'] },
-                { id:18, grupo:'C', fecha:'2026-06-23', hora:'18:00', sede:'BC Place, Vancouver', codA:'sct', nombreA:'Escocia', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO'] },
+                { id:18, grupo:'C', fecha:'2026-06-23', hora:'18:00', sede:'BC Place, Vancouver', codA:'gb-sct', nombreA:'Escocia', codB:'ma', nombreB:'Marruecos', canales:['DSports/DGO'] },
+                // ... resto del fixture igual (solo cambié Escocia)
                 { id:19, grupo:'D', fecha:'2026-06-14', hora:'15:00', sede:'SoFi Stadium, Los Ángeles', codA:'us', nombreA:'Estados Unidos', codB:'py', nombreB:'Paraguay', canales:['DSports/DGO','Telefe'] },
                 { id:20, grupo:'D', fecha:'2026-06-14', hora:'21:00', sede:'Levi\'s Stadium, Santa Clara', codA:'au', nombreA:'Australia', codB:'tr', nombreB:'Turquía', canales:['DSports/DGO'] },
                 { id:21, grupo:'D', fecha:'2026-06-19', hora:'15:00', sede:'Estadio Azteca, Ciudad de México', codA:'py', nombreA:'Paraguay', codB:'au', nombreB:'Australia', canales:['DSports/DGO','TyC Sports'] },
@@ -594,9 +612,10 @@
                 { id:71, grupo:'L', fecha:'2026-06-23', hora:'15:00', sede:'Lumen Field, Seattle', codA:'gb-eng', nombreA:'Inglaterra', codB:'gh', nombreB:'Ghana', canales:['DSports/DGO'] },
                 { id:72, grupo:'L', fecha:'2026-06-23', hora:'17:00', sede:'NRG Stadium, Houston', codA:'pa', nombreA:'Panamá', codB:'hr', nombreB:'Croacia', canales:['DSports/DGO','Telefe','TV Pública'] }
             ];
+
             FIXTURE_OFICIAL.forEach(p => p.resultadoReal = null);
 
-            // --- LocalStorage Keys ---
+            // --- LocalStorage ---
             const LS_KEYS = {
                 userName: 'prode_userName',
                 predictions: 'prode_predictions',
@@ -637,7 +656,7 @@
                 setTimeout(() => { toast.style.display = 'none'; }, 2600);
             }
 
-            // --- Render de partidos (igual que antes) ---
+            // --- Render de partidos ---
             function getPartidosFiltrados() {
                 let partidos = [...FIXTURE_OFICIAL];
                 if (estado.filtroActivo === 'argentina') {
@@ -732,7 +751,7 @@
                 if (filtro === 'todos' || filtro === 'argentina') setFiltro(filtro);
             });
 
-            // --- Nombre de usuario ---
+            // --- Nombre usuario ---
             const inputNombre = document.getElementById('inputNombre');
             inputNombre.addEventListener('change', () => {
                 estado.userName = inputNombre.value.trim();
@@ -740,7 +759,7 @@
                 mostrarToast('👤 Nombre guardado');
             });
 
-            // --- Generar código de pronósticos ---
+            // --- Generar código ---
             const btnGen = document.getElementById('btnGenerarCodigo');
             const btnCopy = document.getElementById('btnCopiarCodigo');
             const txtCodigo = document.getElementById('txtCodigoGenerado');
@@ -758,22 +777,22 @@
                     const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
                     txtCodigo.value = base64;
                     btnCopy.disabled = false;
-                    mostrarToast('✅ Código generado, copialo y enviáselo al organizador');
-                } catch(e) { mostrarToast('❌ Error al generar', true); }
+                    mostrarToast('✅ Código generado');
+                } catch(e) { mostrarToast('❌ Error', true); }
             });
             btnCopy.addEventListener('click', () => {
                 if (!txtCodigo.value) return;
-                navigator.clipboard.writeText(txtCodigo.value).then(() => mostrarToast('📋 Código copiado')).catch(() => { txtCodigo.select(); document.execCommand('copy'); mostrarToast('📋 Copiado'); });
+                navigator.clipboard.writeText(txtCodigo.value).then(() => mostrarToast('📋 Copiado')).catch(() => { txtCodigo.select(); document.execCommand('copy'); mostrarToast('📋 Copiado'); });
             });
 
-            // --- Importar amigos (administrador) ---
+            // --- Importar amigos ---
             const txtAmigos = document.getElementById('txtImportarAmigos');
             const btnImport = document.getElementById('btnImportarAmigos');
             const btnLimpiar = document.getElementById('btnLimpiarAmigos');
             const infoAmigos = document.getElementById('infoAmigos');
             function actualizarInfoAmigos() {
                 infoAmigos.textContent = `Amigos importados: ${estado.friendsData.length} | ${estado.friendsData.map(f=>f.name).join(', ')}`;
-                renderTablaPosicionesGlobal();  // Actualizar tabla visible
+                renderTablaPosicionesGlobal();
             }
             btnImport.addEventListener('click', () => {
                 const texto = txtAmigos.value.trim();
@@ -806,7 +825,7 @@
             });
             actualizarInfoAmigos();
 
-            // --- Resultados reales (administrador) ---
+            // --- Resultados reales ---
             const adminResultadosDiv = document.getElementById('adminResultadosReales');
             function handleRealResultChange(e) {
                 const matchId = parseInt(e.target.dataset.realMatch);
@@ -821,7 +840,7 @@
                 const partido = FIXTURE_OFICIAL.find(p => p.id === matchId);
                 if (partido) partido.resultadoReal = estado.realResults[matchId];
                 renderPartidos();
-                renderTablaPosicionesGlobal();  // Actualizar tabla visible
+                renderTablaPosicionesGlobal();
             }
             function renderAdminResultadosReales() {
                 const ordenados = [...FIXTURE_OFICIAL].sort((a,b)=>new Date(a.fecha+'T'+a.hora+':00-04:00') - new Date(b.fecha+'T'+b.hora+':00-04:00'));
@@ -846,7 +865,7 @@
                 });
             }
 
-            // --- Cálculo de puntos y tabla de posiciones (ahora global) ---
+            // --- Tabla de posiciones global ---
             function calcularPuntos(predictions, realResults) {
                 let puntos = 0, exactos = 0, signo = 0, fallos = 0, total = 0;
                 Object.keys(realResults).forEach(mid => {
@@ -868,7 +887,6 @@
                 });
                 return { puntos, exactos, signo, fallos, total };
             }
-
             function renderTablaPosicionesGlobal() {
                 const container = document.getElementById('tablaPosicionesContainerGlobal');
                 const realKeys = Object.keys(estado.realResults).filter(k => {
@@ -876,11 +894,11 @@
                     return r && r.golesA !== null && r.golesB !== null;
                 });
                 if (realKeys.length === 0) {
-                    container.innerHTML = '<div class="empty-message">⚠️ El organizador aún no cargó resultados reales. ¡Pronto aparecerán aquí!</div>';
+                    container.innerHTML = '<div class="empty-message">⚠️ El organizador aún no cargó resultados reales.</div>';
                     return;
                 }
                 if (estado.friendsData.length === 0) {
-                    container.innerHTML = '<div class="empty-message">📥 Aún no se han importado pronósticos de amigos. El organizador debe importarlos.</div>';
+                    container.innerHTML = '<div class="empty-message">📥 Aún no se han importado pronósticos de amigos.</div>';
                     return;
                 }
                 const tabla = estado.friendsData.map(f => ({ name: f.name, ...calcularPuntos(f.predictions, estado.realResults) }))
@@ -888,7 +906,7 @@
                 container.innerHTML = `<table class="tabla-posiciones"><thead><tr><th>#</th><th>Jugador</th><th>Pts</th><th>Exactos</th><th>Signo</th><th>Fallos</th><th>Pronós</th></tr></thead><tbody>${tabla.map((f,i) => `<tr class="${i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':''}"><td>${i+1}</td><td style="text-align:left;font-weight:600;">${f.name}</td><td style="font-weight:800;color:var(--accent);">${f.puntos}</td><td>${f.exactos}</td><td>${f.signo}</td><td>${f.fallos}</td><td>${f.total}</td></tr>`).join('')}</tbody></table><p style="font-size:0.65rem;margin-top:12px;text-align:center;">Resultados cargados: ${realKeys.length} de ${FIXTURE_OFICIAL.length} · 3pts exacto / 1pt signo</p>`;
             }
 
-            // --- Panel administrador colapsable ---
+            // --- Panel admin colapsable ---
             const panelAdmin = document.getElementById('panelAdmin');
             document.getElementById('panelAdminHeader').addEventListener('click', () => {
                 panelAdmin.classList.toggle('collapsible--open');
@@ -906,8 +924,8 @@
                 renderFiltros();
                 renderPartidos();
                 actualizarInfoAmigos();
-                renderTablaPosicionesGlobal();  // Mostrar tabla desde el inicio
-                mostrarToast('🏆 Tabla de posiciones visible para todos · ¡Suerte!');
+                renderTablaPosicionesGlobal();
+                mostrarToast('🏆 Tabla visible para todos · ¡Cargá tus pronósticos!');
             }
             init();
         })();
